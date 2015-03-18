@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6DA3ECF9-AE4B-45EC-B36A-1889CB97B785</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Wildlands</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>52314F83705695D1CE2E9F525F909CFC0A774ACF</key>
+		<string>http://github.com/wildlands/wildlands-ios</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Wildlands.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>52314F83705695D1CE2E9F525F909CFC0A774ACF</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://github.com/wildlands/wildlands-ios</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>52314F83705695D1CE2E9F525F909CFC0A774ACF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>52314F83705695D1CE2E9F525F909CFC0A774ACF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>wildlands-ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>
