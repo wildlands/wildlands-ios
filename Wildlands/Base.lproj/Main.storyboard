@@ -1,25 +1,189 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="C6l-F3-u08">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="ufC-wZ-h7g">
+        <!--Quiz-->
+        <scene sceneID="4tr-lq-gha">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Kri-EM-N4x" customClass="QuizViewController" customModule="Wildlands" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                        <viewControllerLayoutGuide type="top" id="hXr-JW-SvT"/>
+                        <viewControllerLayoutGuide type="bottom" id="KLA-DO-MED"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <view key="view" contentMode="scaleToFill" id="b4j-HK-QeS">
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="kaart.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="bO9-ot-L43">
+                                <rect key="frame" x="0.0" y="0.0" width="400" height="800"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8N6-vR-sb5">
+                                <rect key="frame" x="16" y="20" width="288" height="528"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1P-bD-RmL">
+                                        <rect key="frame" x="20" y="20" width="248" height="22"/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mqu-tM-Vau">
+                                        <rect key="frame" x="240" y="8" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Ta2-76-GVq"/>
+                                            <constraint firstAttribute="width" constant="40" id="bt6-02-ynB"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="Bio-close.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goBackButton:" destination="Kri-EM-N4x" eventType="touchUpInside" id="qxW-fZ-0VF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="k1P-bD-RmL" firstAttribute="top" secondItem="8N6-vR-sb5" secondAttribute="top" constant="20" id="DiN-DU-Qk7"/>
+                                    <constraint firstAttribute="trailing" secondItem="Mqu-tM-Vau" secondAttribute="trailing" constant="8" id="Nfj-VT-ldY"/>
+                                    <constraint firstItem="k1P-bD-RmL" firstAttribute="leading" secondItem="8N6-vR-sb5" secondAttribute="leading" constant="20" id="V73-sd-DGh"/>
+                                    <constraint firstAttribute="trailing" secondItem="k1P-bD-RmL" secondAttribute="trailing" constant="20" id="X4U-DT-VOh"/>
+                                    <constraint firstItem="Mqu-tM-Vau" firstAttribute="top" secondItem="8N6-vR-sb5" secondAttribute="top" constant="8" id="gQV-J3-x2j"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KLA-DO-MED" firstAttribute="top" secondItem="8N6-vR-sb5" secondAttribute="bottom" constant="20" id="CdB-Ym-Wls"/>
+                            <constraint firstItem="8N6-vR-sb5" firstAttribute="trailing" secondItem="b4j-HK-QeS" secondAttribute="trailingMargin" id="Oqr-4O-V84"/>
+                            <constraint firstItem="8N6-vR-sb5" firstAttribute="top" secondItem="hXr-JW-SvT" secondAttribute="bottom" constant="20" id="Puk-iB-ksy"/>
+                            <constraint firstAttribute="centerX" secondItem="8N6-vR-sb5" secondAttribute="centerX" id="VNV-vp-EPT"/>
+                            <constraint firstItem="8N6-vR-sb5" firstAttribute="leading" secondItem="b4j-HK-QeS" secondAttribute="leadingMargin" id="aMA-DJ-dHn"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Quiz" id="M2T-pp-n5g"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="backgroudView" destination="8N6-vR-sb5" id="7LE-Qb-tfg"/>
+                        <outlet property="vraagLabel" destination="k1P-bD-RmL" id="RFG-K7-caZ"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yd3-nJ-etE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="898" y="998"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Y61-gy-g73">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="C6l-F3-u08" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zw7-Bt-lAr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="1ka-GM-9Re" kind="relationship" relationship="rootViewController" id="X8Z-4O-eHM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xTF-F3-NAe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-10" y="998"/>
+        </scene>
+        <!--Kaart-->
+        <scene sceneID="Tat-Nt-ue4">
+            <objects>
+                <viewController id="1ka-GM-9Re" customClass="KaartViewController" customModule="Wildlands" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nE6-Ii-KLV"/>
+                        <viewControllerLayoutGuide type="bottom" id="1As-p5-swU"/>
+                    </layoutGuides>
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="YEz-UF-apC">
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="5" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKY-cw-Vkg">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cqm-T0-Bte">
+                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="kaartView.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="TAh-22-gGq">
+                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                                <color key="backgroundColor" red="0.96078431372549022" green="0.94901960784313721" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96078431372549022" green="0.94901960784313721" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="1ka-GM-9Re" id="fBP-Dx-uNI"/>
+                                </connections>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsb-SV-spI">
+                                <rect key="frame" x="238" y="518" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Quiz">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Kri-EM-N4x" kind="push" id="lnV-AG-Pa5"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bushbush.png" translatesAutoresizingMaskIntoConstraints="NO" id="zTC-nU-WcU">
+                                <rect key="frame" x="0.0" y="528" width="320" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="MIn-1g-G8p"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iceicebaby.png" translatesAutoresizingMaskIntoConstraints="NO" id="3Ig-5u-Raj">
+                                <rect key="frame" x="0.0" y="528" width="320" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="UQN-Rd-ID6"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96078431369999995" green="0.94901960780000005" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="zTC-nU-WcU" firstAttribute="leading" secondItem="YEz-UF-apC" secondAttribute="leadingMargin" constant="-16" id="84c-Fb-5gH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zTC-nU-WcU" secondAttribute="trailing" constant="-16" id="8Cd-DB-dgn"/>
+                            <constraint firstItem="1As-p5-swU" firstAttribute="top" secondItem="zsb-SV-spI" secondAttribute="bottom" constant="20" id="AHt-YM-TjY"/>
+                            <constraint firstItem="1As-p5-swU" firstAttribute="top" secondItem="cKY-cw-Vkg" secondAttribute="bottom" id="Bsy-5t-bUY"/>
+                            <constraint firstItem="cKY-cw-Vkg" firstAttribute="top" secondItem="YEz-UF-apC" secondAttribute="topMargin" id="FCR-1A-Wle"/>
+                            <constraint firstItem="1As-p5-swU" firstAttribute="top" secondItem="zTC-nU-WcU" secondAttribute="bottom" id="Fce-S6-uuB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3Ig-5u-Raj" secondAttribute="trailing" constant="-16" id="HVm-UI-D2w"/>
+                            <constraint firstItem="1As-p5-swU" firstAttribute="top" secondItem="3Ig-5u-Raj" secondAttribute="bottom" id="KCL-8N-HVs"/>
+                            <constraint firstItem="3Ig-5u-Raj" firstAttribute="leading" secondItem="YEz-UF-apC" secondAttribute="leadingMargin" constant="-16" id="QJ6-Co-wGA"/>
+                            <constraint firstItem="cKY-cw-Vkg" firstAttribute="leading" secondItem="YEz-UF-apC" secondAttribute="leadingMargin" constant="-16" id="SuW-kd-hLM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cKY-cw-Vkg" secondAttribute="trailing" constant="-16" id="hsL-NH-QoT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zsb-SV-spI" secondAttribute="trailing" constant="20" id="iEl-bB-AAd"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Kaart" id="a2t-tb-wbo"/>
+                    <connections>
+                        <outlet property="bottomView1" destination="zTC-nU-WcU" id="0QV-wC-wxf"/>
+                        <outlet property="bottomView2" destination="3Ig-5u-Raj" id="tlf-kJ-f7N"/>
+                        <outlet property="contentView" destination="cqm-T0-Bte" id="YT6-EY-Q45"/>
+                        <outlet property="kaartScrollView" destination="cKY-cw-Vkg" id="7X4-7P-FRe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pt9-7r-ZZY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="473" y="998"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Bio-close.png" width="435" height="435"/>
+        <image name="bushbush.png" width="1287" height="126"/>
+        <image name="iceicebaby.png" width="1287" height="126"/>
+        <image name="kaart.jpg" width="1200" height="900"/>
+        <image name="kaartView.jpg" width="1000" height="1000"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

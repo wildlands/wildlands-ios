@@ -15,7 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        if (NSUserDefaults.standardUserDefaults().objectForKey("checksum") == nil) {
+            
+            NSUserDefaults.standardUserDefaults().setObject(0, forKey: "checksum")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            
+        }
+        
+        
         return true
     }
 
