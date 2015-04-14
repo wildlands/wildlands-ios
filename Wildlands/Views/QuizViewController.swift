@@ -113,7 +113,7 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
         
         let deVraag: Question = questions[currentQuestion] as Question;
         
-        var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("answerCell") as UITableViewCell
+        var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("answerCell") as! UITableViewCell
         
         let hetAntwoord: Answer = deVraag.answers[indexPath.row]
         

@@ -22,7 +22,7 @@ class Utils: NSObject {
     class func openObjectFromDisk(forKey: String) -> AnyObject {
         
         let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let data: NSData = defaults.objectForKey(forKey) as NSData
+        let data: NSData = defaults.objectForKey(forKey) as! NSData
         let object: AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(data)
         
         return object!

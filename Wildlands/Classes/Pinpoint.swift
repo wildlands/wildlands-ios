@@ -18,6 +18,7 @@ class Pinpoint : NSObject, NSCoding {
     var name: String = ""
     var pinDescription: String = ""
     var typeName: String = ""
+    var photo: String = ""
     
     override init() {
         
@@ -29,14 +30,14 @@ class Pinpoint : NSObject, NSCoding {
         
         super.init()
         
-        xPos = aDecoder.decodeObjectForKey("xPos") as CGFloat
-        yPos = aDecoder.decodeObjectForKey("yPos") as CGFloat
-        id = aDecoder.decodeObjectForKey("id") as Int
-        image = aDecoder.decodeObjectForKey("image") as String
-        name = aDecoder.decodeObjectForKey("name") as String
-        pinDescription = aDecoder.decodeObjectForKey("pinDescription") as String
-        typeName = aDecoder.decodeObjectForKey("typeName") as String
-        
+        xPos = aDecoder.decodeObjectForKey("xPos") as! CGFloat
+        yPos = aDecoder.decodeObjectForKey("yPos") as! CGFloat
+        id = aDecoder.decodeObjectForKey("id") as! Int
+        image = aDecoder.decodeObjectForKey("image") as! String
+        name = aDecoder.decodeObjectForKey("name") as! String
+        pinDescription = aDecoder.decodeObjectForKey("pinDescription") as! String
+        typeName = aDecoder.decodeObjectForKey("typeName") as! String
+        photo = aDecoder.decodeObjectForKey("photo") as! String
         
     }
     
@@ -49,6 +50,7 @@ class Pinpoint : NSObject, NSCoding {
         aCoder.encodeObject(name, forKey: "name")
         aCoder.encodeObject(pinDescription, forKey: "pinDescription")
         aCoder.encodeObject(typeName, forKey: "typeName")
+        aCoder.encodeObject(photo, forKey: "photo")
         
     }
     

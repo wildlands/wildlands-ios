@@ -114,19 +114,22 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
             // Door alle ontvangen Pinpoint loopen
             for anPinpoint in JSONPinpoints {
                 
-                let pinPointProps = anPinpoint as NSMutableDictionary
+                let pinPointProps = anPinpoint as! NSMutableDictionary
                 var thePinpoint: Pinpoint = Pinpoint()
                 //thePinpoint.id = pinPointProps.objectForKey("id") as Int
                 thePinpoint.id = i
-                thePinpoint.xPos = pinPointProps.objectForKey("xPos") as CGFloat
-                thePinpoint.yPos = pinPointProps.objectForKey("yPos") as CGFloat
-                thePinpoint.name = pinPointProps.objectForKey("name") as String
-                thePinpoint.pinDescription = pinPointProps.objectForKey("description") as String
+                thePinpoint.xPos = pinPointProps.objectForKey("xPos") as! CGFloat
+                thePinpoint.yPos = pinPointProps.objectForKey("yPos") as! CGFloat
+                thePinpoint.name = pinPointProps.objectForKey("name") as! String
+                thePinpoint.pinDescription = pinPointProps.objectForKey("description") as! String
+                if let photo = pinPointProps.objectForKey("image") as? String {
+                    thePinpoint.photo = photo as String
+                }
                 
                 // Checken of type object bestaat
                 if let type = pinPointProps.objectForKey("type") as? NSDictionary {
-                    thePinpoint.image = type.objectForKey("image") as String
-                    thePinpoint.typeName = type.objectForKey("name") as String
+                    thePinpoint.image = type.objectForKey("image") as! String
+                    thePinpoint.typeName = type.objectForKey("name") as! String
                 } else {
                     println("Could not parse pinPoint: type object not found.")
                 }
@@ -150,20 +153,20 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
             
             for deVraag in JSONVragen {
                 
-                let dict = deVraag as NSMutableDictionary
+                let dict = deVraag as! NSMutableDictionary
                 // Maak een nieuwe vraag aan
-                var eenVraag: Question = Question(text: dict.objectForKey("text") as String)
-                var antwoorden: NSArray = dict.objectForKey("answers") as NSArray
+                var eenVraag: Question = Question(text: dict.objectForKey("text") as! String)
+                var antwoorden: NSArray = dict.objectForKey("answers") as! NSArray
                 
                 // Door alle antwoorden loopen
                 for antwoord in antwoorden {
                     
                     // Antwoord in dictionary zetten
-                    let hetAntwoord = antwoord as NSMutableDictionary
+                    let hetAntwoord = antwoord as! NSMutableDictionary
                     var eenAntwoord: Answer = Answer()
                     eenAntwoord.text = hetAntwoord.objectForKey("text") as? String
                     
-                    if hetAntwoord.objectForKey("rightWrong") as Bool {
+                    if hetAntwoord.objectForKey("rightWrong") as! Bool {
                         eenAntwoord.isRightAnswer = true
                     }
                     // Antwoord toevoegen aan de antwoorden
@@ -186,7 +189,7 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
         
         if let JSONCheckum = jsonArray as? NSMutableDictionary {
             
-            checksum = JSONCheckum.objectForKey("checksum") as Int
+            checksum = JSONCheckum.objectForKey("checksum") as! Int
             
         }
         

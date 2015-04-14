@@ -22,7 +22,7 @@ class PopupView: UIView {
     
     init(aPinpoint: Pinpoint) {
         
-        super.init()
+        super.init(frame: CGRectNull)
         self.thePinpoint = aPinpoint
         self.backgroundColor = UIColor.clearColor()
         addContent()
@@ -58,7 +58,8 @@ class PopupView: UIView {
         let imageView: UIImageView = UIImageView()
         imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
         //imageView.contentMode = UIViewContentMode.ScaleToFill
-        imageView.image = UIImage(named: "olifanten.jpg")
+        //imageView.image = UIImage(named: "olifanten.jpg")
+        imageView.sd_setImageWithURL(NSURL(string: thePinpoint!.photo))
         whiteBackground.addSubview(imageView)
         
         let scrollView: UIScrollView = UIScrollView()

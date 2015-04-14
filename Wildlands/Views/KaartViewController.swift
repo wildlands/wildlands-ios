@@ -20,6 +20,8 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
     var blackScreen: UIView = UIView()
     let contentDownloader: JSONDownloader = JSONDownloader()
     
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     override func viewDidLoad() {
         
         contentDownloader.delegate = self
@@ -50,12 +52,36 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
     func checkDatabaseChecksum() {
         
         contentDownloader.downloadJSON(DownloadType.DOWNLOAD_CHECKUM)
+        startActivityIndicator()
         
     }
     
     func downloadContent() {
 
         contentDownloader.downloadJSON(DownloadType.DOWNLOAD_PINPOINTS)
+        startActivityIndicator()
+        
+    }
+    
+    func startActivityIndicator() {
+        
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        activityIndicator.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.view.addSubview(activityIndicator)
+        
+        activityIndicator.startAnimating()
+        
+        var binding = ["superview" : self.view, "activityIndicator" : activityIndicator]
+        var format = "H:[superview]-(<=1)-[activityIndicator(20)]"
+        var constraint = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions.AlignAllCenterY, metrics: nil, views: binding)
+        
+        self.view.addConstraints(constraint)
+        
+        format = "V:[superview]-(<=1)-[activityIndicator(20)]"
+        constraint = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: binding)
+        
+        self.view.addConstraints(constraint)
         
     }
     
@@ -66,6 +92,8 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
     
     func JSONDownloaderSuccess(response: AnyObject) {
         
+        activityIndicator.stopAnimating()
+        
         if response is [Pinpoint] {
             
             let pinpointResponse = response as? [Pinpoint]
@@ -75,7 +103,7 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
             
         } else if response is Int {
         
-            if (response as Int != NSUserDefaults.standardUserDefaults().objectForKey("checksum") as Int) {
+            if (response as! Int != NSUserDefaults.standardUserDefaults().objectForKey("checksum") as! Int) {
                 
                 println("Nieuwe database!")
                 NSUserDefaults.standardUserDefaults().setObject(response, forKey: "checksum")
@@ -84,7 +112,7 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
                 
             } else {
                 
-                pinpoints = Utils.openObjectFromDisk("pinpoints") as [Pinpoint]
+                pinpoints = Utils.openObjectFromDisk("pinpoints") as! [Pinpoint]
                 addPinPoints()
                 
             }
@@ -99,9 +127,11 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
     
     func JSONDownloaderFailed(message: String, type: DownloadType) {
         
+        activityIndicator.stopAnimating()
+        
         if (type == DownloadType.DOWNLOAD_CHECKUM) {
             
-            pinpoints = Utils.openObjectFromDisk("pinpoints") as [Pinpoint]
+            pinpoints = Utils.openObjectFromDisk("pinpoints") as! [Pinpoint]
             addPinPoints()
             
         }
@@ -115,13 +145,24 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
         
         pinpoints.sort({ $0.id < $1.id })
         
+        var delay = 0.3
+        
         for eenPinPoint: Pinpoint in pinpoints {
             
             let pinPointButton: UIButton = UIButton(frame: CGRectMake(eenPinPoint.xPos - 40, eenPinPoint.yPos - 108, 80, 108))
             pinPointButton.setImage(UIImage(named: eenPinPoint.image), forState: UIControlState.Normal)
             pinPointButton.tag = eenPinPoint.id
             pinPointButton.addTarget(self, action: Selector("pinPointPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
+            pinPointButton.alpha = 0
             kaartScrollView.addSubview(pinPointButton)
+            
+            UIView.animateWithDuration(0.5, delay: delay, options: nil, animations: {
+            
+                pinPointButton.alpha = 1
+            
+            }, completion: nil)
+            
+            delay += 0.3
             
         }
         
@@ -129,7 +170,7 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
     
     func scrollViewDidZoom(scrollView: UIScrollView) {
         
-        for views in kaartScrollView.subviews as [UIView] {
+        for views in kaartScrollView.subviews as! [UIView] {
             
             if let button = views as? UIButton {
                 
