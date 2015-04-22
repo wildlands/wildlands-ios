@@ -54,6 +54,11 @@
 		E44FE9181ADD2117006DD395 /* Warmte-header.png in Resources */ = {isa = PBXBuildFile; fileRef = E44FE9051ADD2117006DD395 /* Warmte-header.png */; };
 		E44FE9191ADD2117006DD395 /* Water-close.png in Resources */ = {isa = PBXBuildFile; fileRef = E44FE9061ADD2117006DD395 /* Water-close.png */; };
 		E44FE91A1ADD2117006DD395 /* Water-header.png in Resources */ = {isa = PBXBuildFile; fileRef = E44FE9071ADD2117006DD395 /* Water-header.png */; };
+		E44FE91C1ADD3BFD006DD395 /* spot.png in Resources */ = {isa = PBXBuildFile; fileRef = E44FE91B1ADD3BFD006DD395 /* spot.png */; };
+		E44FE91E1ADD4189006DD395 /* tempkaart.png in Resources */ = {isa = PBXBuildFile; fileRef = E44FE91D1ADD4189006DD395 /* tempkaart.png */; };
+		E44FE9221ADE6A66006DD395 /* TestGPS.gpx in Resources */ = {isa = PBXBuildFile; fileRef = E44FE9211ADE6A66006DD395 /* TestGPS.gpx */; };
+		E44FE9241ADE7880006DD395 /* stenden.gpx in Resources */ = {isa = PBXBuildFile; fileRef = E44FE9231ADE7880006DD395 /* stenden.gpx */; };
+		E44FE9261ADE7AF4006DD395 /* stenden-2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = E44FE9251ADE7AF4006DD395 /* stenden-2.gpx */; };
 		E4627FF61ABAE1CD003B9229 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4627FF51ABAE1CD003B9229 /* Colors.swift */; };
 		E4C20DEA1AB9A2EC00A911B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C20DE91AB9A2EC00A911B5 /* AppDelegate.swift */; };
 		E4C20DEF1AB9A2EC00A911B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4C20DED1AB9A2EC00A911B5 /* Main.storyboard */; };
@@ -144,6 +149,11 @@
 		E44FE9051ADD2117006DD395 /* Warmte-header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Warmte-header.png"; path = "Images/Warmte-header.png"; sourceTree = "<group>"; };
 		E44FE9061ADD2117006DD395 /* Water-close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Water-close.png"; path = "Images/Water-close.png"; sourceTree = "<group>"; };
 		E44FE9071ADD2117006DD395 /* Water-header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Water-header.png"; path = "Images/Water-header.png"; sourceTree = "<group>"; };
+		E44FE91B1ADD3BFD006DD395 /* spot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spot.png; sourceTree = "<group>"; };
+		E44FE91D1ADD4189006DD395 /* tempkaart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tempkaart.png; sourceTree = "<group>"; };
+		E44FE9211ADE6A66006DD395 /* TestGPS.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestGPS.gpx; sourceTree = "<group>"; };
+		E44FE9231ADE7880006DD395 /* stenden.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = stenden.gpx; sourceTree = "<group>"; };
+		E44FE9251ADE7AF4006DD395 /* stenden-2.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "stenden-2.gpx"; sourceTree = "<group>"; };
 		E460D5431ACBFF2000804640 /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		E4627FF51ABAE1CD003B9229 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = Classes/Colors.swift; sourceTree = "<group>"; };
 		E4C20DE41AB9A2EC00A911B5 /* Wildlands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wildlands.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -263,6 +273,16 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		E44FE9201ADE6A48006DD395 /* GPS Test Locations */ = {
+			isa = PBXGroup;
+			children = (
+				E44FE9211ADE6A66006DD395 /* TestGPS.gpx */,
+				E44FE9231ADE7880006DD395 /* stenden.gpx */,
+				E44FE9251ADE7AF4006DD395 /* stenden-2.gpx */,
+			);
+			name = "GPS Test Locations";
+			sourceTree = "<group>";
+		};
 		E4627FF71ABAE40D003B9229 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +301,8 @@
 		E4627FF81ABAE423003B9229 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E44FE91B1ADD3BFD006DD395 /* spot.png */,
+				E44FE91D1ADD4189006DD395 /* tempkaart.png */,
 				E44FE8F51ADD2117006DD395 /* background.jpg */,
 				E44FE8F61ADD2117006DD395 /* Bio-close.png */,
 				E44FE8F71ADD2117006DD395 /* Bio-header.png */,
@@ -327,6 +349,7 @@
 		E4C20DE61AB9A2EC00A911B5 /* Wildlands */ = {
 			isa = PBXGroup;
 			children = (
+				E44FE9201ADE6A48006DD395 /* GPS Test Locations */,
 				E44FE8F21ADD1FBF006DD395 /* Views */,
 				E430E7D81AC418F40036506D /* Frameworks */,
 				E430E79A1AC408DF0036506D /* Fonts */,
@@ -452,10 +475,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E44FE9171ADD2117006DD395 /* Warmte-close.png in Resources */,
+				E44FE91C1ADD3BFD006DD395 /* spot.png in Resources */,
+				E44FE9261ADE7AF4006DD395 /* stenden-2.gpx in Resources */,
 				E44FE90B1ADD2117006DD395 /* bushbush.png in Resources */,
 				E44FE9111ADD2117006DD395 /* pinpoint-01.png in Resources */,
 				E44FE9121ADD2117006DD395 /* pinpoint-02.png in Resources */,
 				E44FE91A1ADD2117006DD395 /* Water-header.png in Resources */,
+				E44FE9221ADE6A66006DD395 /* TestGPS.gpx in Resources */,
 				E44FE90C1ADD2117006DD395 /* iceicebaby.png in Resources */,
 				E44FE9131ADD2117006DD395 /* pinpoint-03.png in Resources */,
 				E4C20DEF1AB9A2EC00A911B5 /* Main.storyboard in Resources */,
@@ -470,9 +496,11 @@
 				E430E77A1AC1A4FE0036506D /* Localizable.strings in Resources */,
 				E430E79C1AC408EA0036506D /* Roboto-Regular.ttf in Resources */,
 				E44FE9101ADD2117006DD395 /* olifanten.jpg in Resources */,
+				E44FE9241ADE7880006DD395 /* stenden.gpx in Resources */,
 				E44FE9081ADD2117006DD395 /* background.jpg in Resources */,
 				E44FE9181ADD2117006DD395 /* Warmte-header.png in Resources */,
 				E4C20DF41AB9A2EC00A911B5 /* LaunchScreen.xib in Resources */,
+				E44FE91E1ADD4189006DD395 /* tempkaart.png in Resources */,
 				E44FE9141ADD2117006DD395 /* pinpoint-04.png in Resources */,
 				E4C20DF11AB9A2EC00A911B5 /* Images.xcassets in Resources */,
 			);

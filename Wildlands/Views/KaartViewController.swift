@@ -8,17 +8,24 @@
 
 import UIKit
 
-class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloaderDelegate, PopUpViewDelegate {
+class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloaderDelegate, PopUpViewDelegate, WildlandsGPSDelegate {
 
     @IBOutlet weak var kaartScrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
-    @IBOutlet weak var bottomView1: UIImageView!
-    @IBOutlet weak var bottomView2: UIImageView!
+    @IBOutlet weak var bottomView: UIImageView!
     
     var pinpoints: [Pinpoint] = []
     var blackScreen: UIView = UIView()
     let contentDownloader: JSONDownloader = JSONDownloader()
+    var currentPosition: UIImageView = UIImageView()
+    var wildlandsGPS: WildlandsGPS = WildlandsGPS()
+    
+    var currentX: Int = 0
+    var currentY: Int = 0
+    
+    var popupOpen: Bool = false
+    var lastPinpoint: Int = 0
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -26,13 +33,20 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
         
         contentDownloader.delegate = self
         
-        kaartScrollView.contentSize = CGSizeMake(1000, 1000)
+        wildlandsGPS.delegate = self
         
-        kaartScrollView.minimumZoomScale = 1.0
+        kaartScrollView.contentSize = CGSizeMake(2450, 1342)
+        
+        kaartScrollView.minimumZoomScale = 0.5
         kaartScrollView.maximumZoomScale = 5.0
+        kaartScrollView.setZoomScale(0.5, animated: false)
         
         blackScreen.backgroundColor = Colors.bruinTransparant
         blackScreen.frame = CGRectMake(0, 0, self.view.bounds.width, self.view.bounds.height)
+        
+        currentPosition.image = UIImage(named: "spot.png")
+        currentPosition.frame = CGRectMake(0, 0, 25, 25)
+        kaartScrollView.addSubview(currentPosition)
         
         let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
         if defaults.objectForKey("pinpoints") == nil {
@@ -44,8 +58,6 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
             checkDatabaseChecksum()
             
         }
-        
-        bottomView2.alpha = 0;
         
     }
     
@@ -103,7 +115,7 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
             
         } else if response is Int {
         
-            if (response as! Int != NSUserDefaults.standardUserDefaults().objectForKey("checksum") as! Int) {
+            if response as! Int != NSUserDefaults.standardUserDefaults().objectForKey("checksum") as! Int {
                 
                 println("Nieuwe database!")
                 NSUserDefaults.standardUserDefaults().setObject(response, forKey: "checksum")
@@ -129,7 +141,7 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
         
         activityIndicator.stopAnimating()
         
-        if (type == DownloadType.DOWNLOAD_CHECKUM) {
+        if type == DownloadType.DOWNLOAD_CHECKUM {
             
             pinpoints = Utils.openObjectFromDisk("pinpoints") as! [Pinpoint]
             addPinPoints()
@@ -143,18 +155,23 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
     
     func addPinPoints() {
         
+        let zoomScale: CGFloat = kaartScrollView.zoomScale
+        
         pinpoints.sort({ $0.id < $1.id })
         
         var delay = 0.3
         
+        var i = 0
         for eenPinPoint: Pinpoint in pinpoints {
             
-            let pinPointButton: UIButton = UIButton(frame: CGRectMake(eenPinPoint.xPos - 40, eenPinPoint.yPos - 108, 80, 108))
+            let pinPointButton: UIButton = UIButton(frame: CGRectMake(eenPinPoint.xPos * zoomScale - 40, eenPinPoint.yPos * zoomScale - 108, 80, 108))
             pinPointButton.setImage(UIImage(named: eenPinPoint.image), forState: UIControlState.Normal)
             pinPointButton.tag = eenPinPoint.id
             pinPointButton.addTarget(self, action: Selector("pinPointPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
             pinPointButton.alpha = 0
             kaartScrollView.addSubview(pinPointButton)
+            
+            pinpoints[i].trigger = CGRectMake(eenPinPoint.xPos * zoomScale - 80, eenPinPoint.yPos * zoomScale - 80, 160, 160)
             
             UIView.animateWithDuration(0.5, delay: delay, options: nil, animations: {
             
@@ -163,6 +180,7 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
             }, completion: nil)
             
             delay += 0.3
+            i++
             
         }
         
@@ -170,13 +188,21 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
     
     func scrollViewDidZoom(scrollView: UIScrollView) {
         
+        let zoomScale: CGFloat = kaartScrollView.zoomScale
+        
         for views in kaartScrollView.subviews as! [UIView] {
             
             if let button = views as? UIButton {
                 
                 let dePinPoint = pinpoints[button.tag]
-                let zoomScale: CGFloat = kaartScrollView.zoomScale
                 button.frame = CGRectMake(dePinPoint.xPos * zoomScale - 40, dePinPoint.yPos * zoomScale - 108, 80, 108)
+                pinpoints[button.tag].trigger = CGRectMake(dePinPoint.xPos * zoomScale - 80, dePinPoint.yPos * zoomScale - 80, 160, 160)
+                
+            }
+            
+            if let position = views as? UIImageView {
+                
+                position.frame = CGRectMake(CGFloat(currentX) * zoomScale - 12.5, CGFloat(currentY) * zoomScale - 12.5, 25, 25)
                 
             }
             
@@ -188,21 +214,19 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
         
         if (scrollView.contentOffset.x > 500) {
             
-            UIView.animateWithDuration(0.5, animations: {
-            
-                self.bottomView2.alpha = 1
-                self.bottomView1.alpha = 0
-            
-            })
+            UIView.transitionWithView(bottomView, duration:0.5, options: UIViewAnimationOptions.TransitionCrossDissolve , animations: {
+                
+                self.bottomView.image = UIImage(named: "iceicebaby.png")
+                
+            }, completion: nil)
             
         } else {
             
-            UIView.animateWithDuration(0.5, animations: {
+            UIView.transitionWithView(bottomView, duration:0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
                 
-                self.bottomView2.alpha = 0
-                self.bottomView1.alpha = 1
+                self.bottomView.image = UIImage(named: "bushbush.png")
                 
-            })
+            }, completion: nil)
             
         }
         
@@ -210,16 +234,32 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
     
     func pinPointPressed(sender: UIButton!) {
         
+        openPinpointWithID(sender.tag)
+        
+    }
+    
+    func popUpDidDismiss() {
+        
+        blackScreen.removeFromSuperview()
+        popupOpen = false
+        
+    }
+    
+    func openPinpointWithID(id: Int) {
+        
+        popupOpen = true
+        lastPinpoint = id
+        
         blackScreen.alpha = 0
         self.view.addSubview(blackScreen)
         
         UIView.animateWithDuration(0.3, animations: {
-          
+            
             self.blackScreen.alpha = 1
             
         })
         
-        let popUp: PopupView = PopupView(aPinpoint: pinpoints[sender.tag])
+        let popUp: PopupView = PopupView(aPinpoint: pinpoints[id])
         popUp.delegate = self
         popUp.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.001, 0.001)
         popUp.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -237,32 +277,61 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
         self.view.addConstraints(constraints)
         
         UIView.animateWithDuration(0.3/1.5, animations: {
-        
+            
             popUp.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1)
             
-        }, completion: { (finished: Bool) in
-            
-            UIView.animateWithDuration(0.3/2, animations: {
+            }, completion: { (finished: Bool) in
                 
-                popUp.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9)
-                
-            }, completion: { (finshed: Bool) in
-            
                 UIView.animateWithDuration(0.3/2, animations: {
-                
-                    popUp.transform = CGAffineTransformIdentity
-                
+                    
+                    popUp.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9)
+                    
+                    }, completion: { (finshed: Bool) in
+                        
+                        UIView.animateWithDuration(0.3/2, animations: {
+                            
+                            popUp.transform = CGAffineTransformIdentity
+                            
+                        })
+                        
                 })
-            
-            })
-            
+                
         })
         
     }
     
-    func popUpDidDismiss() {
+    func didReceiveNewCoordinates(x: Int, y: Int) {
         
-        blackScreen.removeFromSuperview()
+        let zoomScale: CGFloat = kaartScrollView.zoomScale
+        
+        UIView.animateWithDuration(0.5, animations: {
+        
+            self.currentPosition.frame = CGRectMake((CGFloat(x) * zoomScale) - 12.5, (CGFloat(y) * zoomScale) - 12.5, 25, 25)
+        
+        });
+        
+        currentX = x
+        currentY = y
+        
+        let coordinate: CGPoint = CGPointMake(CGFloat(x), CGFloat(y))
+        
+        var i = 0
+        for eenPinpoint: Pinpoint in pinpoints {
+            
+            if CGRectContainsPoint(eenPinpoint.trigger, coordinate) {
+                
+                if !popupOpen && i != lastPinpoint {
+                
+                    openPinpointWithID(i)
+                
+                }
+                
+                break
+                
+            }
+            i++
+            
+        }
         
     }
     

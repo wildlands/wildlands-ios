@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="C6l-F3-u08">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C2513" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="C6l-F3-u08">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -106,10 +106,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cqm-T0-Bte">
-                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="2450" height="1342"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="kaartView.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="TAh-22-gGq">
-                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tempkaart.png" translatesAutoresizingMaskIntoConstraints="NO" id="TAh-22-gGq">
+                                                <rect key="frame" x="0.0" y="0.0" width="2450" height="1342"/>
                                                 <color key="backgroundColor" red="0.96078431372549022" green="0.94901960784313721" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </imageView>
                                         </subviews>
@@ -137,12 +137,6 @@
                                     <constraint firstAttribute="height" constant="40" id="MIn-1g-G8p"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iceicebaby.png" translatesAutoresizingMaskIntoConstraints="NO" id="3Ig-5u-Raj">
-                                <rect key="frame" x="0.0" y="528" width="320" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="UQN-Rd-ID6"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.94901960780000005" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -152,9 +146,6 @@
                             <constraint firstItem="1As-p5-swU" firstAttribute="top" secondItem="cKY-cw-Vkg" secondAttribute="bottom" id="Bsy-5t-bUY"/>
                             <constraint firstItem="cKY-cw-Vkg" firstAttribute="top" secondItem="YEz-UF-apC" secondAttribute="topMargin" id="FCR-1A-Wle"/>
                             <constraint firstItem="1As-p5-swU" firstAttribute="top" secondItem="zTC-nU-WcU" secondAttribute="bottom" id="Fce-S6-uuB"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="3Ig-5u-Raj" secondAttribute="trailing" constant="-16" id="HVm-UI-D2w"/>
-                            <constraint firstItem="1As-p5-swU" firstAttribute="top" secondItem="3Ig-5u-Raj" secondAttribute="bottom" id="KCL-8N-HVs"/>
-                            <constraint firstItem="3Ig-5u-Raj" firstAttribute="leading" secondItem="YEz-UF-apC" secondAttribute="leadingMargin" constant="-16" id="QJ6-Co-wGA"/>
                             <constraint firstItem="cKY-cw-Vkg" firstAttribute="leading" secondItem="YEz-UF-apC" secondAttribute="leadingMargin" constant="-16" id="SuW-kd-hLM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cKY-cw-Vkg" secondAttribute="trailing" constant="-16" id="hsL-NH-QoT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zsb-SV-spI" secondAttribute="trailing" constant="20" id="iEl-bB-AAd"/>
@@ -162,8 +153,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Kaart" id="a2t-tb-wbo"/>
                     <connections>
-                        <outlet property="bottomView1" destination="zTC-nU-WcU" id="0QV-wC-wxf"/>
-                        <outlet property="bottomView2" destination="3Ig-5u-Raj" id="tlf-kJ-f7N"/>
+                        <outlet property="bottomView" destination="zTC-nU-WcU" id="dgu-Q8-v78"/>
                         <outlet property="contentView" destination="cqm-T0-Bte" id="YT6-EY-Q45"/>
                         <outlet property="kaartScrollView" destination="cKY-cw-Vkg" id="7X4-7P-FRe"/>
                     </connections>
@@ -176,9 +166,8 @@
     <resources>
         <image name="Bio-close.png" width="435" height="435"/>
         <image name="bushbush.png" width="1287" height="126"/>
-        <image name="iceicebaby.png" width="1287" height="126"/>
         <image name="kaart.jpg" width="1200" height="900"/>
-        <image name="kaartView.jpg" width="1000" height="1000"/>
+        <image name="tempkaart.png" width="2450" height="1342"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -24,7 +24,7 @@ protocol JSONDownloaderDelegate {
 
 class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDelegate {
     
-    var delegate:JSONDownloaderDelegate?
+    var delegate: JSONDownloaderDelegate?
     var data: NSMutableData = NSMutableData()
     let baseURL: String = "http://doornbosagrait.no-ip.org/wildlandsBackend/api/api.php"
     var currentType: DownloadType?
@@ -133,6 +133,9 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
                 } else {
                     println("Could not parse pinPoint: type object not found.")
                 }
+                
+                var rect = CGRectMake(thePinpoint.xPos - 40, thePinpoint.yPos - 40, 80, 80)
+                thePinpoint.trigger = rect
                 
                 pinPoints.append(thePinpoint)
                 i++

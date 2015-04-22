@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+ 
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="bikehike.co.uk" version="1.1" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+
+  
+    <wpt lat="52.778625" lon="6.912065">
+      <ele>20.35</ele>
+      <time>2015-04-15T11:54:35Z</time>
+      <name>pt0</name>
+    </wpt>
+    <wpt lat="52.777923" lon="6.911979">
+      <ele>19.99</ele>
+      <time>2015-04-15T12:03:58Z</time>
+      <name>pt1</name>
+    </wpt>
+    <wpt lat="52.778010" lon="6.910721">
+      <ele>20</ele>
+      <time>2015-04-15T12:14:12Z</time>
+      <name>pt2</name>
+    </wpt>
+    <wpt lat="52.778161" lon="6.911944">
+      <ele>19.61</ele>
+      <time>2015-04-15T12:24:16Z</time>
+      <name>pt3</name>
+    </wpt>
+    <wpt lat="52.778229" lon="6.911462">
+      <ele>19.44</ele>
+      <time>2015-04-15T12:28:16Z</time>
+      <name>pt4</name>
+    </wpt>
+    <wpt lat="52.778388" lon="6.911859">
+      <ele>19.38</ele>
+      <time>2015-04-15T12:32:07Z</time>
+      <name>pt5</name>
+    </wpt>
+    <wpt lat="52.778541" lon="6.911199">
+      <ele>19.92</ele>
+      <time>2015-04-15T12:37:49Z</time>
+      <name>pt6</name>
+    </wpt>
+    <wpt lat="52.778280" lon="6.911024">
+      <ele>19.8</ele>
+      <time>2015-04-15T12:41:35Z</time>
+      <name>pt7</name>
+    </wpt>
+    <wpt lat="52.778573" lon="6.910971">
+      <ele>20.17</ele>
+      <time>2015-04-15T12:45:31Z</time>
+      <name>pt8</name>
+    </wpt>
+  
+</gpx>

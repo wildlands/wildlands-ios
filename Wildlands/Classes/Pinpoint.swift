@@ -20,6 +20,8 @@ class Pinpoint : NSObject, NSCoding {
     var typeName: String = ""
     var photo: String = ""
     
+    var trigger: CGRect = CGRectNull
+    
     override init() {
         
         super.init()
@@ -38,6 +40,8 @@ class Pinpoint : NSObject, NSCoding {
         pinDescription = aDecoder.decodeObjectForKey("pinDescription") as! String
         typeName = aDecoder.decodeObjectForKey("typeName") as! String
         photo = aDecoder.decodeObjectForKey("photo") as! String
+        var triggerString = aDecoder.decodeObjectForKey("trigger") as! String
+        trigger = CGRectFromString(triggerString)
         
     }
     
@@ -51,6 +55,7 @@ class Pinpoint : NSObject, NSCoding {
         aCoder.encodeObject(pinDescription, forKey: "pinDescription")
         aCoder.encodeObject(typeName, forKey: "typeName")
         aCoder.encodeObject(photo, forKey: "photo")
+        aCoder.encodeObject(NSStringFromCGRect(trigger), forKey: "trigger")
         
     }
     
