@@ -19,6 +19,7 @@ class Pinpoint : NSObject, NSCoding {
     var pinDescription: String = ""
     var typeName: String = ""
     var photo: String = ""
+    var pages: [ContentPage] = [ContentPage]()
     
     var trigger: CGRect = CGRectNull
     

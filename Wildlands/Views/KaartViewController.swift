@@ -49,7 +49,7 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
         kaartScrollView.addSubview(currentPosition)
         
         let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        if defaults.objectForKey("pinpoints") == nil {
+        if defaults.objectForKey("pinpoints") != nil {
             
             downloadContent()
             

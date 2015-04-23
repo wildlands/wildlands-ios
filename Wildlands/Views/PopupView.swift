@@ -14,11 +14,13 @@ protocol PopUpViewDelegate {
     
 }
 
-class PopupView: UIView {
+class PopupView: UIView, UIScrollViewDelegate {
 
     var delegate: PopUpViewDelegate?
     var thePinpoint: Pinpoint?
     var whiteBackground = UIView()
+    var pageScrollView: UIScrollView = UIScrollView()
+    var pageControl: UIPageControl = UIPageControl()
     
     init(aPinpoint: Pinpoint) {
         
@@ -55,19 +57,6 @@ class PopupView: UIView {
         whiteBackground.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.addSubview(whiteBackground)
         
-        let imageView: UIImageView = UIImageView()
-        imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        //imageView.contentMode = UIViewContentMode.ScaleToFill
-        //imageView.image = UIImage(named: "olifanten.jpg")
-        imageView.sd_setImageWithURL(NSURL(string: thePinpoint!.photo))
-        whiteBackground.addSubview(imageView)
-        
-        let scrollView: UIScrollView = UIScrollView()
-        scrollView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        scrollView.bounces = true
-        scrollView.showsVerticalScrollIndicator = true
-        whiteBackground.addSubview(scrollView)
-        
         let header: UIImageView = UIImageView(image: UIImage(named: thePinpoint!.typeName + "-header.png"))
         header.setTranslatesAutoresizingMaskIntoConstraints(false)
         header.contentMode = UIViewContentMode.ScaleAspectFit
@@ -79,15 +68,20 @@ class PopupView: UIView {
         backButton.addTarget(self, action: Selector("goBackButton:"), forControlEvents: UIControlEvents.TouchUpInside)
         whiteBackground.addSubview(backButton)
         
-        let label: UILabel = UILabel()
-        label.text = thePinpoint!.pinDescription
-        label.textColor = Colors.fontColor
-        label.setTranslatesAutoresizingMaskIntoConstraints(false)
-        label.numberOfLines = 0
-        label.font = Fonts.defaultFont
-        scrollView.addSubview(label)
+        pageScrollView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        pageScrollView.bounces = true
+        pageScrollView.showsVerticalScrollIndicator = true
+        pageScrollView.delegate = self
+        pageScrollView.scrollEnabled = true
+        pageScrollView.pagingEnabled = true
+        whiteBackground.addSubview(pageScrollView)
         
-        let bindings = ["label" : label, "header" : header, "whiteBackground" : whiteBackground, "backButton" : backButton, "scrollView" : scrollView, "imageView" : imageView]
+        pageControl.pageIndicatorTintColor = Colors.houtBruin
+        pageControl.currentPageIndicatorTintColor = Colors.groen
+        pageControl.setTranslatesAutoresizingMaskIntoConstraints(false)
+        whiteBackground.addSubview(pageControl)
+        
+        let bindings = ["header" : header, "whiteBackground" : whiteBackground, "backButton" : backButton, "pageScrollView" : pageScrollView, "pageControl" : pageControl]
         
         var format: String = "H:|-20-[header]-20-|"
         var constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: bindings)
@@ -109,16 +103,6 @@ class PopupView: UIView {
         
         self.addConstraints(constraints)
         
-        format = "H:|[imageView]|"
-        constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: bindings)
-        
-        whiteBackground.addConstraints(constraints)
-        
-        format = "V:|-50-[imageView(200)]-10-[scrollView]-10-|"
-        constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: bindings)
-        
-        whiteBackground.addConstraints(constraints)
-        
         format = "H:[backButton(40)]-5-|"
         constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: bindings)
         
@@ -129,21 +113,61 @@ class PopupView: UIView {
         
         whiteBackground.addConstraints(constraints)
         
-        format = "H:|-10-[scrollView]-10-|"
+        format = "H:|[pageScrollView]|"
         constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: bindings)
         
         whiteBackground.addConstraints(constraints)
         
-        format = "H:|[label(==scrollView)]|"
+        format = "V:|-50-[pageScrollView][pageControl(15)]-|"
         constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: bindings)
         
-        scrollView.addConstraints(constraints)
+        whiteBackground.addConstraints(constraints)
         
-        format = "V:|[label]|"
+        format = "H:|[pageControl]|"
         constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: bindings)
         
-        scrollView.addConstraints(constraints)
+        whiteBackground.addConstraints(constraints)
         
+        addPagesToScrollView()
+        
+    }
+    
+    func addPagesToScrollView() {
+        
+        if thePinpoint!.pages.count > 0 {
+        
+            var pageBindings = [String : AnyObject]()
+            pageBindings["pageScrollView"] = pageScrollView
+            
+            var horizontalFormat = "H:|"
+            
+            var index = 1
+            for contentPage in thePinpoint!.pages {
+                
+                let page = ContentPageView(content: contentPage)
+                page.setTranslatesAutoresizingMaskIntoConstraints(false)
+                pageBindings["page\(index)"] = page
+                pageScrollView.addSubview(page)
+                
+                var format = "V:|[page\(index)(==pageScrollView)]|"
+                var constraint = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: pageBindings)
+                pageScrollView.addConstraints(constraint)
+                
+                horizontalFormat = horizontalFormat + "[page\(index)(==pageScrollView)]"
+                
+                index++
+                
+            }
+            
+            pageControl.numberOfPages = thePinpoint!.pages.count
+            
+            horizontalFormat = horizontalFormat + "|"
+            
+            var constraint = NSLayoutConstraint.constraintsWithVisualFormat(horizontalFormat, options: NSLayoutFormatOptions(0), metrics: nil, views: pageBindings)
+            pageScrollView.addConstraints(constraint)
+        
+        }
+    
     }
     
     func goBackButton(sender: UIButton!) {
@@ -166,6 +190,12 @@ class PopupView: UIView {
                     })
                 
             })
+        
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        pageControl.currentPage = (Int(floor(scrollView.contentOffset.x)) / (Int(floor(scrollView.contentSize.width)) / thePinpoint!.pages.count))
         
     }
 

@@ -26,7 +26,7 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
     
     var delegate: JSONDownloaderDelegate?
     var data: NSMutableData = NSMutableData()
-    let baseURL: String = "http://doornbosagrait.no-ip.org/wildlandsBackend/api/api.php"
+    let baseURL: String = "http://wildlands.doornbosagrait.tk/api/api.php"
     var currentType: DownloadType?
     var jsonArray: AnyObject?
 
@@ -128,10 +128,30 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
                 
                 // Checken of type object bestaat
                 if let type = pinPointProps.objectForKey("type") as? NSDictionary {
-                    thePinpoint.image = type.objectForKey("image") as! String
-                    thePinpoint.typeName = type.objectForKey("name") as! String
+                    if let image = type.objectForKey("image") as? String {
+                        thePinpoint.image = image
+                    }
+                    if let typeName = type.objectForKey("name") as? String {
+                        thePinpoint.typeName = typeName
+                    }
+                    
                 } else {
                     println("Could not parse pinPoint: type object not found.")
+                }
+                
+                // Pagina's verwerken in pinpoint
+                if let pages = pinPointProps.objectForKey("pages") as? NSArray {
+                    
+                    for aPage in pages {
+                        
+                        var page: ContentPage = ContentPage()
+                        page.image = aPage.objectForKey("image") as! String
+                        page.title = aPage.objectForKey("title") as! String
+                        page.content = aPage.objectForKey("text") as! String
+                        thePinpoint.pages.append(page)
+                        
+                    }
+                    
                 }
                 
                 var rect = CGRectMake(thePinpoint.xPos - 40, thePinpoint.yPos - 40, 80, 80)
