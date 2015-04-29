@@ -26,7 +26,7 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
         super.viewDidLoad()
         
         vraagLabel.text = ""
-        vraagLabel.font = Fonts.defaultFont
+        vraagLabel.font = Fonts.defaultFont(16)
         
         navigationController?.navigationBar.barTintColor = Colors.bruin;
         backgroudView.layer.cornerRadius = 10

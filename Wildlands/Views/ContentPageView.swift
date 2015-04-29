@@ -50,7 +50,7 @@ class ContentPageView: UIView {
         label.textColor = Colors.fontColor
         label.setTranslatesAutoresizingMaskIntoConstraints(false)
         label.numberOfLines = 0
-        label.font = Fonts.defaultFont
+        label.font = Fonts.defaultFont(16)
         label.textAlignment = NSTextAlignment.Justified
         scrollView.addSubview(label)
         

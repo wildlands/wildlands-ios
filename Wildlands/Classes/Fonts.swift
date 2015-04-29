@@ -10,8 +10,16 @@ import UIKit
 
 class Fonts: NSObject {
  
-    class var defaultFont: UIFont {
-        return UIFont(name: "Roboto-Regular", size: 16)!
+    class func defaultFont(size: CGFloat) -> UIFont {
+        return UIFont(name: "Roboto-Regular", size: size)!
+    }
+    
+    class func wildlandsfont(size: CGFloat) -> UIFont {
+        return UIFont(name: "wildlands-regular", size: size)!
+    }
+    
+    class func speedletterFont(size: CGFloat) -> UIFont {
+        return UIFont(name: "speedletter-regular", size: size)!
     }
     
 }

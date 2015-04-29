@@ -79,6 +79,7 @@ class PopupView: UIView, UIScrollViewDelegate {
         pageControl.pageIndicatorTintColor = Colors.houtBruin
         pageControl.currentPageIndicatorTintColor = Colors.groen
         pageControl.setTranslatesAutoresizingMaskIntoConstraints(false)
+        pageControl.addTarget(self, action: Selector("changePage"), forControlEvents: UIControlEvents.ValueChanged)
         whiteBackground.addSubview(pageControl)
         
         let bindings = ["header" : header, "whiteBackground" : whiteBackground, "backButton" : backButton, "pageScrollView" : pageScrollView, "pageControl" : pageControl]
@@ -197,6 +198,15 @@ class PopupView: UIView, UIScrollViewDelegate {
         
         pageControl.currentPage = (Int(floor(scrollView.contentOffset.x)) / (Int(floor(scrollView.contentSize.width)) / thePinpoint!.pages.count))
         
+    }
+    
+    func changePage() {
+    
+        let page: CGFloat = CGFloat(pageControl.currentPage)
+        let pageWidth: CGFloat = CGFloat(floor(pageScrollView.contentSize.width)) / CGFloat(thePinpoint!.pages.count)
+        
+        pageScrollView.scrollRectToVisible(CGRectMake(pageWidth * page, 0, pageWidth, pageScrollView.contentSize.height), animated: true)
+    
     }
 
 }

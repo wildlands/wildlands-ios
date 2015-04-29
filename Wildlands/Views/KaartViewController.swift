@@ -21,6 +21,8 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
     var currentPosition: UIImageView = UIImageView()
     var wildlandsGPS: WildlandsGPS = WildlandsGPS()
     
+    var currentType: PinpointType?
+    
     var currentX: Int = 0
     var currentY: Int = 0
     
@@ -164,22 +166,27 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
         var i = 0
         for eenPinPoint: Pinpoint in pinpoints {
             
-            let pinPointButton: UIButton = UIButton(frame: CGRectMake(eenPinPoint.xPos * zoomScale - 40, eenPinPoint.yPos * zoomScale - 108, 80, 108))
-            pinPointButton.setImage(UIImage(named: eenPinPoint.image), forState: UIControlState.Normal)
-            pinPointButton.tag = eenPinPoint.id
-            pinPointButton.addTarget(self, action: Selector("pinPointPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
-            pinPointButton.alpha = 0
-            kaartScrollView.addSubview(pinPointButton)
+            if eenPinPoint.typeName == currentType?.description {
             
-            pinpoints[i].trigger = CGRectMake(eenPinPoint.xPos * zoomScale - 80, eenPinPoint.yPos * zoomScale - 80, 160, 160)
+                let pinPointButton: UIButton = UIButton(frame: CGRectMake(eenPinPoint.xPos * zoomScale - 40, eenPinPoint.yPos * zoomScale - 108, 80, 108))
+                pinPointButton.setImage(UIImage(named: eenPinPoint.image), forState: UIControlState.Normal)
+                pinPointButton.tag = eenPinPoint.id
+                pinPointButton.addTarget(self, action: Selector("pinPointPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
+                pinPointButton.alpha = 0
+                kaartScrollView.addSubview(pinPointButton)
+                
+                pinpoints[i].trigger = CGRectMake(eenPinPoint.xPos * zoomScale - 80, eenPinPoint.yPos * zoomScale - 80, 160, 160)
+                
+                UIView.animateWithDuration(0.5, delay: delay, options: nil, animations: {
+                
+                    pinPointButton.alpha = 1
+                
+                }, completion: nil)
+                
+                delay += 0.3
+                
+            }
             
-            UIView.animateWithDuration(0.5, delay: delay, options: nil, animations: {
-            
-                pinPointButton.alpha = 1
-            
-            }, completion: nil)
-            
-            delay += 0.3
             i++
             
         }
@@ -335,4 +342,9 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
         
     }
     
+    @IBAction func goBack(sender: AnyObject) {
+        
+        self.navigationController?.popViewControllerAnimated(true)
+        
+    }
 }

@@ -8,6 +8,17 @@
 
 import UIKit
 
+enum PinpointType: String, Printable {
+    case BIO_MIMICRY = "Bio Mimicry"
+    case MATERIAAL = "Materiaal"
+    case WATER = "Water"
+    case ENERGIE = "Energie"
+    
+    var description: String {
+        return self.rawValue
+    }
+}
+
 class Utils: NSObject {
     
     class func saveObjectToDisk(object: AnyObject, forKey: String) {

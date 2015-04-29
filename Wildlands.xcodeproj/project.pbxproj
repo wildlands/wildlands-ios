@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		64E6CBEE3B900BAD654F85CF /* libPods-Wildlands.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6032D292A1100303591B84D0 /* libPods-Wildlands.a */; };
 		E430E7671AC17D7C0036506D /* KaartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E430E7661AC17D7C0036506D /* KaartViewController.swift */; };
 		E430E76B1AC18E9E0036506D /* Pinpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E430E76A1AC18E9E0036506D /* Pinpoint.swift */; };
 		E430E7751AC1A3540036506D /* JSONDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E430E7741AC1A3540036506D /* JSONDownloader.swift */; };
@@ -43,10 +42,6 @@
 		E44FE90E1ADD2117006DD395 /* kaartView.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E44FE8FB1ADD2117006DD395 /* kaartView.jpg */; };
 		E44FE90F1ADD2117006DD395 /* logo_wildlands.png in Resources */ = {isa = PBXBuildFile; fileRef = E44FE8FC1ADD2117006DD395 /* logo_wildlands.png */; };
 		E44FE9101ADD2117006DD395 /* olifanten.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E44FE8FD1ADD2117006DD395 /* olifanten.jpg */; };
-		E44FE9111ADD2117006DD395 /* pinpoint-01.png in Resources */ = {isa = PBXBuildFile; fileRef = E44FE8FE1ADD2117006DD395 /* pinpoint-01.png */; };
-		E44FE9121ADD2117006DD395 /* pinpoint-02.png in Resources */ = {isa = PBXBuildFile; fileRef = E44FE8FF1ADD2117006DD395 /* pinpoint-02.png */; };
-		E44FE9131ADD2117006DD395 /* pinpoint-03.png in Resources */ = {isa = PBXBuildFile; fileRef = E44FE9001ADD2117006DD395 /* pinpoint-03.png */; };
-		E44FE9141ADD2117006DD395 /* pinpoint-04.png in Resources */ = {isa = PBXBuildFile; fileRef = E44FE9011ADD2117006DD395 /* pinpoint-04.png */; };
 		E44FE9151ADD2117006DD395 /* Stroom-close.png in Resources */ = {isa = PBXBuildFile; fileRef = E44FE9021ADD2117006DD395 /* Stroom-close.png */; };
 		E44FE9161ADD2117006DD395 /* Stroom-header.png in Resources */ = {isa = PBXBuildFile; fileRef = E44FE9031ADD2117006DD395 /* Stroom-header.png */; };
 		E44FE9171ADD2117006DD395 /* Warmte-close.png in Resources */ = {isa = PBXBuildFile; fileRef = E44FE9041ADD2117006DD395 /* Warmte-close.png */; };
@@ -60,6 +55,7 @@
 		E44FE9261ADE7AF4006DD395 /* stenden-2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = E44FE9251ADE7AF4006DD395 /* stenden-2.gpx */; };
 		E4627FF61ABAE1CD003B9229 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4627FF51ABAE1CD003B9229 /* Colors.swift */; };
 		E48FD5511AE91E59000C1CFA /* ContentPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48FD5501AE91E59000C1CFA /* ContentPage.swift */; };
+		E4B6E6711AEA4D1D0033CD3A /* ChooseSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B6E6701AEA4D1D0033CD3A /* ChooseSubjectViewController.swift */; };
 		E4C1903D1AE7A7ED00FC2800 /* ContentPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C1903C1AE7A7ED00FC2800 /* ContentPageView.swift */; };
 		E4C190411AE7C4DD00FC2800 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C190401AE7C4DD00FC2800 /* PopupView.swift */; };
 		E4C20DEA1AB9A2EC00A911B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C20DE91AB9A2EC00A911B5 /* AppDelegate.swift */; };
@@ -69,6 +65,42 @@
 		E4C20E001AB9A2EC00A911B5 /* WildlandsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C20DFF1AB9A2EC00A911B5 /* WildlandsTests.swift */; };
 		E4C20E0C1AB9AA2900A911B5 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C20E0B1AB9AA2900A911B5 /* QuizViewController.swift */; };
 		E4C20E0E1AB9AAF600A911B5 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C20E0D1AB9AAF600A911B5 /* Answer.swift */; };
+		E4C84D501AEF87E500A208EF /* wildlands-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4C84D4F1AEF87E500A208EF /* wildlands-regular.ttf */; };
+		E4C84D521AEF8DB600A208EF /* speedletter-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4C84D511AEF8DB600A208EF /* speedletter-regular.ttf */; };
+		E4DEEB421AF0D0C5002B6434 /* NoAnimationSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DEEB411AF0D0C5002B6434 /* NoAnimationSegue.swift */; };
+		E4DEEB441AF0D93E002B6434 /* backarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E4DEEB431AF0D93E002B6434 /* backarrow.png */; };
+		E4DEEB481AF0DAE7002B6434 /* stroke_green.png in Resources */ = {isa = PBXBuildFile; fileRef = E4DEEB471AF0DAE7002B6434 /* stroke_green.png */; };
+		E4DEEB4A1AF0E201002B6434 /* QuizChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DEEB491AF0E201002B6434 /* QuizChooseViewController.swift */; };
+		E4DEEB4C1AF0E8EE002B6434 /* JoinQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DEEB4B1AF0E8EE002B6434 /* JoinQuizViewController.swift */; };
+		E4DEEB4E1AF0F4A4002B6434 /* WaitForQuizStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DEEB4D1AF0F4A4002B6434 /* WaitForQuizStartViewController.swift */; };
+		E4DEEB501AF0F902002B6434 /* GenerateQuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DEEB4F1AF0F902002B6434 /* GenerateQuizViewController.swift */; };
+		E4DEEB521AF106DA002B6434 /* FadeTransitionSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DEEB511AF106DA002B6434 /* FadeTransitionSegue.swift */; };
+		E4DEEB571AF11118002B6434 /* pinpoint-01.png in Resources */ = {isa = PBXBuildFile; fileRef = E4DEEB531AF11118002B6434 /* pinpoint-01.png */; };
+		E4DEEB581AF11118002B6434 /* pinpoint-02.png in Resources */ = {isa = PBXBuildFile; fileRef = E4DEEB541AF11118002B6434 /* pinpoint-02.png */; };
+		E4DEEB591AF11118002B6434 /* pinpoint-03.png in Resources */ = {isa = PBXBuildFile; fileRef = E4DEEB551AF11118002B6434 /* pinpoint-03.png */; };
+		E4DEEB5A1AF11118002B6434 /* pinpoint-04.png in Resources */ = {isa = PBXBuildFile; fileRef = E4DEEB561AF11118002B6434 /* pinpoint-04.png */; };
+		E4EEE5F51AEF9D9400920E85 /* element-01.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE5E91AEF9D9400920E85 /* element-01.png */; };
+		E4EEE5F61AEF9D9400920E85 /* element-02.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE5EA1AEF9D9400920E85 /* element-02.png */; };
+		E4EEE5F71AEF9D9400920E85 /* element-03.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE5EB1AEF9D9400920E85 /* element-03.png */; };
+		E4EEE5F81AEF9D9400920E85 /* element-04.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE5EC1AEF9D9400920E85 /* element-04.png */; };
+		E4EEE5F91AEF9D9400920E85 /* element-05.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE5ED1AEF9D9400920E85 /* element-05.png */; };
+		E4EEE5FA1AEF9D9400920E85 /* element-06.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE5EE1AEF9D9400920E85 /* element-06.png */; };
+		E4EEE5FB1AEF9D9400920E85 /* element-07.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE5EF1AEF9D9400920E85 /* element-07.png */; };
+		E4EEE5FC1AEF9D9400920E85 /* element-08.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE5F01AEF9D9400920E85 /* element-08.png */; };
+		E4EEE5FD1AEF9D9400920E85 /* element-09.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE5F11AEF9D9400920E85 /* element-09.png */; };
+		E4EEE5FE1AEF9D9400920E85 /* element-10.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE5F21AEF9D9400920E85 /* element-10.png */; };
+		E4EEE5FF1AEF9D9400920E85 /* element-11.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE5F31AEF9D9400920E85 /* element-11.png */; };
+		E4EEE6001AEF9D9400920E85 /* element-12.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE5F41AEF9D9400920E85 /* element-12.png */; };
+		E4EEE6021AEF9E6100920E85 /* element-01-180.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE6011AEF9E6100920E85 /* element-01-180.png */; };
+		E4EEE6041AEF9FC700920E85 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EEE6031AEF9FC700920E85 /* StartViewController.swift */; };
+		E4EEE6061AEFA42200920E85 /* WildlandsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EEE6051AEFA42200920E85 /* WildlandsButton.swift */; };
+		E4EEE60E1AEFB1A700920E85 /* element-14.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE6081AEFB1A700920E85 /* element-14.png */; };
+		E4EEE60F1AEFB1A700920E85 /* element-15.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE6091AEFB1A700920E85 /* element-15.png */; };
+		E4EEE6101AEFB1A700920E85 /* element-16.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE60A1AEFB1A700920E85 /* element-16.png */; };
+		E4EEE6111AEFB1A700920E85 /* element-17.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE60B1AEFB1A700920E85 /* element-17.png */; };
+		E4EEE6121AEFB1A700920E85 /* element-18.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE60C1AEFB1A700920E85 /* element-18.png */; };
+		E4EEE6131AEFB1A700920E85 /* element-19.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE60D1AEFB1A700920E85 /* element-19.png */; };
+		EBB6E73FDD6C92AE70B1E78A /* Pods_Wildlands.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753519B94D96BFA270B9CE08 /* Pods_Wildlands.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,8 +115,8 @@
 
 /* Begin PBXFileReference section */
 		4E5E0BD42386D9869A092966 /* Pods-Wildlands.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wildlands.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Wildlands/Pods-Wildlands.debug.xcconfig"; sourceTree = "<group>"; };
-		6032D292A1100303591B84D0 /* libPods-Wildlands.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Wildlands.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69867EA9EFE0C4C6D1D1BE2B /* Pods-Wildlands.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wildlands.release.xcconfig"; path = "Pods/Target Support Files/Pods-Wildlands/Pods-Wildlands.release.xcconfig"; sourceTree = "<group>"; };
+		753519B94D96BFA270B9CE08 /* Pods_Wildlands.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Wildlands.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E430E7661AC17D7C0036506D /* KaartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KaartViewController.swift; path = Views/KaartViewController.swift; sourceTree = "<group>"; };
 		E430E76A1AC18E9E0036506D /* Pinpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Pinpoint.swift; path = Classes/Pinpoint.swift; sourceTree = "<group>"; };
 		E430E7741AC1A3540036506D /* JSONDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONDownloader.swift; path = Classes/JSONDownloader.swift; sourceTree = "<group>"; };
@@ -140,10 +172,6 @@
 		E44FE8FB1ADD2117006DD395 /* kaartView.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = kaartView.jpg; path = Images/kaartView.jpg; sourceTree = "<group>"; };
 		E44FE8FC1ADD2117006DD395 /* logo_wildlands.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo_wildlands.png; path = Images/logo_wildlands.png; sourceTree = "<group>"; };
 		E44FE8FD1ADD2117006DD395 /* olifanten.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = olifanten.jpg; path = Images/olifanten.jpg; sourceTree = "<group>"; };
-		E44FE8FE1ADD2117006DD395 /* pinpoint-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pinpoint-01.png"; path = "Images/pinpoint-01.png"; sourceTree = "<group>"; };
-		E44FE8FF1ADD2117006DD395 /* pinpoint-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pinpoint-02.png"; path = "Images/pinpoint-02.png"; sourceTree = "<group>"; };
-		E44FE9001ADD2117006DD395 /* pinpoint-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pinpoint-03.png"; path = "Images/pinpoint-03.png"; sourceTree = "<group>"; };
-		E44FE9011ADD2117006DD395 /* pinpoint-04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pinpoint-04.png"; path = "Images/pinpoint-04.png"; sourceTree = "<group>"; };
 		E44FE9021ADD2117006DD395 /* Stroom-close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stroom-close.png"; path = "Images/Stroom-close.png"; sourceTree = "<group>"; };
 		E44FE9031ADD2117006DD395 /* Stroom-header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Stroom-header.png"; path = "Images/Stroom-header.png"; sourceTree = "<group>"; };
 		E44FE9041ADD2117006DD395 /* Warmte-close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Warmte-close.png"; path = "Images/Warmte-close.png"; sourceTree = "<group>"; };
@@ -158,6 +186,7 @@
 		E460D5431ACBFF2000804640 /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		E4627FF51ABAE1CD003B9229 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = Classes/Colors.swift; sourceTree = "<group>"; };
 		E48FD5501AE91E59000C1CFA /* ContentPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentPage.swift; path = Classes/ContentPage.swift; sourceTree = "<group>"; };
+		E4B6E6701AEA4D1D0033CD3A /* ChooseSubjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChooseSubjectViewController.swift; path = Views/ChooseSubjectViewController.swift; sourceTree = "<group>"; };
 		E4C1903C1AE7A7ED00FC2800 /* ContentPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentPageView.swift; path = Views/ContentPageView.swift; sourceTree = "<group>"; };
 		E4C190401AE7C4DD00FC2800 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopupView.swift; path = Views/PopupView.swift; sourceTree = "<group>"; };
 		E4C20DE41AB9A2EC00A911B5 /* Wildlands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wildlands.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +200,41 @@
 		E4C20DFF1AB9A2EC00A911B5 /* WildlandsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WildlandsTests.swift; sourceTree = "<group>"; };
 		E4C20E0B1AB9AA2900A911B5 /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizViewController.swift; path = Views/QuizViewController.swift; sourceTree = "<group>"; };
 		E4C20E0D1AB9AAF600A911B5 /* Answer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Answer.swift; path = Classes/Answer.swift; sourceTree = "<group>"; };
+		E4C84D4F1AEF87E500A208EF /* wildlands-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "wildlands-regular.ttf"; sourceTree = "<group>"; };
+		E4C84D511AEF8DB600A208EF /* speedletter-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "speedletter-regular.ttf"; sourceTree = "<group>"; };
+		E4DEEB411AF0D0C5002B6434 /* NoAnimationSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoAnimationSegue.swift; path = Classes/NoAnimationSegue.swift; sourceTree = "<group>"; };
+		E4DEEB431AF0D93E002B6434 /* backarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backarrow.png; sourceTree = "<group>"; };
+		E4DEEB471AF0DAE7002B6434 /* stroke_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stroke_green.png; sourceTree = "<group>"; };
+		E4DEEB491AF0E201002B6434 /* QuizChooseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizChooseViewController.swift; path = Views/QuizChooseViewController.swift; sourceTree = "<group>"; };
+		E4DEEB4B1AF0E8EE002B6434 /* JoinQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JoinQuizViewController.swift; path = Views/JoinQuizViewController.swift; sourceTree = "<group>"; };
+		E4DEEB4D1AF0F4A4002B6434 /* WaitForQuizStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaitForQuizStartViewController.swift; path = Views/WaitForQuizStartViewController.swift; sourceTree = "<group>"; };
+		E4DEEB4F1AF0F902002B6434 /* GenerateQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenerateQuizViewController.swift; path = Views/GenerateQuizViewController.swift; sourceTree = "<group>"; };
+		E4DEEB511AF106DA002B6434 /* FadeTransitionSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FadeTransitionSegue.swift; path = Classes/FadeTransitionSegue.swift; sourceTree = "<group>"; };
+		E4DEEB531AF11118002B6434 /* pinpoint-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinpoint-01.png"; sourceTree = "<group>"; };
+		E4DEEB541AF11118002B6434 /* pinpoint-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinpoint-02.png"; sourceTree = "<group>"; };
+		E4DEEB551AF11118002B6434 /* pinpoint-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinpoint-03.png"; sourceTree = "<group>"; };
+		E4DEEB561AF11118002B6434 /* pinpoint-04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinpoint-04.png"; sourceTree = "<group>"; };
+		E4EEE5E91AEF9D9400920E85 /* element-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-01.png"; path = "Images/Views/element-01.png"; sourceTree = "<group>"; };
+		E4EEE5EA1AEF9D9400920E85 /* element-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-02.png"; path = "Images/Views/element-02.png"; sourceTree = "<group>"; };
+		E4EEE5EB1AEF9D9400920E85 /* element-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-03.png"; path = "Images/Views/element-03.png"; sourceTree = "<group>"; };
+		E4EEE5EC1AEF9D9400920E85 /* element-04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-04.png"; path = "Images/Views/element-04.png"; sourceTree = "<group>"; };
+		E4EEE5ED1AEF9D9400920E85 /* element-05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-05.png"; path = "Images/Views/element-05.png"; sourceTree = "<group>"; };
+		E4EEE5EE1AEF9D9400920E85 /* element-06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-06.png"; path = "Images/Views/element-06.png"; sourceTree = "<group>"; };
+		E4EEE5EF1AEF9D9400920E85 /* element-07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-07.png"; path = "Images/Views/element-07.png"; sourceTree = "<group>"; };
+		E4EEE5F01AEF9D9400920E85 /* element-08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-08.png"; path = "Images/Views/element-08.png"; sourceTree = "<group>"; };
+		E4EEE5F11AEF9D9400920E85 /* element-09.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-09.png"; path = "Images/Views/element-09.png"; sourceTree = "<group>"; };
+		E4EEE5F21AEF9D9400920E85 /* element-10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-10.png"; path = "Images/Views/element-10.png"; sourceTree = "<group>"; };
+		E4EEE5F31AEF9D9400920E85 /* element-11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-11.png"; path = "Images/Views/element-11.png"; sourceTree = "<group>"; };
+		E4EEE5F41AEF9D9400920E85 /* element-12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-12.png"; path = "Images/Views/element-12.png"; sourceTree = "<group>"; };
+		E4EEE6011AEF9E6100920E85 /* element-01-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-01-180.png"; path = "Images/Views/element-01-180.png"; sourceTree = "<group>"; };
+		E4EEE6031AEF9FC700920E85 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartViewController.swift; path = Views/StartViewController.swift; sourceTree = "<group>"; };
+		E4EEE6051AEFA42200920E85 /* WildlandsButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WildlandsButton.swift; path = Views/WildlandsButton.swift; sourceTree = "<group>"; };
+		E4EEE6081AEFB1A700920E85 /* element-14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-14.png"; path = "Images/Buttons/element-14.png"; sourceTree = "<group>"; };
+		E4EEE6091AEFB1A700920E85 /* element-15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-15.png"; path = "Images/Buttons/element-15.png"; sourceTree = "<group>"; };
+		E4EEE60A1AEFB1A700920E85 /* element-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-16.png"; path = "Images/Buttons/element-16.png"; sourceTree = "<group>"; };
+		E4EEE60B1AEFB1A700920E85 /* element-17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-17.png"; path = "Images/Buttons/element-17.png"; sourceTree = "<group>"; };
+		E4EEE60C1AEFB1A700920E85 /* element-18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-18.png"; path = "Images/Buttons/element-18.png"; sourceTree = "<group>"; };
+		E4EEE60D1AEFB1A700920E85 /* element-19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-19.png"; path = "Images/Buttons/element-19.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,7 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E430E7D71AC418E60036506D /* ImageIO.framework in Frameworks */,
-				64E6CBEE3B900BAD654F85CF /* libPods-Wildlands.a in Frameworks */,
+				EBB6E73FDD6C92AE70B1E78A /* Pods_Wildlands.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,7 +269,7 @@
 		A47CC03B517AB98FD7F76CAC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6032D292A1100303591B84D0 /* libPods-Wildlands.a */,
+				753519B94D96BFA270B9CE08 /* Pods_Wildlands.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -214,6 +278,8 @@
 			isa = PBXGroup;
 			children = (
 				E430E79B1AC408EA0036506D /* Roboto-Regular.ttf */,
+				E4C84D4F1AEF87E500A208EF /* wildlands-regular.ttf */,
+				E4C84D511AEF8DB600A208EF /* speedletter-regular.ttf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -271,9 +337,16 @@
 			isa = PBXGroup;
 			children = (
 				E4C20E0B1AB9AA2900A911B5 /* QuizViewController.swift */,
+				E4DEEB4F1AF0F902002B6434 /* GenerateQuizViewController.swift */,
+				E4DEEB491AF0E201002B6434 /* QuizChooseViewController.swift */,
 				E430E7661AC17D7C0036506D /* KaartViewController.swift */,
 				E4C1903C1AE7A7ED00FC2800 /* ContentPageView.swift */,
 				E4C190401AE7C4DD00FC2800 /* PopupView.swift */,
+				E4B6E6701AEA4D1D0033CD3A /* ChooseSubjectViewController.swift */,
+				E4EEE6031AEF9FC700920E85 /* StartViewController.swift */,
+				E4EEE6051AEFA42200920E85 /* WildlandsButton.swift */,
+				E4DEEB4B1AF0E8EE002B6434 /* JoinQuizViewController.swift */,
+				E4DEEB4D1AF0F4A4002B6434 /* WaitForQuizStartViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -300,6 +373,8 @@
 				E430E79D1AC409550036506D /* Fonts.swift */,
 				E430E7D91AC41DA00036506D /* Utils.swift */,
 				E44FE8F01ADD1F73006DD395 /* WildlandsGPS.swift */,
+				E4DEEB411AF0D0C5002B6434 /* NoAnimationSegue.swift */,
+				E4DEEB511AF106DA002B6434 /* FadeTransitionSegue.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -307,7 +382,10 @@
 		E4627FF81ABAE423003B9229 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E4EEE6071AEFB19E00920E85 /* Buttons */,
+				E4EEE5D01AEF9D3900920E85 /* View Elements */,
 				E44FE91B1ADD3BFD006DD395 /* spot.png */,
+				E4DEEB431AF0D93E002B6434 /* backarrow.png */,
 				E44FE91D1ADD4189006DD395 /* tempkaart.png */,
 				E44FE8F51ADD2117006DD395 /* background.jpg */,
 				E44FE8F61ADD2117006DD395 /* Bio-close.png */,
@@ -318,10 +396,6 @@
 				E44FE8FB1ADD2117006DD395 /* kaartView.jpg */,
 				E44FE8FC1ADD2117006DD395 /* logo_wildlands.png */,
 				E44FE8FD1ADD2117006DD395 /* olifanten.jpg */,
-				E44FE8FE1ADD2117006DD395 /* pinpoint-01.png */,
-				E44FE8FF1ADD2117006DD395 /* pinpoint-02.png */,
-				E44FE9001ADD2117006DD395 /* pinpoint-03.png */,
-				E44FE9011ADD2117006DD395 /* pinpoint-04.png */,
 				E44FE9021ADD2117006DD395 /* Stroom-close.png */,
 				E44FE9031ADD2117006DD395 /* Stroom-header.png */,
 				E44FE9041ADD2117006DD395 /* Warmte-close.png */,
@@ -397,6 +471,44 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E4EEE5D01AEF9D3900920E85 /* View Elements */ = {
+			isa = PBXGroup;
+			children = (
+				E4DEEB531AF11118002B6434 /* pinpoint-01.png */,
+				E4DEEB541AF11118002B6434 /* pinpoint-02.png */,
+				E4DEEB551AF11118002B6434 /* pinpoint-03.png */,
+				E4DEEB561AF11118002B6434 /* pinpoint-04.png */,
+				E4DEEB471AF0DAE7002B6434 /* stroke_green.png */,
+				E4EEE5E91AEF9D9400920E85 /* element-01.png */,
+				E4EEE5EA1AEF9D9400920E85 /* element-02.png */,
+				E4EEE5EB1AEF9D9400920E85 /* element-03.png */,
+				E4EEE5EC1AEF9D9400920E85 /* element-04.png */,
+				E4EEE5ED1AEF9D9400920E85 /* element-05.png */,
+				E4EEE5EE1AEF9D9400920E85 /* element-06.png */,
+				E4EEE5EF1AEF9D9400920E85 /* element-07.png */,
+				E4EEE5F01AEF9D9400920E85 /* element-08.png */,
+				E4EEE5F11AEF9D9400920E85 /* element-09.png */,
+				E4EEE5F21AEF9D9400920E85 /* element-10.png */,
+				E4EEE5F31AEF9D9400920E85 /* element-11.png */,
+				E4EEE5F41AEF9D9400920E85 /* element-12.png */,
+				E4EEE6011AEF9E6100920E85 /* element-01-180.png */,
+			);
+			name = "View Elements";
+			sourceTree = "<group>";
+		};
+		E4EEE6071AEFB19E00920E85 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				E4EEE6081AEFB1A700920E85 /* element-14.png */,
+				E4EEE6091AEFB1A700920E85 /* element-15.png */,
+				E4EEE60A1AEFB1A700920E85 /* element-16.png */,
+				E4EEE60B1AEFB1A700920E85 /* element-17.png */,
+				E4EEE60C1AEFB1A700920E85 /* element-18.png */,
+				E4EEE60D1AEFB1A700920E85 /* element-19.png */,
+			);
+			name = Buttons;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -409,6 +521,7 @@
 				E4C20DE11AB9A2EC00A911B5 /* Frameworks */,
 				E4C20DE21AB9A2EC00A911B5 /* Resources */,
 				1470B21F1869D15D3DAB755A /* Copy Pods Resources */,
+				486A274C6F7609FE9B19BCCA /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -482,33 +595,56 @@
 			files = (
 				E44FE9171ADD2117006DD395 /* Warmte-close.png in Resources */,
 				E44FE91C1ADD3BFD006DD395 /* spot.png in Resources */,
+				E4C84D521AEF8DB600A208EF /* speedletter-regular.ttf in Resources */,
+				E4EEE6021AEF9E6100920E85 /* element-01-180.png in Resources */,
+				E4EEE5FA1AEF9D9400920E85 /* element-06.png in Resources */,
 				E44FE9261ADE7AF4006DD395 /* stenden-2.gpx in Resources */,
 				E44FE90B1ADD2117006DD395 /* bushbush.png in Resources */,
-				E44FE9111ADD2117006DD395 /* pinpoint-01.png in Resources */,
-				E44FE9121ADD2117006DD395 /* pinpoint-02.png in Resources */,
+				E4DEEB581AF11118002B6434 /* pinpoint-02.png in Resources */,
+				E4DEEB571AF11118002B6434 /* pinpoint-01.png in Resources */,
+				E4EEE5FC1AEF9D9400920E85 /* element-08.png in Resources */,
+				E4EEE5FE1AEF9D9400920E85 /* element-10.png in Resources */,
+				E4DEEB481AF0DAE7002B6434 /* stroke_green.png in Resources */,
+				E4EEE6101AEFB1A700920E85 /* element-16.png in Resources */,
+				E4EEE5FD1AEF9D9400920E85 /* element-09.png in Resources */,
 				E44FE91A1ADD2117006DD395 /* Water-header.png in Resources */,
 				E44FE9221ADE6A66006DD395 /* TestGPS.gpx in Resources */,
+				E4EEE60E1AEFB1A700920E85 /* element-14.png in Resources */,
+				E4C84D501AEF87E500A208EF /* wildlands-regular.ttf in Resources */,
 				E44FE90C1ADD2117006DD395 /* iceicebaby.png in Resources */,
-				E44FE9131ADD2117006DD395 /* pinpoint-03.png in Resources */,
 				E4C20DEF1AB9A2EC00A911B5 /* Main.storyboard in Resources */,
 				E44FE9161ADD2117006DD395 /* Stroom-header.png in Resources */,
 				E44FE9151ADD2117006DD395 /* Stroom-close.png in Resources */,
 				E44FE90A1ADD2117006DD395 /* Bio-header.png in Resources */,
 				E44FE90D1ADD2117006DD395 /* kaart.jpg in Resources */,
+				E4DEEB591AF11118002B6434 /* pinpoint-03.png in Resources */,
+				E4DEEB441AF0D93E002B6434 /* backarrow.png in Resources */,
 				E44FE90F1ADD2117006DD395 /* logo_wildlands.png in Resources */,
+				E4EEE5FB1AEF9D9400920E85 /* element-07.png in Resources */,
+				E4EEE6121AEFB1A700920E85 /* element-18.png in Resources */,
 				E44FE9191ADD2117006DD395 /* Water-close.png in Resources */,
 				E44FE9091ADD2117006DD395 /* Bio-close.png in Resources */,
 				E44FE90E1ADD2117006DD395 /* kaartView.jpg in Resources */,
+				E4EEE5FF1AEF9D9400920E85 /* element-11.png in Resources */,
 				E430E77A1AC1A4FE0036506D /* Localizable.strings in Resources */,
 				E430E79C1AC408EA0036506D /* Roboto-Regular.ttf in Resources */,
+				E4EEE6111AEFB1A700920E85 /* element-17.png in Resources */,
+				E4EEE6131AEFB1A700920E85 /* element-19.png in Resources */,
+				E4EEE6001AEF9D9400920E85 /* element-12.png in Resources */,
+				E4EEE5F71AEF9D9400920E85 /* element-03.png in Resources */,
 				E44FE9101ADD2117006DD395 /* olifanten.jpg in Resources */,
 				E44FE9241ADE7880006DD395 /* stenden.gpx in Resources */,
+				E4EEE5F51AEF9D9400920E85 /* element-01.png in Resources */,
 				E44FE9081ADD2117006DD395 /* background.jpg in Resources */,
 				E44FE9181ADD2117006DD395 /* Warmte-header.png in Resources */,
 				E4C20DF41AB9A2EC00A911B5 /* LaunchScreen.xib in Resources */,
 				E44FE91E1ADD4189006DD395 /* tempkaart.png in Resources */,
-				E44FE9141ADD2117006DD395 /* pinpoint-04.png in Resources */,
+				E4EEE5F61AEF9D9400920E85 /* element-02.png in Resources */,
+				E4EEE5F91AEF9D9400920E85 /* element-05.png in Resources */,
 				E4C20DF11AB9A2EC00A911B5 /* Images.xcassets in Resources */,
+				E4DEEB5A1AF11118002B6434 /* pinpoint-04.png in Resources */,
+				E4EEE60F1AEFB1A700920E85 /* element-15.png in Resources */,
+				E4EEE5F81AEF9D9400920E85 /* element-04.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,6 +673,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Wildlands/Pods-Wildlands-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		486A274C6F7609FE9B19BCCA /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Wildlands/Pods-Wildlands-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		87A542D829967AB97F3BC23C /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -560,7 +711,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E48FD5511AE91E59000C1CFA /* ContentPage.swift in Sources */,
+				E4EEE6041AEF9FC700920E85 /* StartViewController.swift in Sources */,
 				E4C1903D1AE7A7ED00FC2800 /* ContentPageView.swift in Sources */,
+				E4DEEB4C1AF0E8EE002B6434 /* JoinQuizViewController.swift in Sources */,
+				E4DEEB421AF0D0C5002B6434 /* NoAnimationSegue.swift in Sources */,
 				E430E7C61AC418CD0036506D /* MKAnnotationView+WebCache.m in Sources */,
 				E430E7DA1AC41DA00036506D /* Utils.swift in Sources */,
 				E4C190411AE7C4DD00FC2800 /* PopupView.swift in Sources */,
@@ -570,9 +724,13 @@
 				E430E7CD1AC418CD0036506D /* SDWebImageManager.m in Sources */,
 				E4627FF61ABAE1CD003B9229 /* Colors.swift in Sources */,
 				E430E7D41AC418CD0036506D /* UIImageView+WebCache.m in Sources */,
+				E4DEEB501AF0F902002B6434 /* GenerateQuizViewController.swift in Sources */,
+				E4DEEB4A1AF0E201002B6434 /* QuizChooseViewController.swift in Sources */,
 				E44FE8F11ADD1F73006DD395 /* WildlandsGPS.swift in Sources */,
+				E4DEEB521AF106DA002B6434 /* FadeTransitionSegue.swift in Sources */,
 				E430E7C91AC418CD0036506D /* SDWebImageCompat.m in Sources */,
 				E4C20E0C1AB9AA2900A911B5 /* QuizViewController.swift in Sources */,
+				E4B6E6711AEA4D1D0033CD3A /* ChooseSubjectViewController.swift in Sources */,
 				E430E7CA1AC418CD0036506D /* SDWebImageDecoder.m in Sources */,
 				E430E7D11AC418CD0036506D /* UIImage+MultiFormat.m in Sources */,
 				E430E7D21AC418CD0036506D /* UIImage+WebP.m in Sources */,
@@ -588,6 +746,8 @@
 				E430E7C81AC418CD0036506D /* SDImageCache.m in Sources */,
 				E430E7CF1AC418CD0036506D /* UIButton+WebCache.m in Sources */,
 				E430E7C71AC418CD0036506D /* NSData+ImageContentType.m in Sources */,
+				E4EEE6061AEFA42200920E85 /* WildlandsButton.swift in Sources */,
+				E4DEEB4E1AF0F4A4002B6434 /* WaitForQuizStartViewController.swift in Sources */,
 				E430E76B1AC18E9E0036506D /* Pinpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -723,6 +883,7 @@
 			baseConfigurationReference = 4E5E0BD42386D9869A092966 /* Pods-Wildlands.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Wildlands/Info.plist;
@@ -740,6 +901,7 @@
 			baseConfigurationReference = 69867EA9EFE0C4C6D1D1BE2B /* Pods-Wildlands.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Wildlands/Info.plist;
