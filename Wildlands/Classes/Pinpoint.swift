@@ -43,6 +43,7 @@ class Pinpoint : NSObject, NSCoding {
         photo = aDecoder.decodeObjectForKey("photo") as! String
         var triggerString = aDecoder.decodeObjectForKey("trigger") as! String
         trigger = CGRectFromString(triggerString)
+        pages = aDecoder.decodeObjectForKey("pages") as! [ContentPage]
         
     }
     
@@ -57,6 +58,7 @@ class Pinpoint : NSObject, NSCoding {
         aCoder.encodeObject(typeName, forKey: "typeName")
         aCoder.encodeObject(photo, forKey: "photo")
         aCoder.encodeObject(NSStringFromCGRect(trigger), forKey: "trigger")
+        aCoder.encodeObject(pages, forKey: "pages")
         
     }
     

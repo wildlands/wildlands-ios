@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloaderDelegate, PopUpViewDelegate, WildlandsGPSDelegate {
+class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDelegate, WildlandsGPSDelegate {
 
     @IBOutlet weak var kaartScrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -17,7 +17,6 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
     
     var pinpoints: [Pinpoint] = []
     var blackScreen: UIView = UIView()
-    let contentDownloader: JSONDownloader = JSONDownloader()
     var currentPosition: UIImageView = UIImageView()
     var wildlandsGPS: WildlandsGPS = WildlandsGPS()
     
@@ -32,8 +31,6 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
-        
-        contentDownloader.delegate = self
         
         wildlandsGPS.delegate = self
         
@@ -50,109 +47,14 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, JSONDownloade
         currentPosition.frame = CGRectMake(0, 0, 25, 25)
         kaartScrollView.addSubview(currentPosition)
         
-        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        if defaults.objectForKey("pinpoints") != nil {
-            
-            downloadContent()
-            
-        } else {
-            
-            checkDatabaseChecksum()
-            
-        }
-        
-    }
-    
-    func checkDatabaseChecksum() {
-        
-        contentDownloader.downloadJSON(DownloadType.DOWNLOAD_CHECKUM)
-        startActivityIndicator()
-        
-    }
-    
-    func downloadContent() {
-
-        contentDownloader.downloadJSON(DownloadType.DOWNLOAD_PINPOINTS)
-        startActivityIndicator()
-        
-    }
-    
-    func startActivityIndicator() {
-        
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        activityIndicator.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.view.addSubview(activityIndicator)
-        
-        activityIndicator.startAnimating()
-        
-        var binding = ["superview" : self.view, "activityIndicator" : activityIndicator]
-        var format = "H:[superview]-(<=1)-[activityIndicator(20)]"
-        var constraint = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions.AlignAllCenterY, metrics: nil, views: binding)
-        
-        self.view.addConstraints(constraint)
-        
-        format = "V:[superview]-(<=1)-[activityIndicator(20)]"
-        constraint = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions.AlignAllCenterX, metrics: nil, views: binding)
-        
-        self.view.addConstraints(constraint)
+        pinpoints = Utils.openObjectFromDisk("pinpoints") as! [Pinpoint]
+        addPinPoints()
         
     }
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         
         return contentView
-    }
-    
-    func JSONDownloaderSuccess(response: AnyObject) {
-        
-        activityIndicator.stopAnimating()
-        
-        if response is [Pinpoint] {
-            
-            let pinpointResponse = response as? [Pinpoint]
-            pinpoints = pinpointResponse!
-            Utils.saveObjectToDisk(pinpoints, forKey: "pinpoints")
-            addPinPoints()
-            
-        } else if response is Int {
-        
-            if response as! Int != NSUserDefaults.standardUserDefaults().objectForKey("checksum") as! Int {
-                
-                println("Nieuwe database!")
-                NSUserDefaults.standardUserDefaults().setObject(response, forKey: "checksum")
-                NSUserDefaults.standardUserDefaults().synchronize()
-                downloadContent()
-                
-            } else {
-                
-                pinpoints = Utils.openObjectFromDisk("pinpoints") as! [Pinpoint]
-                addPinPoints()
-                
-            }
-            
-        } else {
-        
-            print("Onbekende response ontvangen")
-            
-        }
-        
-    }
-    
-    func JSONDownloaderFailed(message: String, type: DownloadType) {
-        
-        activityIndicator.stopAnimating()
-        
-        if type == DownloadType.DOWNLOAD_CHECKUM {
-            
-            pinpoints = Utils.openObjectFromDisk("pinpoints") as! [Pinpoint]
-            addPinPoints()
-            
-        }
-        
-        let failAlert: UIAlertView = UIAlertView(title: "Error", message: message, delegate: self, cancelButtonTitle: "Helaas")
-        failAlert.show()
-        
     }
     
     func addPinPoints() {

@@ -133,8 +133,7 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if (questions.count > 1)
-        {
+        if (questions.count > 1) {
             return questions[currentQuestion].answers.count
         }
         

@@ -37,6 +37,8 @@ class ContentPageView: UIView {
         let imageView: UIImageView = UIImageView()
         imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
         imageView.sd_setImageWithURL(NSURL(string: theContent!.image))
+        imageView.contentMode = UIViewContentMode.ScaleAspectFill
+        imageView.clipsToBounds = true
         self.addSubview(imageView)
         
         let scrollView: UIScrollView = UIScrollView()
@@ -45,42 +47,30 @@ class ContentPageView: UIView {
         scrollView.showsVerticalScrollIndicator = true
         self.addSubview(scrollView)
         
-        let label: UILabel = UILabel()
-        label.text = theContent?.content
-        label.textColor = Colors.fontColor
-        label.setTranslatesAutoresizingMaskIntoConstraints(false)
-        label.numberOfLines = 0
-        label.font = Fonts.defaultFont(16)
-        label.textAlignment = NSTextAlignment.Justified
-        scrollView.addSubview(label)
+        var htmlString = "<style>body { font-family: 'Roboto'; text-align: justify; color: #461e00; }</style> \(theContent!.content)"
+        let webView: UIWebView = UIWebView()
+        webView.loadHTMLString(htmlString, baseURL: nil)
+        webView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        webView.backgroundColor = UIColor.clearColor()
+        webView.opaque = false
+        self.addSubview(webView)
         
-        let bindings = ["label" : label, "scrollView" : scrollView, "imageView" : imageView]
+        let bindings = ["webView" : webView, "scrollView" : scrollView, "imageView" : imageView]
         
         var format = "H:|[imageView]|"
         var constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: bindings)
         
         self.addConstraints(constraints)
         
-        format = "V:|[imageView(200)]-10-[scrollView]-10-|"
+        format = "V:|[imageView(200)]-10-[webView]-10-|"
         constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: bindings)
         
         self.addConstraints(constraints)
         
-        format = "H:|-10-[scrollView]-10-|"
+        format = "H:|-10-[webView]-10-|"
         constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: bindings)
         
         self.addConstraints(constraints)
-        
-        format = "H:|[label(==scrollView)]|"
-        constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: bindings)
-        
-        self.addConstraints(constraints)
-        
-        format = "V:|[label]|"
-        constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: bindings)
-        
-        self.addConstraints(constraints)
-        
         
     }
    

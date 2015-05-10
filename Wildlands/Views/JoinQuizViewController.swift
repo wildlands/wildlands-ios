@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Socket_IO_Client_Swift
 
 class JoinQuizViewController: UIViewController, UITextFieldDelegate {
 
@@ -15,6 +16,8 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var quizCodeField: UITextField!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
+    
+    var socket: SocketIOClient?
     
     private var activeTextField: UITextField?
     
@@ -47,6 +50,20 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
         
         var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
+        
+        let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        socket = delegate.socket
+        
+        socket?.connect()
+        socket?.on("message", callback: messageRecevied)
+        
+    }
+    
+    func messageRecevied(data: NSArray?, ack: AckEmitter?) {
+        
+        var message = data?[0].objectForKey("message") as! String
+        let alert: UIAlertView = UIAlertView(title: "Socket.IO", message: message, delegate: self, cancelButtonTitle: "Thanks")
+        alert.show()
         
     }
     
@@ -116,4 +133,16 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
         
     }
 
+    @IBAction func goBack(sender: AnyObject) {
+        
+        self.navigationController?.popViewControllerAnimated(false)
+        socket?.disconnect(fast: false)
+        
+    }
+    
+    @IBAction func startTheQuiz(sender: AnyObject) {
+        
+        self.performSegueWithIdentifier("goToWaitForStart", sender: self)
+        
+    }
 }
