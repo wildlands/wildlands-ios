@@ -12,6 +12,7 @@ class Question : NSObject {
     
     var text: String
     var answers: [Answer]
+    var typeName: String = ""
     
     init(text: String) {
         self.text = text;

@@ -54,15 +54,22 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
         let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         socket = delegate.socket
         
-        socket?.connect()
-        socket?.on("message", callback: messageRecevied)
+        socket?.on("joinSuccess", callback: successReceived)
+        socket?.on("joinFailed", callback: failReceived)
         
     }
     
-    func messageRecevied(data: NSArray?, ack: AckEmitter?) {
+    func successReceived(data: NSArray?, ack: AckEmitter?) {
         
-        var message = data?[0].objectForKey("message") as! String
-        let alert: UIAlertView = UIAlertView(title: "Socket.IO", message: message, delegate: self, cancelButtonTitle: "Thanks")
+        Utils.saveObjectToDisk(naamInputField.text, forKey: "quizName")
+        Utils.saveObjectToDisk(quizCodeField.text, forKey: "quizCode")
+        self.performSegueWithIdentifier("goToWaitForStart", sender: self)
+        
+    }
+    
+    func failReceived(data: NSArray?, ack: AckEmitter?) {
+        
+        let alert: UIAlertView = UIAlertView(title: "Quiz", message: "Quiz bestaat niet...", delegate: self, cancelButtonTitle: "Helaas");
         alert.show()
         
     }
@@ -142,7 +149,11 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func startTheQuiz(sender: AnyObject) {
         
-        self.performSegueWithIdentifier("goToWaitForStart", sender: self)
+        var socketJson = [
+            "quizID" : quizCodeField.text!,
+            "naam" : naamInputField.text!
+        ]
+        socket?.emit("joinQuiz", socketJson)
         
     }
 }

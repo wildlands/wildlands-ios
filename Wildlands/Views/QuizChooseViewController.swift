@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Socket_IO_Client_Swift
 
 class QuizChooseViewController: UIViewController {
 
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var leerlingButton: UIButton!
     @IBOutlet weak var docentButton: UIButton!
+    
+    var socket: SocketIOClient?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +35,11 @@ class QuizChooseViewController: UIViewController {
         docentButton.layer.shadowColor = UIColor.blackColor().CGColor
         docentButton.layer.shadowOffset = CGSizeMake(0, 0);
         docentButton.layer.shadowOpacity = 1
+        
+        let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        socket = delegate.socket
+        
+        socket?.connect()
         
     }
 

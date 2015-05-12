@@ -57,6 +57,8 @@
 		E44FE9261ADE7AF4006DD395 /* stenden-2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = E44FE9251ADE7AF4006DD395 /* stenden-2.gpx */; };
 		E4627FF61ABAE1CD003B9229 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4627FF51ABAE1CD003B9229 /* Colors.swift */; };
 		E48FD5511AE91E59000C1CFA /* ContentPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48FD5501AE91E59000C1CFA /* ContentPage.swift */; };
+		E495EB3A1B00D37000C136C7 /* QuizBeforeStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E495EB391B00D37000C136C7 /* QuizBeforeStartViewController.swift */; };
+		E4A6406C1B028BD0003E2CEC /* QuizDidEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6406B1B028BD0003E2CEC /* QuizDidEndViewController.swift */; };
 		E4B6E6711AEA4D1D0033CD3A /* ChooseSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B6E6701AEA4D1D0033CD3A /* ChooseSubjectViewController.swift */; };
 		E4C1903D1AE7A7ED00FC2800 /* ContentPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C1903C1AE7A7ED00FC2800 /* ContentPageView.swift */; };
 		E4C190411AE7C4DD00FC2800 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C190401AE7C4DD00FC2800 /* PopupView.swift */; };
@@ -101,6 +103,9 @@
 		E4EEE6111AEFB1A700920E85 /* element-17.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE60B1AEFB1A700920E85 /* element-17.png */; };
 		E4EEE6121AEFB1A700920E85 /* element-18.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE60C1AEFB1A700920E85 /* element-18.png */; };
 		E4EEE6131AEFB1A700920E85 /* element-19.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE60D1AEFB1A700920E85 /* element-19.png */; };
+		E4FAE6CB1B01F9490061F9D1 /* QuizScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FAE6CA1B01F9490061F9D1 /* QuizScoreViewController.swift */; };
+		E4FAE6CD1B0216CB0061F9D1 /* QuizSendScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FAE6CC1B0216CB0061F9D1 /* QuizSendScoreViewController.swift */; };
+		E4FAE6CF1B0218430061F9D1 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4FAE6CE1B0218430061F9D1 /* MessageUI.framework */; };
 		E4FD960D1AFFB6B7007EFB0A /* AnalogClockHandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FD960B1AFFB6B7007EFB0A /* AnalogClockHandView.swift */; };
 		E4FD960E1AFFB6B7007EFB0A /* AnalogClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FD960C1AFFB6B7007EFB0A /* AnalogClockView.swift */; };
 		EBB6E73FDD6C92AE70B1E78A /* Pods_Wildlands.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 753519B94D96BFA270B9CE08 /* Pods_Wildlands.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -191,6 +196,8 @@
 		E460D5431ACBFF2000804640 /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		E4627FF51ABAE1CD003B9229 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = Classes/Colors.swift; sourceTree = "<group>"; };
 		E48FD5501AE91E59000C1CFA /* ContentPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentPage.swift; path = Classes/ContentPage.swift; sourceTree = "<group>"; };
+		E495EB391B00D37000C136C7 /* QuizBeforeStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizBeforeStartViewController.swift; path = Views/QuizBeforeStartViewController.swift; sourceTree = "<group>"; };
+		E4A6406B1B028BD0003E2CEC /* QuizDidEndViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizDidEndViewController.swift; path = Views/QuizDidEndViewController.swift; sourceTree = "<group>"; };
 		E4B6E6701AEA4D1D0033CD3A /* ChooseSubjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChooseSubjectViewController.swift; path = Views/ChooseSubjectViewController.swift; sourceTree = "<group>"; };
 		E4C1903C1AE7A7ED00FC2800 /* ContentPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentPageView.swift; path = Views/ContentPageView.swift; sourceTree = "<group>"; };
 		E4C190401AE7C4DD00FC2800 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopupView.swift; path = Views/PopupView.swift; sourceTree = "<group>"; };
@@ -239,6 +246,9 @@
 		E4EEE60B1AEFB1A700920E85 /* element-17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-17.png"; path = "Images/Buttons/element-17.png"; sourceTree = "<group>"; };
 		E4EEE60C1AEFB1A700920E85 /* element-18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-18.png"; path = "Images/Buttons/element-18.png"; sourceTree = "<group>"; };
 		E4EEE60D1AEFB1A700920E85 /* element-19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-19.png"; path = "Images/Buttons/element-19.png"; sourceTree = "<group>"; };
+		E4FAE6CA1B01F9490061F9D1 /* QuizScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizScoreViewController.swift; path = Views/QuizScoreViewController.swift; sourceTree = "<group>"; };
+		E4FAE6CC1B0216CB0061F9D1 /* QuizSendScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizSendScoreViewController.swift; path = Views/QuizSendScoreViewController.swift; sourceTree = "<group>"; };
+		E4FAE6CE1B0218430061F9D1 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		E4FD960B1AFFB6B7007EFB0A /* AnalogClockHandView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalogClockHandView.swift; sourceTree = "<group>"; };
 		E4FD960C1AFFB6B7007EFB0A /* AnalogClockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalogClockView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -248,6 +258,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4FAE6CF1B0218430061F9D1 /* MessageUI.framework in Frameworks */,
 				E430E7D71AC418E60036506D /* ImageIO.framework in Frameworks */,
 				EBB6E73FDD6C92AE70B1E78A /* Pods_Wildlands.framework in Frameworks */,
 			);
@@ -275,6 +286,7 @@
 		A47CC03B517AB98FD7F76CAC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E4FAE6CE1B0218430061F9D1 /* MessageUI.framework */,
 				753519B94D96BFA270B9CE08 /* Pods_Wildlands.framework */,
 			);
 			name = Frameworks;
@@ -357,17 +369,13 @@
 		E44FE8F21ADD1FBF006DD395 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E4C20E0B1AB9AA2900A911B5 /* QuizViewController.swift */,
-				E4DEEB4F1AF0F902002B6434 /* GenerateQuizViewController.swift */,
-				E4DEEB491AF0E201002B6434 /* QuizChooseViewController.swift */,
+				E495EB3B1B00D37700C136C7 /* Quiz */,
 				E430E7661AC17D7C0036506D /* KaartViewController.swift */,
 				E4C1903C1AE7A7ED00FC2800 /* ContentPageView.swift */,
 				E4C190401AE7C4DD00FC2800 /* PopupView.swift */,
 				E4B6E6701AEA4D1D0033CD3A /* ChooseSubjectViewController.swift */,
 				E4EEE6031AEF9FC700920E85 /* StartViewController.swift */,
 				E4EEE6051AEFA42200920E85 /* WildlandsButton.swift */,
-				E4DEEB4B1AF0E8EE002B6434 /* JoinQuizViewController.swift */,
-				E4DEEB4D1AF0F4A4002B6434 /* WaitForQuizStartViewController.swift */,
 				E44D75831AF3A7C400EC9D5E /* DownloadViewController.swift */,
 			);
 			name = Views;
@@ -420,6 +428,38 @@
 				E44FE8FD1ADD2117006DD395 /* olifanten.jpg */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		E495EB3B1B00D37700C136C7 /* Quiz */ = {
+			isa = PBXGroup;
+			children = (
+				E4DEEB491AF0E201002B6434 /* QuizChooseViewController.swift */,
+				E495EB3C1B00D39700C136C7 /* Docent */,
+				E495EB3D1B00D3A500C136C7 /* Leerling */,
+			);
+			name = Quiz;
+			sourceTree = "<group>";
+		};
+		E495EB3C1B00D39700C136C7 /* Docent */ = {
+			isa = PBXGroup;
+			children = (
+				E4DEEB4F1AF0F902002B6434 /* GenerateQuizViewController.swift */,
+				E495EB391B00D37000C136C7 /* QuizBeforeStartViewController.swift */,
+				E4FAE6CA1B01F9490061F9D1 /* QuizScoreViewController.swift */,
+				E4FAE6CC1B0216CB0061F9D1 /* QuizSendScoreViewController.swift */,
+			);
+			name = Docent;
+			sourceTree = "<group>";
+		};
+		E495EB3D1B00D3A500C136C7 /* Leerling */ = {
+			isa = PBXGroup;
+			children = (
+				E4DEEB4B1AF0E8EE002B6434 /* JoinQuizViewController.swift */,
+				E4DEEB4D1AF0F4A4002B6434 /* WaitForQuizStartViewController.swift */,
+				E4C20E0B1AB9AA2900A911B5 /* QuizViewController.swift */,
+				E4A6406B1B028BD0003E2CEC /* QuizDidEndViewController.swift */,
+			);
+			name = Leerling;
 			sourceTree = "<group>";
 		};
 		E4C20DDB1AB9A2EB00A911B5 = {
@@ -756,6 +796,7 @@
 				E4DEEB521AF106DA002B6434 /* FadeTransitionSegue.swift in Sources */,
 				E430E7C91AC418CD0036506D /* SDWebImageCompat.m in Sources */,
 				E4C20E0C1AB9AA2900A911B5 /* QuizViewController.swift in Sources */,
+				E4A6406C1B028BD0003E2CEC /* QuizDidEndViewController.swift in Sources */,
 				E4FD960D1AFFB6B7007EFB0A /* AnalogClockHandView.swift in Sources */,
 				E4B6E6711AEA4D1D0033CD3A /* ChooseSubjectViewController.swift in Sources */,
 				E430E7CA1AC418CD0036506D /* SDWebImageDecoder.m in Sources */,
@@ -763,14 +804,17 @@
 				E430E7D21AC418CD0036506D /* UIImage+WebP.m in Sources */,
 				E430E7CC1AC418CD0036506D /* SDWebImageDownloaderOperation.m in Sources */,
 				E430E7D51AC418CD0036506D /* UIView+WebCacheOperation.m in Sources */,
+				E4FAE6CB1B01F9490061F9D1 /* QuizScoreViewController.swift in Sources */,
 				E430E7CB1AC418CD0036506D /* SDWebImageDownloader.m in Sources */,
 				E430E7D01AC418CD0036506D /* UIImage+GIF.m in Sources */,
 				E4C20DEA1AB9A2EC00A911B5 /* AppDelegate.swift in Sources */,
 				E430E79E1AC409550036506D /* Fonts.swift in Sources */,
 				E430E7671AC17D7C0036506D /* KaartViewController.swift in Sources */,
 				E430E7D31AC418CD0036506D /* UIImageView+HighlightedWebCache.m in Sources */,
+				E495EB3A1B00D37000C136C7 /* QuizBeforeStartViewController.swift in Sources */,
 				E4C20E0E1AB9AAF600A911B5 /* Answer.swift in Sources */,
 				E430E7C81AC418CD0036506D /* SDImageCache.m in Sources */,
+				E4FAE6CD1B0216CB0061F9D1 /* QuizSendScoreViewController.swift in Sources */,
 				E430E7CF1AC418CD0036506D /* UIButton+WebCache.m in Sources */,
 				E430E7C71AC418CD0036506D /* NSData+ImageContentType.m in Sources */,
 				E4EEE6061AEFA42200920E85 /* WildlandsButton.swift in Sources */,

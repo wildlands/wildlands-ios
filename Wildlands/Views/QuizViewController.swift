@@ -8,18 +8,24 @@
 
 import UIKit
 import Foundation
+import Socket_IO_Client_Swift
 
 class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate {
     
-    @IBOutlet var backgroudView: UIView!
+    @IBOutlet var backgroundView: UIView!
+    @IBOutlet weak var bushbushView: UIImageView!
 
     var data: NSMutableData = NSMutableData()
     var questions: [Question] = []
     var currentQuestion: Int = 0
     var goodAnswerd: Int = 0
-    var tableView: UITableView = UITableView()
+    
+    var socket: SocketIOClient?
+    
+    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var vraagLabel: UILabel!
+    @IBOutlet weak var progressBar: UIProgressView!
     
     override func viewDidLoad() {
         
@@ -28,39 +34,20 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
         vraagLabel.text = ""
         vraagLabel.font = Fonts.defaultFont(16)
         
-        navigationController?.navigationBar.barTintColor = Colors.bruin;
-        backgroudView.layer.cornerRadius = 10
-        
-        print(backgroudView.frame)
-        
         tableView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.backgroundColor = UIColor.whiteColor()
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.backgroundColor = UIColor.clearColor()
-        
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "answerCell")
-        
-        backgroudView.addSubview(tableView)
-        
-        let bindings = ["tableView" : tableView]
-        var format: String = "H:|-20-[tableView]-20-|"
-        var constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: bindings)
-        
-        backgroudView.addConstraints(constraints)
-        
-        format = "V:[tableView(200)]-20-|"
-        constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: bindings)
-        
-        backgroudView.addConstraints(constraints)
-        
-        print(tableView.frame)
         
         var questionDownload = JSONDownloader()
         questionDownload.delegate = self
         questionDownload.downloadJSON(DownloadType.DOWNLOAD_QUESTIONS)
         
+        progressBar.progress = 1.0
+        
+        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateProgressbar", userInfo: nil, repeats: true)
+        
+        let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        socket = delegate.socket
         
     }
     
@@ -105,6 +92,37 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
         
         tableView.userInteractionEnabled = true
         
+        if currentQuestion != 0 {
+            
+            var layer: CALayer = backgroundView.layer.valueForKey("gradient") as! CALayer
+            layer.removeFromSuperlayer()
+            backgroundView.layer.setValue(nil, forKey: "gradient")
+            
+        }
+        
+        var gradient: CAGradientLayer = CAGradientLayer()
+        gradient.frame = view.bounds
+        
+        if komtIe.typeName == "Bio Mimicry" {
+            bushbushView.image = UIImage(named: "element-05.png")
+            gradient.colors = [UIColor(red: 174.0/255.0, green: 100.0/255.0, blue: 255.0/255.0, alpha: 1).CGColor, UIColor(red: 255.0/255.0, green: 144.0/255.0, blue: 255.0/255.0, alpha: 1).CGColor]
+        }
+        if komtIe.typeName == "Materiaal" {
+            bushbushView.image = UIImage(named: "element-06.png")
+            gradient.colors = [UIColor(red: 135.0/255.0, green: 114.0/255.0, blue: 46.0/255.0, alpha: 1).CGColor, UIColor(red: 202.0/255.0, green: 169.0/255.0, blue: 109.0/255.0, alpha: 1).CGColor]
+        }
+        if komtIe.typeName == "Energie" {
+            bushbushView.image = UIImage(named: "element-04.png")
+            gradient.colors = [UIColor(red: 255.0/255.0, green: 172.0/255.0, blue: 0.0/255.0, alpha: 1).CGColor, UIColor(red: 255.0/255.0, green: 225.0/255.0, blue: 2.0/255.0, alpha: 1).CGColor]
+        }
+        if komtIe.typeName == "Water" {
+            bushbushView.image = UIImage(named: "element-03.png")
+            gradient.colors = [UIColor(red: 0.0/255.0, green: 92.0/255.0, blue: 255.0/255.0, alpha: 1).CGColor, UIColor(red: 0.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1).CGColor]
+            
+        }
+        
+        backgroundView.layer.insertSublayer(gradient, atIndex: 0)
+        backgroundView.layer.setValue(gradient, forKey: "gradient")
         tableView.reloadData()
         
     }
@@ -114,12 +132,20 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
         let deVraag: Question = questions[currentQuestion] as Question;
         
         var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("answerCell") as! UITableViewCell
+        cell.backgroundColor = UIColor.clearColor()
         
         let hetAntwoord: Answer = deVraag.answers[indexPath.row]
         
-        cell.textLabel?.text = hetAntwoord.text
-        cell.backgroundColor = UIColor.clearColor()
-        cell.textLabel?.textColor = UIColor.blackColor()
+        var label: UILabel? = cell.viewWithTag(1) as? UILabel
+        var view: UIView? = cell.viewWithTag(2)
+        
+        view?.layer.cornerRadius = 10
+        view?.layer.shadowColor = UIColor.blackColor().CGColor
+        view?.layer.shadowOffset = CGSize(width: 0, height: 0)
+        view?.layer.shadowOpacity = 1
+        
+        
+        label?.text = hetAntwoord.text?.uppercaseString
         
         return cell
         
@@ -145,22 +171,35 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
         
         let antwoord: Answer = questions[currentQuestion].answers[indexPath.row]
         let cell: UITableViewCell? = tableView.cellForRowAtIndexPath(indexPath)
+        var goodAnswer: Bool = false
         if antwoord.isRightAnswer {
             
-            cell?.backgroundColor = UIColor.greenColor()
             goodAnswerd += 1
-            
-        } else {
-            
-            cell?.backgroundColor = UIColor.redColor()
+            goodAnswer = true
             
         }
         tableView.userInteractionEnabled = false
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
+        var json = [
+        
+            "naam" : Utils.openObjectFromDisk("quizName") as! String,
+            "vraag" : (currentQuestion + 1),
+            "goed" : goodAnswer,
+            "quizID" : Utils.openObjectFromDisk("quizCode") as! String
+        ]
+        
+        socket?.emit("sendAnswer", json)
+        
         currentQuestion = currentQuestion + 1
         var nextQuestion = [currentQuestion]
         var timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("showQuestion"), userInfo: nil, repeats: false)
+        
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        return 55.0
         
     }
     
@@ -179,4 +218,21 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
         navigationController?.popToRootViewControllerAnimated(true)
         
     }
+    
+    func updateProgressbar() {
+        
+        var duration = Float(Utils.openObjectFromDisk("quizDuration") as! Int) * 60.0
+        
+        var step: Float = 1.0 / duration
+        var newValue = self.progressBar.progress - step
+        progressBar.setProgress(newValue, animated: true)
+        
+        if newValue <= 0 {
+            
+            self.performSegueWithIdentifier("quizIsOver", sender: self)
+            
+        }
+        
+    }
+    
 }

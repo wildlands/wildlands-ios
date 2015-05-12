@@ -14,7 +14,7 @@ class FadeTransitionSegue: UIStoryboardSegue {
         
         let transition: CATransition = CATransition()
         
-        transition.duration = 0.3;
+        transition.duration = 0.5;
         transition.type = kCATransitionFade;
         
         let source = sourceViewController as! UIViewController

@@ -179,6 +179,13 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
                 let dict = deVraag as! NSMutableDictionary
                 // Maak een nieuwe vraag aan
                 var eenVraag: Question = Question(text: dict.objectForKey("text") as! String)
+                
+                if let type = deVraag.objectForKey("type") as? NSDictionary {
+                    if let typeName = type.objectForKey("name") as? String {
+                        eenVraag.typeName = typeName
+                    }
+                }
+                
                 var antwoorden: NSArray = dict.objectForKey("answers") as! NSArray
                 
                 // Door alle antwoorden loopen
