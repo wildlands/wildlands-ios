@@ -21,10 +21,7 @@ class GenerateQuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor(red: 153.0/255.0, green: 153/255.0, blue: 153.0/255.0, alpha: 1).CGColor, UIColor(red: 153.0/255.0, green: 153.0/255.0, blue: 153.0/255.0, alpha: 1).CGColor]
-        backgroundView.layer.insertSublayer(gradient, atIndex: 0)
+        backgroundView.layer.insertSublayer(WildlandsGradient.grayGradient(forBounds: view.bounds), atIndex: 0)
         
         let button: UIImage = UIImage(named: "element-18")!.resizableImageWithCapInsets(UIEdgeInsetsMake(6, 6, 6, 6), resizingMode: UIImageResizingMode.Stretch)
         genereerButton.setBackgroundImage(button, forState: UIControlState.Normal)

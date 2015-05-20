@@ -7,32 +7,42 @@
 //
 
 import UIKit
+import SpriteKit
 
 class StartViewController: UIViewController {
 
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var verkenButton: UIButton!
     @IBOutlet weak var quizButton: UIButton!
+    @IBOutlet weak var infoButton: UIButton!
     @IBOutlet weak var ecoAppLogo: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor(red: 45.0/255.0, green: 100.0/255.0, blue: 0.0/255.0, alpha: 1).CGColor, UIColor(red: 22.0/255.0, green: 45.0/255.0, blue: 26.0/255.0, alpha: 1).CGColor]
-        backgroundView.layer.insertSublayer(gradient, atIndex: 0)
-    
-        let button: UIImage = UIImage(named: "element-18")!.resizableImageWithCapInsets(UIEdgeInsetsMake(6, 6, 6, 6), resizingMode: UIImageResizingMode.Stretch)
-        verkenButton.setBackgroundImage(button, forState: UIControlState.Normal)
-        verkenButton.layer.shadowColor = UIColor.blackColor().CGColor
-        verkenButton.layer.shadowOffset = CGSizeMake(0, 0);
-        verkenButton.layer.shadowOpacity = 1
+        // Custom Wildlands elementen maken
+        backgroundView.layer.insertSublayer(WildlandsGradient.greenGradient(forBounds: self.view.bounds), atIndex: 0)
+        verkenButton = WildlandsButton.createButtonWithImage(named: "element-18", forButton: verkenButton)
+        quizButton = WildlandsButton.createButtonWithImage(named: "element-18", forButton: quizButton)
+        infoButton = WildlandsButton.createButtonWithImage(named: "element-18", forButton: infoButton)
         
-        quizButton.setBackgroundImage(button, forState: UIControlState.Normal)
-        quizButton.layer.shadowColor = UIColor.blackColor().CGColor
-        quizButton.layer.shadowOffset = CGSizeMake(0, 0);
-        quizButton.layer.shadowOpacity = 1
+        /* Particles
+        
+        let path = NSBundle.mainBundle().pathForResource("ButtonParticles", ofType: "sks")
+        var particle: SKEmitterNode = NSKeyedUnarchiver.unarchiveObjectWithFile(path!) as! SKEmitterNode
+        
+        var view: SKView = SKView(frame: self.view.frame)
+        view.backgroundColor = UIColor.clearColor()
+        view.allowsTransparency = true
+        var scene: SKScene = SKScene(size: self.view.frame.size)
+        scene.backgroundColor = UIColor.clearColor()
+        
+        scene.addChild(particle)
+        
+        view.presentScene(scene)
+        
+        self.view.addSubview(view)
+        */
         
     }
 

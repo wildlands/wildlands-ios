@@ -25,10 +25,7 @@ class QuizSendScoreViewController: UIViewController, MFMailComposeViewController
         verstuurButton.layer.shadowOffset = CGSizeMake(0, 0);
         verstuurButton.layer.shadowOpacity = 1
         
-        var gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor(red: 45.0/255.0, green: 100.0/255.0, blue: 0.0/255.0, alpha: 1).CGColor, UIColor(red: 22.0/255.0, green: 45.0/255.0, blue: 26.0/255.0, alpha: 1).CGColor]
-        backgroundView.layer.insertSublayer(gradient, atIndex: 0)
+        backgroundView.layer.insertSublayer(WildlandsGradient.greenGradient(forBounds: view.bounds), atIndex: 0)
 
     }
 

@@ -57,6 +57,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         socket.connect()
         
     }
+    
+    func isSocketConnected() -> Bool {
+        
+        return socket.connected
+        
+    }
 
 }
 

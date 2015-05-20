@@ -8,6 +8,7 @@
 
 import UIKit
 import Socket_IO_Client_Swift
+import AudioToolbox
 
 class WaitForQuizStartViewController: UIViewController {
 
@@ -19,10 +20,7 @@ class WaitForQuizStartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor(red: 153.0/255.0, green: 153/255.0, blue: 153.0/255.0, alpha: 1).CGColor, UIColor(red: 153.0/255.0, green: 153.0/255.0, blue: 153.0/255.0, alpha: 1).CGColor]
-        backgroundView.layer.insertSublayer(gradient, atIndex: 0)
+        backgroundView.layer.insertSublayer(WildlandsGradient.grayGradient(forBounds: view.bounds), atIndex: 0)
         
         NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "updateClock", userInfo: nil, repeats: true)
         
@@ -46,7 +44,9 @@ class WaitForQuizStartViewController: UIViewController {
         if let duration = data?[0].objectForKey("duration") as? Int {
             
             Utils.saveObjectToDisk(duration, forKey: "quizDuration")
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             self.performSegueWithIdentifier("goToTheQuiz", sender: self)
+            socket?.off("startTheQuiz")
             
         }
         

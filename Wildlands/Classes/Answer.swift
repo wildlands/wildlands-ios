@@ -8,13 +8,31 @@
 
 import Foundation
 
-class Answer: NSObject {
+class Answer: NSObject, NSCoding {
 
-    var text: String?
-    var isRightAnswer: Bool
+    var text: String = ""
+    var isRightAnswer: Bool = false
     
     override init() {
-        isRightAnswer = false
+        
+        super.init()
+        
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        
+        super.init()
+        
+        text = aDecoder.decodeObjectForKey("text") as! String
+        isRightAnswer = aDecoder.decodeObjectForKey("isRightAnswer") as! Bool
+        
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        
+        aCoder.encodeObject(text, forKey: "text")
+        aCoder.encodeObject(isRightAnswer, forKey: "isRightAnswer")
+        
     }
     
 }

@@ -57,14 +57,14 @@ class PopupView: UIView, UIScrollViewDelegate {
         whiteBackground.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.addSubview(whiteBackground)
         
-        let header: UIImageView = UIImageView(image: UIImage(named: thePinpoint!.typeName + "-header.png"))
+        let header: UIImageView = UIImageView(image: UIImage(named: thePinpoint!.typeName.rawValue + "-header.png"))
         header.setTranslatesAutoresizingMaskIntoConstraints(false)
         header.contentMode = UIViewContentMode.ScaleAspectFit
         self.addSubview(header)
         
         let backButton: UIButton = UIButton()
         backButton.setTranslatesAutoresizingMaskIntoConstraints(false)
-        backButton.setImage(UIImage(named: thePinpoint!.typeName + "-close.png"), forState: UIControlState.Normal)
+        backButton.setImage(UIImage(named: thePinpoint!.typeName.rawValue + "-close.png"), forState: UIControlState.Normal)
         backButton.addTarget(self, action: Selector("goBackButton:"), forControlEvents: UIControlEvents.TouchUpInside)
         whiteBackground.addSubview(backButton)
         

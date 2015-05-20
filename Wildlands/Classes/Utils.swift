@@ -8,15 +8,18 @@
 
 import UIKit
 
-enum PinpointType: String, Printable {
+enum WildlandsTheme: String, Printable {
+    case EMPTY = ""
     case BIO_MIMICRY = "Bio Mimicry"
     case MATERIAAL = "Materiaal"
     case WATER = "Water"
     case ENERGIE = "Energie"
+    case DIERENWELZIJN = "Dierenwelzijn"
     
     var description: String {
         return self.rawValue
     }
+
 }
 
 class Utils: NSObject {

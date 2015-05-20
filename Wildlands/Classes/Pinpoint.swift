@@ -17,7 +17,7 @@ class Pinpoint : NSObject, NSCoding {
     var image: String = ""
     var name: String = ""
     var pinDescription: String = ""
-    var typeName: String = ""
+    var typeName: WildlandsTheme = .EMPTY
     var photo: String = ""
     var pages: [ContentPage] = [ContentPage]()
     
@@ -39,7 +39,7 @@ class Pinpoint : NSObject, NSCoding {
         image = aDecoder.decodeObjectForKey("image") as! String
         name = aDecoder.decodeObjectForKey("name") as! String
         pinDescription = aDecoder.decodeObjectForKey("pinDescription") as! String
-        typeName = aDecoder.decodeObjectForKey("typeName") as! String
+        typeName = WildlandsTheme(rawValue: aDecoder.decodeObjectForKey("typeName") as! String)!
         photo = aDecoder.decodeObjectForKey("photo") as! String
         var triggerString = aDecoder.decodeObjectForKey("trigger") as! String
         trigger = CGRectFromString(triggerString)
@@ -55,7 +55,7 @@ class Pinpoint : NSObject, NSCoding {
         aCoder.encodeObject(image, forKey: "image")
         aCoder.encodeObject(name, forKey: "name")
         aCoder.encodeObject(pinDescription, forKey: "pinDescription")
-        aCoder.encodeObject(typeName, forKey: "typeName")
+        aCoder.encodeObject(typeName.rawValue, forKey: "typeName")
         aCoder.encodeObject(photo, forKey: "photo")
         aCoder.encodeObject(NSStringFromCGRect(trigger), forKey: "trigger")
         aCoder.encodeObject(pages, forKey: "pages")

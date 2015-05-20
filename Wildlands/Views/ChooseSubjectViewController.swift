@@ -10,7 +10,7 @@ import UIKit
 
 class ChooseSubjectViewController: UIViewController {
 
-    var openType: PinpointType?
+    var openType: WildlandsTheme?
     @IBOutlet weak var backgroundView: UIView!
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -18,14 +18,14 @@ class ChooseSubjectViewController: UIViewController {
     @IBOutlet weak var waterButton: UIButton!
     @IBOutlet weak var materialenButton: UIButton!
     @IBOutlet weak var biomimicryButton: UIButton!
+    @IBOutlet weak var dierenwelzijnButton: UIButton!
+    
+    var buttonsForAnimation: [UIButton] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor(red: 45.0/255.0, green: 100.0/255.0, blue: 0.0/255.0, alpha: 1).CGColor, UIColor(red: 22.0/255.0, green: 45.0/255.0, blue: 26.0/255.0, alpha: 1).CGColor]
-        backgroundView.layer.insertSublayer(gradient, atIndex: 0)
+        backgroundView.layer.insertSublayer(WildlandsGradient.greenGradient(forBounds: view.bounds), atIndex: 0)
 
         createButtons()
         
@@ -39,11 +39,13 @@ class ChooseSubjectViewController: UIViewController {
             self.waterButton.alpha = 1
             self.materialenButton.alpha = 1
             self.biomimicryButton.alpha = 1
+            self.dierenwelzijnButton.alpha = 1
             
             self.energieButton.transform = CGAffineTransformIdentity
             self.waterButton.transform = CGAffineTransformIdentity
             self.materialenButton.transform = CGAffineTransformIdentity
             self.biomimicryButton.transform = CGAffineTransformIdentity
+            self.dierenwelzijnButton.transform = CGAffineTransformIdentity
             
         
         }, completion: nil)
@@ -56,71 +58,66 @@ class ChooseSubjectViewController: UIViewController {
     
     func createButtons() {
         
-        let energie: UIImage = UIImage(named: "element-14")!.resizableImageWithCapInsets(UIEdgeInsetsMake(6, 6, 6, 6), resizingMode: UIImageResizingMode.Stretch)
-        let water: UIImage = UIImage(named: "element-15")!.resizableImageWithCapInsets(UIEdgeInsetsMake(6, 6, 6, 6), resizingMode: UIImageResizingMode.Stretch)
-        let materialen: UIImage = UIImage(named: "element-16")!.resizableImageWithCapInsets(UIEdgeInsetsMake(6, 6, 6, 6), resizingMode: UIImageResizingMode.Stretch)
-        let bio: UIImage = UIImage(named: "element-17")!.resizableImageWithCapInsets(UIEdgeInsetsMake(6, 6, 6, 6), resizingMode: UIImageResizingMode.Stretch)
-        
-        energieButton.setBackgroundImage(energie, forState: UIControlState.Normal)
-        energieButton.layer.shadowColor = UIColor.blackColor().CGColor
-        energieButton.layer.shadowOffset = CGSizeMake(0, 0);
-        energieButton.layer.shadowOpacity = 1
-        
-        waterButton.setBackgroundImage(water, forState: UIControlState.Normal)
-        waterButton.layer.shadowColor = UIColor.blackColor().CGColor
-        waterButton.layer.shadowOffset = CGSizeMake(0, 0);
-        waterButton.layer.shadowOpacity = 1
-        
-        materialenButton.setBackgroundImage(materialen, forState: UIControlState.Normal)
-        materialenButton.layer.shadowColor = UIColor.blackColor().CGColor
-        materialenButton.layer.shadowOffset = CGSizeMake(0, 0);
-        materialenButton.layer.shadowOpacity = 1
-        
-        biomimicryButton.setBackgroundImage(bio, forState: UIControlState.Normal)
-        biomimicryButton.layer.shadowColor = UIColor.blackColor().CGColor
-        biomimicryButton.layer.shadowOffset = CGSizeMake(0, 0);
-        biomimicryButton.layer.shadowOpacity = 1
+        energieButton = WildlandsButton.createButtonWithImage(named: "energie-button", forButton: energieButton)
+        waterButton = WildlandsButton.createButtonWithImage(named: "water-button", forButton: waterButton)
+        materialenButton = WildlandsButton.createButtonWithImage(named: "materialen-button", forButton: materialenButton)
+        biomimicryButton = WildlandsButton.createButtonWithImage(named: "biomimicry-button", forButton: biomimicryButton)
+        dierenwelzijnButton = WildlandsButton.createButtonWithImage(named: "dierenwelzijn-button", forButton: dierenwelzijnButton)
         
         energieButton.alpha = 0
         waterButton.alpha = 0
         materialenButton.alpha = 0
         biomimicryButton.alpha = 0
+        dierenwelzijnButton.alpha = 0
         
         energieButton.transform = CGAffineTransformMakeTranslation(-400, 0)
         waterButton.transform = CGAffineTransformMakeTranslation(600, 0)
         materialenButton.transform = CGAffineTransformMakeTranslation(-800, 0)
         biomimicryButton.transform = CGAffineTransformMakeTranslation(1000, 0)
+        dierenwelzijnButton.transform = CGAffineTransformMakeTranslation(-1200, 0)
+        
+        buttonsForAnimation.append(energieButton)
+        buttonsForAnimation.append(waterButton)
+        buttonsForAnimation.append(materialenButton)
+        buttonsForAnimation.append(biomimicryButton)
+        buttonsForAnimation.append(dierenwelzijnButton)
         
     }
 
     @IBAction func openKaartWithEnergie(sender: AnyObject) {
         
         openType = .ENERGIE
-        self.performSegueWithIdentifier("openKaart", sender: self)
+        fadeOutButtons()
         
     }
     
     @IBAction func openKaartWithWater(sender: AnyObject) {
         
         openType = .WATER
-        self.performSegueWithIdentifier("openKaart", sender: self)
+        fadeOutButtons()
         
     }
     
     @IBAction func openKaartWithMaterialen(sender: AnyObject) {
         
         openType = .MATERIAAL
-        self.performSegueWithIdentifier("openKaart", sender: self)
+        fadeOutButtons()
         
     }
     
     @IBAction func openKaartWithBioMimicry(sender: AnyObject) {
         
         openType = .BIO_MIMICRY
-        self.performSegueWithIdentifier("openKaart", sender: self)
+        fadeOutButtons()
         
     }
 
+    @IBAction func openKaartWithDierenwelzijn(sender: AnyObject) {
+        
+        openType = .DIERENWELZIJN
+        fadeOutButtons()
+        
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -135,4 +132,45 @@ class ChooseSubjectViewController: UIViewController {
         self.navigationController?.popViewControllerAnimated(false)
         
     }
+    
+    func fadeOutButtons() {
+        
+        var delay = 0.0
+        var counter = 1
+        
+        for button in buttonsForAnimation {
+            
+            if counter != buttonsForAnimation.count {
+            
+                UIView.animateWithDuration(0.2, delay: delay, options: nil, animations: {
+                    
+                    button.alpha = 0
+                    
+                }, completion: nil)
+                
+            } else {
+                
+                UIView.animateWithDuration(0.2, delay: delay, options: nil, animations: {
+                    
+                    button.alpha = 0
+                    
+                }, completion: { finished in
+                        
+                    if finished {
+                    
+                        self.performSegueWithIdentifier("openKaart", sender: self)
+                        
+                    }
+                
+                })
+                
+            }
+            
+            counter++
+            delay += 0.1
+            
+        }
+        
+    }
+    
 }

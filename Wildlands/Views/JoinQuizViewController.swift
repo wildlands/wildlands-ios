@@ -24,10 +24,7 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor(red: 153.0/255.0, green: 153/255.0, blue: 153.0/255.0, alpha: 1).CGColor, UIColor(red: 153.0/255.0, green: 153.0/255.0, blue: 153.0/255.0, alpha: 1).CGColor]
-        backgroundView.layer.insertSublayer(gradient, atIndex: 0)
+        backgroundView.layer.insertSublayer(WildlandsGradient.grayGradient(forBounds: view.bounds), atIndex: 0)
         
         let background: UIImage = UIImage(named: "element-19")!.resizableImageWithCapInsets(UIEdgeInsetsMake(6, 6, 6, 6), resizingMode: UIImageResizingMode.Stretch)
         naamInputField.background = background
@@ -117,9 +114,15 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
         aRect.size.height -= keyboardSize.height
         let activeTextFieldRect: CGRect? = activeTextField?.frame
         let activeTextFieldOrigin: CGPoint? = activeTextFieldRect?.origin
-        if (!CGRectContainsPoint(aRect, activeTextFieldOrigin!)) {
-            scrollView.scrollRectToVisible(activeTextFieldRect!, animated:true)
+        
+        if let fieldOrigin = activeTextFieldOrigin {
+        
+            if (!CGRectContainsPoint(aRect, fieldOrigin)) {
+                scrollView.scrollRectToVisible(activeTextFieldRect!, animated:true)
+            }
+            
         }
+    
     }
 
     func keyboardWillBeHidden(sender: NSNotification) {
@@ -143,7 +146,6 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
     @IBAction func goBack(sender: AnyObject) {
         
         self.navigationController?.popViewControllerAnimated(false)
-        socket?.disconnect(fast: false)
         
     }
     

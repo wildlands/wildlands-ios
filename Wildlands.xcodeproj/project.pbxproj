@@ -31,6 +31,21 @@
 		E430E7D51AC418CD0036506D /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E430E7C51AC418CD0036506D /* UIView+WebCacheOperation.m */; };
 		E430E7D71AC418E60036506D /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E430E7D61AC418E60036506D /* ImageIO.framework */; };
 		E430E7DA1AC41DA00036506D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E430E7D91AC41DA00036506D /* Utils.swift */; };
+		E43809701B0B45320030B792 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E438096F1B0B45320030B792 /* AudioToolbox.framework */; };
+		E43809771B0B573D0030B792 /* score-biomimicry.png in Resources */ = {isa = PBXBuildFile; fileRef = E43809721B0B573D0030B792 /* score-biomimicry.png */; };
+		E43809781B0B573D0030B792 /* score-energie.png in Resources */ = {isa = PBXBuildFile; fileRef = E43809731B0B573D0030B792 /* score-energie.png */; };
+		E43809791B0B573D0030B792 /* score-water.png in Resources */ = {isa = PBXBuildFile; fileRef = E43809741B0B573D0030B792 /* score-water.png */; };
+		E438097A1B0B573D0030B792 /* score-materialen.png in Resources */ = {isa = PBXBuildFile; fileRef = E43809751B0B573D0030B792 /* score-materialen.png */; };
+		E438097B1B0B573D0030B792 /* score-dierenwelzijn.png in Resources */ = {isa = PBXBuildFile; fileRef = E43809761B0B573D0030B792 /* score-dierenwelzijn.png */; };
+		E438097D1B0B699B0030B792 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = E438097C1B0B699B0030B792 /* Score.swift */; };
+		E438097F1B0C90130030B792 /* element-dierenwelzijn.png in Resources */ = {isa = PBXBuildFile; fileRef = E438097E1B0C90130030B792 /* element-dierenwelzijn.png */; };
+		E43809811B0CA84A0030B792 /* WildlandsGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43809801B0CA84A0030B792 /* WildlandsGradient.swift */; };
+		E43809831B0CB2C00030B792 /* pinpoint-05.png in Resources */ = {isa = PBXBuildFile; fileRef = E43809821B0CB2C00030B792 /* pinpoint-05.png */; };
+		E43809871B0CB44E0030B792 /* element-fadebg.png in Resources */ = {isa = PBXBuildFile; fileRef = E43809861B0CB44E0030B792 /* element-fadebg.png */; };
+		E43809891B0CBE900030B792 /* Credits.png in Resources */ = {isa = PBXBuildFile; fileRef = E43809881B0CBE900030B792 /* Credits.png */; };
+		E43809911B0CC2B40030B792 /* ButtonParticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = E438098F1B0CC2B40030B792 /* ButtonParticles.sks */; };
+		E43809921B0CC2B40030B792 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = E43809901B0CC2B40030B792 /* spark.png */; };
+		E43809941B0CC3760030B792 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43809931B0CC3760030B792 /* SpriteKit.framework */; };
 		E44D75741AF3870000EC9D5E /* Bio Mimicry-header.png in Resources */ = {isa = PBXBuildFile; fileRef = E44D75701AF3870000EC9D5E /* Bio Mimicry-header.png */; };
 		E44D75751AF3870000EC9D5E /* Materiaal-header.png in Resources */ = {isa = PBXBuildFile; fileRef = E44D75711AF3870000EC9D5E /* Materiaal-header.png */; };
 		E44D75761AF3870000EC9D5E /* Water-header.png in Resources */ = {isa = PBXBuildFile; fileRef = E44D75721AF3870000EC9D5E /* Water-header.png */; };
@@ -59,6 +74,13 @@
 		E48FD5511AE91E59000C1CFA /* ContentPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48FD5501AE91E59000C1CFA /* ContentPage.swift */; };
 		E495EB3A1B00D37000C136C7 /* QuizBeforeStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E495EB391B00D37000C136C7 /* QuizBeforeStartViewController.swift */; };
 		E4A6406C1B028BD0003E2CEC /* QuizDidEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6406B1B028BD0003E2CEC /* QuizDidEndViewController.swift */; };
+		E4AA96011B09FB7A00B3AAC3 /* ChooseDoelgroepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AA96001B09FB7A00B3AAC3 /* ChooseDoelgroepViewController.swift */; };
+		E4AA96031B09FFEA00B3AAC3 /* dierenwelzijn-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E4AA96021B09FFEA00B3AAC3 /* dierenwelzijn-button.png */; };
+		E4AA96051B0A067600B3AAC3 /* Dierenwelzijn-header.png in Resources */ = {isa = PBXBuildFile; fileRef = E4AA96041B0A067600B3AAC3 /* Dierenwelzijn-header.png */; };
+		E4AA96071B0A068600B3AAC3 /* Dierenwelzijn-close.png in Resources */ = {isa = PBXBuildFile; fileRef = E4AA96061B0A068600B3AAC3 /* Dierenwelzijn-close.png */; };
+		E4AA96091B0A091600B3AAC3 /* niveau-selector-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = E4AA96081B0A091600B3AAC3 /* niveau-selector-btn.png */; };
+		E4AA960B1B0A09C400B3AAC3 /* WildlandsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AA960A1B0A09C400B3AAC3 /* WildlandsButton.swift */; };
+		E4AA960D1B0A180C00B3AAC3 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AA960C1B0A180C00B3AAC3 /* Level.swift */; };
 		E4B6E6711AEA4D1D0033CD3A /* ChooseSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B6E6701AEA4D1D0033CD3A /* ChooseSubjectViewController.swift */; };
 		E4C1903D1AE7A7ED00FC2800 /* ContentPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C1903C1AE7A7ED00FC2800 /* ContentPageView.swift */; };
 		E4C190411AE7C4DD00FC2800 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C190401AE7C4DD00FC2800 /* PopupView.swift */; };
@@ -96,13 +118,12 @@
 		E4EEE6001AEF9D9400920E85 /* element-12.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE5F41AEF9D9400920E85 /* element-12.png */; };
 		E4EEE6021AEF9E6100920E85 /* element-01-180.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE6011AEF9E6100920E85 /* element-01-180.png */; };
 		E4EEE6041AEF9FC700920E85 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EEE6031AEF9FC700920E85 /* StartViewController.swift */; };
-		E4EEE6061AEFA42200920E85 /* WildlandsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EEE6051AEFA42200920E85 /* WildlandsButton.swift */; };
-		E4EEE60E1AEFB1A700920E85 /* element-14.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE6081AEFB1A700920E85 /* element-14.png */; };
-		E4EEE60F1AEFB1A700920E85 /* element-15.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE6091AEFB1A700920E85 /* element-15.png */; };
-		E4EEE6101AEFB1A700920E85 /* element-16.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE60A1AEFB1A700920E85 /* element-16.png */; };
-		E4EEE6111AEFB1A700920E85 /* element-17.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE60B1AEFB1A700920E85 /* element-17.png */; };
-		E4EEE6121AEFB1A700920E85 /* element-18.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE60C1AEFB1A700920E85 /* element-18.png */; };
-		E4EEE6131AEFB1A700920E85 /* element-19.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE60D1AEFB1A700920E85 /* element-19.png */; };
+		E4EEE60E1AEFB1A700920E85 /* energie-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE6081AEFB1A700920E85 /* energie-button.png */; };
+		E4EEE60F1AEFB1A700920E85 /* water-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE6091AEFB1A700920E85 /* water-button.png */; };
+		E4EEE6101AEFB1A700920E85 /* materialen-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE60A1AEFB1A700920E85 /* materialen-button.png */; };
+		E4EEE6111AEFB1A700920E85 /* biomimicry-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE60B1AEFB1A700920E85 /* biomimicry-button.png */; };
+		E4EEE6121AEFB1A700920E85 /* default-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE60C1AEFB1A700920E85 /* default-button.png */; };
+		E4EEE6131AEFB1A700920E85 /* black-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E4EEE60D1AEFB1A700920E85 /* black-button.png */; };
 		E4FAE6CB1B01F9490061F9D1 /* QuizScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FAE6CA1B01F9490061F9D1 /* QuizScoreViewController.swift */; };
 		E4FAE6CD1B0216CB0061F9D1 /* QuizSendScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FAE6CC1B0216CB0061F9D1 /* QuizSendScoreViewController.swift */; };
 		E4FAE6CF1B0218430061F9D1 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4FAE6CE1B0218430061F9D1 /* MessageUI.framework */; };
@@ -169,6 +190,21 @@
 		E430E7C51AC418CD0036506D /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		E430E7D61AC418E60036506D /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		E430E7D91AC41DA00036506D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Classes/Utils.swift; sourceTree = "<group>"; };
+		E438096F1B0B45320030B792 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		E43809721B0B573D0030B792 /* score-biomimicry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "score-biomimicry.png"; sourceTree = "<group>"; };
+		E43809731B0B573D0030B792 /* score-energie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "score-energie.png"; sourceTree = "<group>"; };
+		E43809741B0B573D0030B792 /* score-water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "score-water.png"; sourceTree = "<group>"; };
+		E43809751B0B573D0030B792 /* score-materialen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "score-materialen.png"; sourceTree = "<group>"; };
+		E43809761B0B573D0030B792 /* score-dierenwelzijn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "score-dierenwelzijn.png"; sourceTree = "<group>"; };
+		E438097C1B0B699B0030B792 /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Score.swift; path = Classes/Score.swift; sourceTree = "<group>"; };
+		E438097E1B0C90130030B792 /* element-dierenwelzijn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "element-dierenwelzijn.png"; sourceTree = "<group>"; };
+		E43809801B0CA84A0030B792 /* WildlandsGradient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WildlandsGradient.swift; path = Classes/WildlandsGradient.swift; sourceTree = "<group>"; };
+		E43809821B0CB2C00030B792 /* pinpoint-05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinpoint-05.png"; sourceTree = "<group>"; };
+		E43809861B0CB44E0030B792 /* element-fadebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "element-fadebg.png"; sourceTree = "<group>"; };
+		E43809881B0CBE900030B792 /* Credits.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Credits.png; sourceTree = "<group>"; };
+		E438098F1B0CC2B40030B792 /* ButtonParticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = ButtonParticles.sks; path = Particles/ButtonParticles.sks; sourceTree = "<group>"; };
+		E43809901B0CC2B40030B792 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = Particles/spark.png; sourceTree = "<group>"; };
+		E43809931B0CC3760030B792 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		E44D75701AF3870000EC9D5E /* Bio Mimicry-header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bio Mimicry-header.png"; sourceTree = "<group>"; };
 		E44D75711AF3870000EC9D5E /* Materiaal-header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Materiaal-header.png"; sourceTree = "<group>"; };
 		E44D75721AF3870000EC9D5E /* Water-header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Water-header.png"; sourceTree = "<group>"; };
@@ -198,6 +234,13 @@
 		E48FD5501AE91E59000C1CFA /* ContentPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentPage.swift; path = Classes/ContentPage.swift; sourceTree = "<group>"; };
 		E495EB391B00D37000C136C7 /* QuizBeforeStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizBeforeStartViewController.swift; path = Views/QuizBeforeStartViewController.swift; sourceTree = "<group>"; };
 		E4A6406B1B028BD0003E2CEC /* QuizDidEndViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizDidEndViewController.swift; path = Views/QuizDidEndViewController.swift; sourceTree = "<group>"; };
+		E4AA96001B09FB7A00B3AAC3 /* ChooseDoelgroepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChooseDoelgroepViewController.swift; path = Views/ChooseDoelgroepViewController.swift; sourceTree = "<group>"; };
+		E4AA96021B09FFEA00B3AAC3 /* dierenwelzijn-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dierenwelzijn-button.png"; sourceTree = "<group>"; };
+		E4AA96041B0A067600B3AAC3 /* Dierenwelzijn-header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dierenwelzijn-header.png"; sourceTree = "<group>"; };
+		E4AA96061B0A068600B3AAC3 /* Dierenwelzijn-close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dierenwelzijn-close.png"; sourceTree = "<group>"; };
+		E4AA96081B0A091600B3AAC3 /* niveau-selector-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "niveau-selector-btn.png"; sourceTree = "<group>"; };
+		E4AA960A1B0A09C400B3AAC3 /* WildlandsButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WildlandsButton.swift; path = Classes/WildlandsButton.swift; sourceTree = "<group>"; };
+		E4AA960C1B0A180C00B3AAC3 /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Level.swift; path = Classes/Level.swift; sourceTree = "<group>"; };
 		E4B6E6701AEA4D1D0033CD3A /* ChooseSubjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChooseSubjectViewController.swift; path = Views/ChooseSubjectViewController.swift; sourceTree = "<group>"; };
 		E4C1903C1AE7A7ED00FC2800 /* ContentPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentPageView.swift; path = Views/ContentPageView.swift; sourceTree = "<group>"; };
 		E4C190401AE7C4DD00FC2800 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopupView.swift; path = Views/PopupView.swift; sourceTree = "<group>"; };
@@ -239,13 +282,12 @@
 		E4EEE5F41AEF9D9400920E85 /* element-12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-12.png"; path = "Images/Views/element-12.png"; sourceTree = "<group>"; };
 		E4EEE6011AEF9E6100920E85 /* element-01-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-01-180.png"; path = "Images/Views/element-01-180.png"; sourceTree = "<group>"; };
 		E4EEE6031AEF9FC700920E85 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartViewController.swift; path = Views/StartViewController.swift; sourceTree = "<group>"; };
-		E4EEE6051AEFA42200920E85 /* WildlandsButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WildlandsButton.swift; path = Views/WildlandsButton.swift; sourceTree = "<group>"; };
-		E4EEE6081AEFB1A700920E85 /* element-14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-14.png"; path = "Images/Buttons/element-14.png"; sourceTree = "<group>"; };
-		E4EEE6091AEFB1A700920E85 /* element-15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-15.png"; path = "Images/Buttons/element-15.png"; sourceTree = "<group>"; };
-		E4EEE60A1AEFB1A700920E85 /* element-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-16.png"; path = "Images/Buttons/element-16.png"; sourceTree = "<group>"; };
-		E4EEE60B1AEFB1A700920E85 /* element-17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-17.png"; path = "Images/Buttons/element-17.png"; sourceTree = "<group>"; };
-		E4EEE60C1AEFB1A700920E85 /* element-18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-18.png"; path = "Images/Buttons/element-18.png"; sourceTree = "<group>"; };
-		E4EEE60D1AEFB1A700920E85 /* element-19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-19.png"; path = "Images/Buttons/element-19.png"; sourceTree = "<group>"; };
+		E4EEE6081AEFB1A700920E85 /* energie-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "energie-button.png"; path = "Images/Buttons/energie-button.png"; sourceTree = "<group>"; };
+		E4EEE6091AEFB1A700920E85 /* water-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "water-button.png"; path = "Images/Buttons/water-button.png"; sourceTree = "<group>"; };
+		E4EEE60A1AEFB1A700920E85 /* materialen-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "materialen-button.png"; path = "Images/Buttons/materialen-button.png"; sourceTree = "<group>"; };
+		E4EEE60B1AEFB1A700920E85 /* biomimicry-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "biomimicry-button.png"; path = "Images/Buttons/biomimicry-button.png"; sourceTree = "<group>"; };
+		E4EEE60C1AEFB1A700920E85 /* default-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "default-button.png"; path = "Images/Buttons/default-button.png"; sourceTree = "<group>"; };
+		E4EEE60D1AEFB1A700920E85 /* black-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "black-button.png"; path = "Images/Buttons/black-button.png"; sourceTree = "<group>"; };
 		E4FAE6CA1B01F9490061F9D1 /* QuizScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizScoreViewController.swift; path = Views/QuizScoreViewController.swift; sourceTree = "<group>"; };
 		E4FAE6CC1B0216CB0061F9D1 /* QuizSendScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizSendScoreViewController.swift; path = Views/QuizSendScoreViewController.swift; sourceTree = "<group>"; };
 		E4FAE6CE1B0218430061F9D1 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -258,6 +300,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E43809941B0CC3760030B792 /* SpriteKit.framework in Frameworks */,
+				E43809701B0B45320030B792 /* AudioToolbox.framework in Frameworks */,
 				E4FAE6CF1B0218430061F9D1 /* MessageUI.framework in Frameworks */,
 				E430E7D71AC418E60036506D /* ImageIO.framework in Frameworks */,
 				EBB6E73FDD6C92AE70B1E78A /* Pods_Wildlands.framework in Frameworks */,
@@ -286,6 +330,8 @@
 		A47CC03B517AB98FD7F76CAC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E43809931B0CC3760030B792 /* SpriteKit.framework */,
+				E438096F1B0B45320030B792 /* AudioToolbox.framework */,
 				E4FAE6CE1B0218430061F9D1 /* MessageUI.framework */,
 				753519B94D96BFA270B9CE08 /* Pods_Wildlands.framework */,
 			);
@@ -351,6 +397,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E43809711B0B56050030B792 /* Score */ = {
+			isa = PBXGroup;
+			children = (
+				E43809721B0B573D0030B792 /* score-biomimicry.png */,
+				E43809731B0B573D0030B792 /* score-energie.png */,
+				E43809741B0B573D0030B792 /* score-water.png */,
+				E43809751B0B573D0030B792 /* score-materialen.png */,
+				E43809761B0B573D0030B792 /* score-dierenwelzijn.png */,
+			);
+			name = Score;
+			sourceTree = "<group>";
+		};
+		E438098E1B0CC2A70030B792 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				E438098F1B0CC2B40030B792 /* ButtonParticles.sks */,
+				E43809901B0CC2B40030B792 /* spark.png */,
+			);
+			name = Particles;
+			sourceTree = "<group>";
+		};
 		E44D75781AF3870900EC9D5E /* Pop-up elements */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,10 +425,12 @@
 				E44D75711AF3870000EC9D5E /* Materiaal-header.png */,
 				E44D75721AF3870000EC9D5E /* Water-header.png */,
 				E44D75731AF3870000EC9D5E /* Energie-header.png */,
+				E4AA96041B0A067600B3AAC3 /* Dierenwelzijn-header.png */,
 				E44D75791AF3876200EC9D5E /* Bio Mimicry-close.png */,
 				E44D757A1AF3876200EC9D5E /* Materiaal-close.png */,
 				E44D757B1AF3876200EC9D5E /* Water-close.png */,
 				E44D757C1AF3876200EC9D5E /* Energie-close.png */,
+				E4AA96061B0A068600B3AAC3 /* Dierenwelzijn-close.png */,
 			);
 			name = "Pop-up elements";
 			sourceTree = "<group>";
@@ -375,8 +444,8 @@
 				E4C190401AE7C4DD00FC2800 /* PopupView.swift */,
 				E4B6E6701AEA4D1D0033CD3A /* ChooseSubjectViewController.swift */,
 				E4EEE6031AEF9FC700920E85 /* StartViewController.swift */,
-				E4EEE6051AEFA42200920E85 /* WildlandsButton.swift */,
 				E44D75831AF3A7C400EC9D5E /* DownloadViewController.swift */,
+				E4AA96001B09FB7A00B3AAC3 /* ChooseDoelgroepViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -396,6 +465,8 @@
 			children = (
 				E4FD960A1AFFB6AA007EFB0A /* Clock */,
 				E44FE8F31ADD20B1006DD395 /* Question.swift */,
+				E438097C1B0B699B0030B792 /* Score.swift */,
+				E4AA960C1B0A180C00B3AAC3 /* Level.swift */,
 				E4C20E0D1AB9AAF600A911B5 /* Answer.swift */,
 				E48FD5501AE91E59000C1CFA /* ContentPage.swift */,
 				E430E76A1AC18E9E0036506D /* Pinpoint.swift */,
@@ -406,6 +477,8 @@
 				E44FE8F01ADD1F73006DD395 /* WildlandsGPS.swift */,
 				E4DEEB411AF0D0C5002B6434 /* NoAnimationSegue.swift */,
 				E4DEEB511AF106DA002B6434 /* FadeTransitionSegue.swift */,
+				E4AA960A1B0A09C400B3AAC3 /* WildlandsButton.swift */,
+				E43809801B0CA84A0030B792 /* WildlandsGradient.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -413,10 +486,12 @@
 		E4627FF81ABAE423003B9229 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E43809711B0B56050030B792 /* Score */,
 				E44D75781AF3870900EC9D5E /* Pop-up elements */,
 				E4EEE6071AEFB19E00920E85 /* Buttons */,
 				E4EEE5D01AEF9D3900920E85 /* View Elements */,
 				E44FE91B1ADD3BFD006DD395 /* spot.png */,
+				E43809861B0CB44E0030B792 /* element-fadebg.png */,
 				E4DEEB431AF0D93E002B6434 /* backarrow.png */,
 				E44FE91D1ADD4189006DD395 /* tempkaart.png */,
 				E44FE8F51ADD2117006DD395 /* background.jpg */,
@@ -426,6 +501,7 @@
 				E44FE8FB1ADD2117006DD395 /* kaartView.jpg */,
 				E44FE8FC1ADD2117006DD395 /* logo_wildlands.png */,
 				E44FE8FD1ADD2117006DD395 /* olifanten.jpg */,
+				E43809881B0CBE900030B792 /* Credits.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -485,6 +561,7 @@
 		E4C20DE61AB9A2EC00A911B5 /* Wildlands */ = {
 			isa = PBXGroup;
 			children = (
+				E438098E1B0CC2A70030B792 /* Particles */,
 				E44FE9201ADE6A48006DD395 /* GPS Test Locations */,
 				E44FE8F21ADD1FBF006DD395 /* Views */,
 				E430E7D81AC418F40036506D /* Frameworks */,
@@ -530,10 +607,12 @@
 		E4EEE5D01AEF9D3900920E85 /* View Elements */ = {
 			isa = PBXGroup;
 			children = (
+				E4AA96081B0A091600B3AAC3 /* niveau-selector-btn.png */,
 				E44D75811AF3879A00EC9D5E /* pinpoint-01.png */,
 				E4DEEB541AF11118002B6434 /* pinpoint-02.png */,
 				E4DEEB551AF11118002B6434 /* pinpoint-03.png */,
 				E4DEEB561AF11118002B6434 /* pinpoint-04.png */,
+				E43809821B0CB2C00030B792 /* pinpoint-05.png */,
 				E4DEEB471AF0DAE7002B6434 /* stroke_green.png */,
 				E4EEE5E91AEF9D9400920E85 /* element-01.png */,
 				E4EEE5EA1AEF9D9400920E85 /* element-02.png */,
@@ -548,6 +627,7 @@
 				E4EEE5F31AEF9D9400920E85 /* element-11.png */,
 				E4EEE5F41AEF9D9400920E85 /* element-12.png */,
 				E4EEE6011AEF9E6100920E85 /* element-01-180.png */,
+				E438097E1B0C90130030B792 /* element-dierenwelzijn.png */,
 			);
 			name = "View Elements";
 			sourceTree = "<group>";
@@ -555,12 +635,13 @@
 		E4EEE6071AEFB19E00920E85 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				E4EEE6081AEFB1A700920E85 /* element-14.png */,
-				E4EEE6091AEFB1A700920E85 /* element-15.png */,
-				E4EEE60A1AEFB1A700920E85 /* element-16.png */,
-				E4EEE60B1AEFB1A700920E85 /* element-17.png */,
-				E4EEE60C1AEFB1A700920E85 /* element-18.png */,
-				E4EEE60D1AEFB1A700920E85 /* element-19.png */,
+				E4EEE6081AEFB1A700920E85 /* energie-button.png */,
+				E4EEE6091AEFB1A700920E85 /* water-button.png */,
+				E4EEE60A1AEFB1A700920E85 /* materialen-button.png */,
+				E4EEE60B1AEFB1A700920E85 /* biomimicry-button.png */,
+				E4AA96021B09FFEA00B3AAC3 /* dierenwelzijn-button.png */,
+				E4EEE60C1AEFB1A700920E85 /* default-button.png */,
+				E4EEE60D1AEFB1A700920E85 /* black-button.png */,
 			);
 			name = Buttons;
 			sourceTree = "<group>";
@@ -627,6 +708,11 @@
 					E4C20DE31AB9A2EC00A911B5 = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = K8545XK74J;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					E4C20DF81AB9A2EC00A911B5 = {
 						CreatedOnToolsVersion = 6.2;
@@ -662,50 +748,65 @@
 				E4C84D521AEF8DB600A208EF /* speedletter-regular.ttf in Resources */,
 				E4EEE6021AEF9E6100920E85 /* element-01-180.png in Resources */,
 				E4EEE5FA1AEF9D9400920E85 /* element-06.png in Resources */,
+				E43809791B0B573D0030B792 /* score-water.png in Resources */,
 				E44FE9261ADE7AF4006DD395 /* stenden-2.gpx in Resources */,
 				E44FE90B1ADD2117006DD395 /* bushbush.png in Resources */,
 				E4DEEB581AF11118002B6434 /* pinpoint-02.png in Resources */,
 				E4EEE5FC1AEF9D9400920E85 /* element-08.png in Resources */,
 				E4EEE5FE1AEF9D9400920E85 /* element-10.png in Resources */,
+				E4AA96091B0A091600B3AAC3 /* niveau-selector-btn.png in Resources */,
+				E43809921B0CC2B40030B792 /* spark.png in Resources */,
 				E4DEEB481AF0DAE7002B6434 /* stroke_green.png in Resources */,
-				E4EEE6101AEFB1A700920E85 /* element-16.png in Resources */,
+				E4EEE6101AEFB1A700920E85 /* materialen-button.png in Resources */,
 				E44D75761AF3870000EC9D5E /* Water-header.png in Resources */,
 				E4EEE5FD1AEF9D9400920E85 /* element-09.png in Resources */,
 				E44FE9221ADE6A66006DD395 /* TestGPS.gpx in Resources */,
-				E4EEE60E1AEFB1A700920E85 /* element-14.png in Resources */,
+				E4EEE60E1AEFB1A700920E85 /* energie-button.png in Resources */,
 				E4C84D501AEF87E500A208EF /* wildlands-regular.ttf in Resources */,
 				E44FE90C1ADD2117006DD395 /* iceicebaby.png in Resources */,
 				E4C20DEF1AB9A2EC00A911B5 /* Main.storyboard in Resources */,
 				E44D75751AF3870000EC9D5E /* Materiaal-header.png in Resources */,
 				E44FE90D1ADD2117006DD395 /* kaart.jpg in Resources */,
+				E438097B1B0B573D0030B792 /* score-dierenwelzijn.png in Resources */,
 				E4DEEB591AF11118002B6434 /* pinpoint-03.png in Resources */,
+				E43809781B0B573D0030B792 /* score-energie.png in Resources */,
+				E438097F1B0C90130030B792 /* element-dierenwelzijn.png in Resources */,
 				E4DEEB441AF0D93E002B6434 /* backarrow.png in Resources */,
+				E43809831B0CB2C00030B792 /* pinpoint-05.png in Resources */,
+				E4AA96051B0A067600B3AAC3 /* Dierenwelzijn-header.png in Resources */,
 				E44FE90F1ADD2117006DD395 /* logo_wildlands.png in Resources */,
 				E4EEE5FB1AEF9D9400920E85 /* element-07.png in Resources */,
-				E4EEE6121AEFB1A700920E85 /* element-18.png in Resources */,
+				E4AA96071B0A068600B3AAC3 /* Dierenwelzijn-close.png in Resources */,
+				E4EEE6121AEFB1A700920E85 /* default-button.png in Resources */,
+				E438097A1B0B573D0030B792 /* score-materialen.png in Resources */,
 				E44FE90E1ADD2117006DD395 /* kaartView.jpg in Resources */,
 				E44D75741AF3870000EC9D5E /* Bio Mimicry-header.png in Resources */,
+				E43809771B0B573D0030B792 /* score-biomimicry.png in Resources */,
 				E4EEE5FF1AEF9D9400920E85 /* element-11.png in Resources */,
 				E430E77A1AC1A4FE0036506D /* Localizable.strings in Resources */,
 				E430E79C1AC408EA0036506D /* Roboto-Regular.ttf in Resources */,
-				E4EEE6111AEFB1A700920E85 /* element-17.png in Resources */,
-				E4EEE6131AEFB1A700920E85 /* element-19.png in Resources */,
+				E4EEE6111AEFB1A700920E85 /* biomimicry-button.png in Resources */,
+				E4EEE6131AEFB1A700920E85 /* black-button.png in Resources */,
 				E4EEE6001AEF9D9400920E85 /* element-12.png in Resources */,
 				E4EEE5F71AEF9D9400920E85 /* element-03.png in Resources */,
 				E44D75821AF3879A00EC9D5E /* pinpoint-01.png in Resources */,
 				E44FE9101ADD2117006DD395 /* olifanten.jpg in Resources */,
 				E44FE9241ADE7880006DD395 /* stenden.gpx in Resources */,
+				E43809911B0CC2B40030B792 /* ButtonParticles.sks in Resources */,
+				E4AA96031B09FFEA00B3AAC3 /* dierenwelzijn-button.png in Resources */,
 				E4EEE5F51AEF9D9400920E85 /* element-01.png in Resources */,
 				E44FE9081ADD2117006DD395 /* background.jpg in Resources */,
 				E4C20DF41AB9A2EC00A911B5 /* LaunchScreen.xib in Resources */,
 				E44FE91E1ADD4189006DD395 /* tempkaart.png in Resources */,
 				E4EEE5F61AEF9D9400920E85 /* element-02.png in Resources */,
+				E43809871B0CB44E0030B792 /* element-fadebg.png in Resources */,
+				E43809891B0CBE900030B792 /* Credits.png in Resources */,
 				E4EEE5F91AEF9D9400920E85 /* element-05.png in Resources */,
 				E4C20DF11AB9A2EC00A911B5 /* Images.xcassets in Resources */,
 				E4DEEB5A1AF11118002B6434 /* pinpoint-04.png in Resources */,
 				E44D75801AF3876200EC9D5E /* Energie-close.png in Resources */,
 				E44D757E1AF3876200EC9D5E /* Materiaal-close.png in Resources */,
-				E4EEE60F1AEFB1A700920E85 /* element-15.png in Resources */,
+				E4EEE60F1AEFB1A700920E85 /* water-button.png in Resources */,
 				E44D757D1AF3876200EC9D5E /* Bio Mimicry-close.png in Resources */,
 				E44D757F1AF3876200EC9D5E /* Water-close.png in Resources */,
 				E4EEE5F81AEF9D9400920E85 /* element-04.png in Resources */,
@@ -782,6 +883,7 @@
 				E4DEEB4C1AF0E8EE002B6434 /* JoinQuizViewController.swift in Sources */,
 				E4DEEB421AF0D0C5002B6434 /* NoAnimationSegue.swift in Sources */,
 				E430E7C61AC418CD0036506D /* MKAnnotationView+WebCache.m in Sources */,
+				E4AA96011B09FB7A00B3AAC3 /* ChooseDoelgroepViewController.swift in Sources */,
 				E430E7DA1AC41DA00036506D /* Utils.swift in Sources */,
 				E4C190411AE7C4DD00FC2800 /* PopupView.swift in Sources */,
 				E430E7751AC1A3540036506D /* JSONDownloader.swift in Sources */,
@@ -794,6 +896,7 @@
 				E4DEEB4A1AF0E201002B6434 /* QuizChooseViewController.swift in Sources */,
 				E44FE8F11ADD1F73006DD395 /* WildlandsGPS.swift in Sources */,
 				E4DEEB521AF106DA002B6434 /* FadeTransitionSegue.swift in Sources */,
+				E43809811B0CA84A0030B792 /* WildlandsGradient.swift in Sources */,
 				E430E7C91AC418CD0036506D /* SDWebImageCompat.m in Sources */,
 				E4C20E0C1AB9AA2900A911B5 /* QuizViewController.swift in Sources */,
 				E4A6406C1B028BD0003E2CEC /* QuizDidEndViewController.swift in Sources */,
@@ -804,10 +907,12 @@
 				E430E7D21AC418CD0036506D /* UIImage+WebP.m in Sources */,
 				E430E7CC1AC418CD0036506D /* SDWebImageDownloaderOperation.m in Sources */,
 				E430E7D51AC418CD0036506D /* UIView+WebCacheOperation.m in Sources */,
+				E4AA960D1B0A180C00B3AAC3 /* Level.swift in Sources */,
 				E4FAE6CB1B01F9490061F9D1 /* QuizScoreViewController.swift in Sources */,
 				E430E7CB1AC418CD0036506D /* SDWebImageDownloader.m in Sources */,
 				E430E7D01AC418CD0036506D /* UIImage+GIF.m in Sources */,
 				E4C20DEA1AB9A2EC00A911B5 /* AppDelegate.swift in Sources */,
+				E438097D1B0B699B0030B792 /* Score.swift in Sources */,
 				E430E79E1AC409550036506D /* Fonts.swift in Sources */,
 				E430E7671AC17D7C0036506D /* KaartViewController.swift in Sources */,
 				E430E7D31AC418CD0036506D /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -817,9 +922,9 @@
 				E4FAE6CD1B0216CB0061F9D1 /* QuizSendScoreViewController.swift in Sources */,
 				E430E7CF1AC418CD0036506D /* UIButton+WebCache.m in Sources */,
 				E430E7C71AC418CD0036506D /* NSData+ImageContentType.m in Sources */,
-				E4EEE6061AEFA42200920E85 /* WildlandsButton.swift in Sources */,
 				E4DEEB4E1AF0F4A4002B6434 /* WaitForQuizStartViewController.swift in Sources */,
 				E44D75841AF3A7C400EC9D5E /* DownloadViewController.swift in Sources */,
+				E4AA960B1B0A09C400B3AAC3 /* WildlandsButton.swift in Sources */,
 				E430E76B1AC18E9E0036506D /* Pinpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

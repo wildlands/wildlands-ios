@@ -8,22 +8,28 @@
 
 import UIKit
 
-class DownloadViewController: UIViewController, JSONDownloaderDelegate {
+class DownloadViewController: UIViewController, JSONDownloaderDelegate, UIAlertViewDelegate {
 
     @IBOutlet weak var backgroundView: UIView!
     
     let contentDownloader: JSONDownloader = JSONDownloader()
-    var pinpoints: [Pinpoint] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor(red: 45.0/255.0, green: 100.0/255.0, blue: 0.0/255.0, alpha: 1).CGColor, UIColor(red: 22.0/255.0, green: 45.0/255.0, blue: 26.0/255.0, alpha: 1).CGColor]
-        backgroundView.layer.insertSublayer(gradient, atIndex: 0)
+        backgroundView.layer.insertSublayer(WildlandsGradient.greenGradient(forBounds: view.bounds), atIndex: 0)
         
         contentDownloader.delegate = self
+        startDownloading()
+    
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func startDownloading() {
         
         let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
         if defaults.objectForKey("pinpoints") == nil {
@@ -37,21 +43,32 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate {
         }
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     func checkDatabaseChecksum() {
         
+        println("Downloaden checksum")
         contentDownloader.downloadJSON(DownloadType.DOWNLOAD_CHECKUM)
         
     }
     
     func downloadContent() {
         
+        println("Downloaden pinpoints")
         contentDownloader.downloadJSON(DownloadType.DOWNLOAD_PINPOINTS)
+        
+    }
+    
+    func downloadLevels() {
+        
+        println("Downloaden levels")
+        contentDownloader.downloadJSON(DownloadType.DOWNLOAD_LEVELS)
+        
+    }
+    
+    func downloadQuizQuestions() {
+        
+        println("Downloaden questions")
+        contentDownloader.downloadJSON(DownloadType.DOWNLOAD_QUESTIONS)
         
     }
     
@@ -67,9 +84,8 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate {
         if response is [Pinpoint] {
             
             let pinpointResponse = response as? [Pinpoint]
-            pinpoints = pinpointResponse!
-            Utils.saveObjectToDisk(pinpoints, forKey: "pinpoints")
-            self.performSegueWithIdentifier("goToHome", sender: self)
+            Utils.saveObjectToDisk(pinpointResponse!, forKey: "pinpoints")
+            downloadLevels()
             
         } else if response is Int {
             
@@ -82,9 +98,22 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate {
                 
             } else {
                 
-                self.performSegueWithIdentifier("goToHome", sender: self)
+                self.performSegueWithIdentifier("goToChooseDoelgroep", sender: self)
                 
             }
+            
+        } else if response is [Level] {
+            
+            let levelResponse = response as? [Level]
+            Utils.saveObjectToDisk(levelResponse!, forKey: "levels")
+            downloadQuizQuestions()
+            
+            
+        } else if (response is [Question]) {
+            
+            let questionResponse = response as? [Question]
+            Utils.saveObjectToDisk(questionResponse!, forKey: "questions")
+            self.performSegueWithIdentifier("goToChooseDoelgroep", sender: self)
             
         } else {
             
@@ -94,5 +123,10 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate {
         
     }
     
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        
+        startDownloading()
+        
+    }
 
 }

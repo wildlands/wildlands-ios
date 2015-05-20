@@ -13,6 +13,7 @@ enum DownloadType: String {
     case DOWNLOAD_PINPOINTS = "?c=GetAllPinpoints"
     case DOWNLOAD_QUESTIONS = "?c=GetAllQuestions"
     case DOWNLOAD_CHECKUM = "?c=GetDatabaseChecksum"
+    case DOWNLOAD_LEVELS = "?c=GetAllLevels"
 }
 
 protocol JSONDownloaderDelegate {
@@ -94,6 +95,10 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
             
             processDatabaseChecksum()
             
+        } else if (currentType == DownloadType.DOWNLOAD_LEVELS) {
+            
+            processLevels()
+            
         }
         
     }
@@ -132,7 +137,7 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
                         thePinpoint.image = image
                     }
                     if let typeName = type.objectForKey("name") as? String {
-                        thePinpoint.typeName = typeName
+                        thePinpoint.typeName = WildlandsTheme(rawValue: typeName)!
                     }
                     
                 } else {
@@ -178,11 +183,19 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
                 
                 let dict = deVraag as! NSMutableDictionary
                 // Maak een nieuwe vraag aan
-                var eenVraag: Question = Question(text: dict.objectForKey("text") as! String)
+                var eenVraag: Question = Question()
+                eenVraag.text = dict.objectForKey("text") as! String
+                eenVraag.imageURL = dict.objectForKey("image") as! String
                 
                 if let type = deVraag.objectForKey("type") as? NSDictionary {
                     if let typeName = type.objectForKey("name") as? String {
                         eenVraag.typeName = typeName
+                    }
+                }
+                
+                if let levelDict = deVraag.objectForKey("level") as? NSDictionary {
+                    if let levelID = levelDict.objectForKey("id") as? Int {
+                        eenVraag.levelID = levelID
                     }
                 }
                 
@@ -194,7 +207,7 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
                     // Antwoord in dictionary zetten
                     let hetAntwoord = antwoord as! NSMutableDictionary
                     var eenAntwoord: Answer = Answer()
-                    eenAntwoord.text = hetAntwoord.objectForKey("text") as? String
+                    eenAntwoord.text = hetAntwoord.objectForKey("text") as! String
                     
                     if hetAntwoord.objectForKey("rightWrong") as! Bool {
                         eenAntwoord.isRightAnswer = true
@@ -224,6 +237,30 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
         }
         
         delegate?.JSONDownloaderSuccess(checksum)
+        
+    }
+    
+    func processLevels() {
+        
+        var levels: [Level] = []
+        
+        if let jsonLevels = jsonArray as? NSArray {
+            
+            for level in jsonLevels {
+                
+                let deLevel = level as! NSDictionary
+                
+                var eenLevel: Level = Level()
+                eenLevel.id = deLevel.objectForKey("id") as! Int
+                eenLevel.name = deLevel.objectForKey("name") as! String
+                
+                levels.append(eenLevel)
+                
+            }
+            
+        }
+        
+        delegate?.JSONDownloaderSuccess(levels)
         
     }
     

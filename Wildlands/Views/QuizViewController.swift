@@ -9,11 +9,13 @@
 import UIKit
 import Foundation
 import Socket_IO_Client_Swift
+import AudioToolbox
 
-class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate {
+class QuizViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate {
     
     @IBOutlet var backgroundView: UIView!
     @IBOutlet weak var bushbushView: UIImageView!
+    @IBOutlet weak var questionImageView: UIImageView!
 
     var data: NSMutableData = NSMutableData()
     var questions: [Question] = []
@@ -21,6 +23,10 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
     var goodAnswerd: Int = 0
     
     var socket: SocketIOClient?
+    
+    var quizTimer: NSTimer?
+    
+    var endScore: [Score] = []
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -31,6 +37,10 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
         
         super.viewDidLoad()
         
+        var gradient = WildlandsGradient.greenGradient(forBounds: view.bounds)
+        backgroundView.layer.insertSublayer(gradient, atIndex: 0)
+        backgroundView.layer.setValue(gradient, forKey: "gradient")
+        
         vraagLabel.text = ""
         vraagLabel.font = Fonts.defaultFont(16)
         
@@ -38,39 +48,27 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.backgroundColor = UIColor.clearColor()
         
-        var questionDownload = JSONDownloader()
-        questionDownload.delegate = self
-        questionDownload.downloadJSON(DownloadType.DOWNLOAD_QUESTIONS)
+        questionImageView.clipsToBounds = true
+        questionImageView.contentMode = .ScaleAspectFit;
         
         progressBar.progress = 1.0
         
-        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateProgressbar", userInfo: nil, repeats: true)
+        quizTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateProgressbar", userInfo: nil, repeats: true)
         
         let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         socket = delegate.socket
         
-    }
-    
-    func JSONDownloaderSuccess(response: AnyObject) {
-        
-        if (response is [Question]) {
+        var sortQuestions = Utils.openObjectFromDisk("questions") as! [Question]
+        var currentLevel = Utils.openObjectFromDisk("currentLevel") as! Level
+        for theQuestion in sortQuestions {
             
-            let questionResponse = response as? [Question]
-            questions = questionResponse!
-            showQuestion()
-            
-        } else {
-            
-            print("Onbekende response ontvangen")
+            if theQuestion.levelID == currentLevel.id {
+                questions.append(theQuestion)
+            }
             
         }
         
-    }
-    
-    func JSONDownloaderFailed(message: String, type: DownloadType) {
-        
-        let failAlert: UIAlertView = UIAlertView(title: "Error", message: message, delegate: self, cancelButtonTitle: "Helaas")
-        failAlert.show()
+        showQuestion()
         
     }
     
@@ -78,9 +76,7 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
         
         if currentQuestion > questions.count - 1 {
             
-            let alertMessage: String = "De quiz is afgerond. U heeft \(goodAnswerd) vragen goed beantwoord."
-            var alert: UIAlertView = UIAlertView(title: "Quiz beeindigd", message: alertMessage, delegate: self, cancelButtonTitle: "Oké")
-            alert.show()
+            self.performSegueWithIdentifier("quizIsOver", sender: self)
             return
             
         }
@@ -91,39 +87,41 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
         vraagLabel.sizeToFit()
         
         tableView.userInteractionEnabled = true
-        
-        if currentQuestion != 0 {
             
-            var layer: CALayer = backgroundView.layer.valueForKey("gradient") as! CALayer
-            layer.removeFromSuperlayer()
-            backgroundView.layer.setValue(nil, forKey: "gradient")
-            
-        }
+        var layer: CALayer = backgroundView.layer.valueForKey("gradient") as! CALayer
+        layer.removeFromSuperlayer()
+        backgroundView.layer.setValue(nil, forKey: "gradient")
         
         var gradient: CAGradientLayer = CAGradientLayer()
         gradient.frame = view.bounds
         
         if komtIe.typeName == "Bio Mimicry" {
             bushbushView.image = UIImage(named: "element-05.png")
-            gradient.colors = [UIColor(red: 174.0/255.0, green: 100.0/255.0, blue: 255.0/255.0, alpha: 1).CGColor, UIColor(red: 255.0/255.0, green: 144.0/255.0, blue: 255.0/255.0, alpha: 1).CGColor]
+            gradient.colors = WildlandsGradient.biomimicryColors()
         }
         if komtIe.typeName == "Materiaal" {
             bushbushView.image = UIImage(named: "element-06.png")
-            gradient.colors = [UIColor(red: 135.0/255.0, green: 114.0/255.0, blue: 46.0/255.0, alpha: 1).CGColor, UIColor(red: 202.0/255.0, green: 169.0/255.0, blue: 109.0/255.0, alpha: 1).CGColor]
+            gradient.colors = WildlandsGradient.materiaalColors()
         }
         if komtIe.typeName == "Energie" {
             bushbushView.image = UIImage(named: "element-04.png")
-            gradient.colors = [UIColor(red: 255.0/255.0, green: 172.0/255.0, blue: 0.0/255.0, alpha: 1).CGColor, UIColor(red: 255.0/255.0, green: 225.0/255.0, blue: 2.0/255.0, alpha: 1).CGColor]
+            gradient.colors = WildlandsGradient.energieColors()
         }
         if komtIe.typeName == "Water" {
             bushbushView.image = UIImage(named: "element-03.png")
-            gradient.colors = [UIColor(red: 0.0/255.0, green: 92.0/255.0, blue: 255.0/255.0, alpha: 1).CGColor, UIColor(red: 0.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1).CGColor]
+            gradient.colors = WildlandsGradient.waterColors()
             
+        }
+        if komtIe.typeName == "Dierenwelzijn" {
+            bushbushView.image = UIImage(named: "element-dierenwelzijn.png")
+            gradient.colors = WildlandsGradient.dierenwelzijnColors()
         }
         
         backgroundView.layer.insertSublayer(gradient, atIndex: 0)
         backgroundView.layer.setValue(gradient, forKey: "gradient")
         tableView.reloadData()
+        
+        questionImageView.sd_setImageWithURL(NSURL(string: komtIe.imageURL))
         
     }
     
@@ -131,7 +129,7 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
         
         let deVraag: Question = questions[currentQuestion] as Question;
         
-        var cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("answerCell") as! UITableViewCell
+        var cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("answerCell") as! UITableViewCell
         cell.backgroundColor = UIColor.clearColor()
         
         let hetAntwoord: Answer = deVraag.answers[indexPath.row]
@@ -139,13 +137,13 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
         var label: UILabel? = cell.viewWithTag(1) as? UILabel
         var view: UIView? = cell.viewWithTag(2)
         
+        view?.backgroundColor = UIColor.whiteColor()
         view?.layer.cornerRadius = 10
         view?.layer.shadowColor = UIColor.blackColor().CGColor
         view?.layer.shadowOffset = CGSize(width: 0, height: 0)
         view?.layer.shadowOpacity = 1
         
-        
-        label?.text = hetAntwoord.text?.uppercaseString
+        label?.text = hetAntwoord.text.uppercaseString
         
         return cell
         
@@ -159,7 +157,7 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if (questions.count > 1) {
+        if questions.count >= 1 {
             return questions[currentQuestion].answers.count
         }
         
@@ -170,12 +168,25 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let antwoord: Answer = questions[currentQuestion].answers[indexPath.row]
-        let cell: UITableViewCell? = tableView.cellForRowAtIndexPath(indexPath)
+        var cell: UITableViewCell? = tableView.cellForRowAtIndexPath(indexPath)
+        
+        var view: UIView? = cell!.viewWithTag(2)
+        
+        UIView.animateWithDuration(0.5, animations: {
+            
+            view?.backgroundColor = Colors.geel
+            
+        })
+        
         var goodAnswer: Bool = false
         if antwoord.isRightAnswer {
             
             goodAnswerd += 1
             goodAnswer = true
+            
+        } else {
+            
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             
         }
         tableView.userInteractionEnabled = false
@@ -190,6 +201,12 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
         ]
         
         socket?.emit("sendAnswer", json)
+        
+        // Maak nieuwe Score object aan voor uitslag
+        let score = Score()
+        score.question = questions[currentQuestion]
+        score.correctlyAnswerd = goodAnswer
+        endScore.append(score)
         
         currentQuestion = currentQuestion + 1
         var nextQuestion = [currentQuestion]
@@ -230,8 +247,16 @@ class QuizViewController: UIViewController, JSONDownloaderDelegate, UITableViewD
         if newValue <= 0 {
             
             self.performSegueWithIdentifier("quizIsOver", sender: self)
+            quizTimer?.invalidate()
             
         }
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        var destinationViewController = segue.destinationViewController as! QuizDidEndViewController
+        destinationViewController.endScore = self.endScore
         
     }
     

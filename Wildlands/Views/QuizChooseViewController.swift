@@ -19,11 +19,8 @@ class QuizChooseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        var gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor(red: 153.0/255.0, green: 153/255.0, blue: 153.0/255.0, alpha: 1).CGColor, UIColor(red: 153.0/255.0, green: 153.0/255.0, blue: 153.0/255.0, alpha: 1).CGColor]
-        backgroundView.layer.insertSublayer(gradient, atIndex: 0)
+        
+        backgroundView.layer.insertSublayer(WildlandsGradient.grayGradient(forBounds: view.bounds), atIndex: 0)
         
         let button: UIImage = UIImage(named: "element-18")!.resizableImageWithCapInsets(UIEdgeInsetsMake(6, 6, 6, 6), resizingMode: UIImageResizingMode.Stretch)
         leerlingButton.setBackgroundImage(button, forState: UIControlState.Normal)
@@ -39,7 +36,13 @@ class QuizChooseViewController: UIViewController {
         let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         socket = delegate.socket
         
-        socket?.connect()
+        if !delegate.isSocketConnected() {
+            
+            socket?.connect()
+            
+        }
+        
+        socket?.on("connect", callback: socketConnected)
         
     }
 
@@ -48,6 +51,31 @@ class QuizChooseViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func checkIfConnected() {
+        
+        if let theSocket = socket {
+            
+            if !theSocket.connected {
+                
+                leerlingButton.enabled = false
+                docentButton.enabled = false
+                
+            } else {
+                
+                leerlingButton.enabled = true
+                docentButton.enabled = true
+                
+            }
+            
+        }
+        
+    }
+    
+    func socketConnected(data: NSArray?, ack: AckEmitter?) {
+        
+        println("Socket is connected!");
+        
+    }
 
     @IBAction func goBack(sender: AnyObject) {
         

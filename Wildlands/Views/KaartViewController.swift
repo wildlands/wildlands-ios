@@ -20,7 +20,7 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
     var currentPosition: UIImageView = UIImageView()
     var wildlandsGPS: WildlandsGPS = WildlandsGPS()
     
-    var currentType: PinpointType?
+    var currentType: WildlandsTheme?
     
     var currentX: Int = 0
     var currentY: Int = 0
@@ -68,7 +68,7 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
         var i = 0
         for eenPinPoint: Pinpoint in pinpoints {
             
-            if eenPinPoint.typeName == currentType?.description {
+            if eenPinPoint.typeName.rawValue == currentType?.description {
             
                 let pinPointButton: UIButton = UIButton(frame: CGRectMake(eenPinPoint.xPos * zoomScale - 40, eenPinPoint.yPos * zoomScale - 108, 80, 108))
                 pinPointButton.setImage(UIImage(named: eenPinPoint.image), forState: UIControlState.Normal)
