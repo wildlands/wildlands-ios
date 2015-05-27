@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.inf2a.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<string>nl.inf2a.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -29,6 +29,9 @@
 		<string>Roboto-Regular.ttf</string>
 		<string>wildlands-regular.ttf</string>
 		<string>speedletter-regular.ttf</string>
+		<string>Roboto-Thin.ttf</string>
+		<string>Roboto-Bold.ttf</string>
+		<string>fontawesome-webfont.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

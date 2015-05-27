@@ -2,7 +2,7 @@ PODS:
   - SDWebImage (3.7.2):
     - SDWebImage/Core (= 3.7.2)
   - SDWebImage/Core (3.7.2)
-  - Socket.IO-Client-Swift (2.2.0)
+  - Socket.IO-Client-Swift (2.3.2)
 
 DEPENDENCIES:
   - SDWebImage (~> 3.7)
@@ -10,6 +10,6 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
-  Socket.IO-Client-Swift: d6fc9bb4a797a56096bb9083e5693cb8f5a60640
+  Socket.IO-Client-Swift: 8b5de9b5042c26e9ae9d8a6b23d108f07319cd60
 
 COCOAPODS: 0.36.3

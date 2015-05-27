@@ -30,6 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+        if socket.connected {
+            showSocketMelding()
+        }
+        socket.disconnect(fast: true)
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
@@ -63,6 +67,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return socket.connected
         
     }
+    
+    func connectIfNotConnected() {
+        
+        if !socket.connected {
+            socket.connect()
+        }
+        
+    }
+    
+    func showSocketMelding() {
+        
+        if let current = self.window?.rootViewController?.navigationController?.visibleViewController {
+            
+            var image: UIImage = Utils.fontAwesomeToImageWith(string: "\u{f1e6}", andColor: UIColor.whiteColor())
+            JSSAlertView().show(current, title: "VERBINDING VERBROKEN", text: "Als je een nieuwe quiz wil starten of joinen zul je de App opnieuw moeten opstarten.", buttonText: "Oke", cancelButtonText: "Annuleer", color: UIColorFromHex(0xc1272d, alpha: 1), iconImage: image, delegate: nil)
+            
+        }
+        
+    }
 
 }
-
