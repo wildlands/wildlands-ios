@@ -10,6 +10,11 @@ import UIKit
 
 class ScoreCalculator: NSObject {
     
+    /**
+        Calculate the score of the quiz.
+    
+        :returns:       All the scores, totals and correctly answered per category.
+     */
     class func calculateScore(score: [Score]) -> (energieGoed: Int, energieTotaal: Int, waterGoed: Int, waterTotaal: Int, materiaalGoed: Int, materiaalTotaal: Int, biomimicryGoed: Int, biomimicryTotaal: Int, dierenwelzijnGoed: Int, dierenwelzijnTotaal: Int, totaal: Int, totaalGoed: Int) {
         
         // Make score tuples

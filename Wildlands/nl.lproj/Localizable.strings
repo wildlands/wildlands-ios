@@ -40,13 +40,13 @@
 
 // Score
 "scoreTitle1" = "Slecht";
-"scoreText1" = "Oeij! Jouw uitslag is niet zo goed. Je kunt het beste nog een keer naar op verkenning gaan bij de volgende thema's: ";
+"scoreText1" = "Oei! Jouw uitslag is niet zo goed. Je kunt het beste nog een keer naar op verkenning gaan bij de volgende thema's: ";
 "scoreTitle2" = "Onvoldoende";
-"scoreText2" = "Jammer, net niet! Jouw uitslag is net geen voldoende. Je kunt het beste nog een keer naar op verkenning gaan bij de volgende thema's: ";
+"scoreText2" = "Jammer, net niet! Jouw uitslag is net geen voldoende. Je kunt het beste nog een keer op verkenning gaan bij de volgende thema's: ";
 "scoreTitle3" = "Voldoende";
 "scoreText3" = "Yes, voldoende! Als je wilt kun je het beste nog een keer naar op verkenning gaan bij de volgende thema's: ";
 "scoreTitle4" = "Goed";
 "scoreText4" = "Geweldig, jij hebt een goed! Bij de volgende thema's heb je misschien iets laten liggen: ";
-"scoretitle5" = "Geweldig";
+"scoretitle5" = "Geweldig!";
 "scoreText5" = "SUPER!!!! Alles goed! Jij bent waarschijnlijk een Ecologisch wezen!";
 

@@ -56,18 +56,32 @@ class QuizDidEndViewController: UIViewController {
         
         totaalScoreLabel.text = "\(score.totaalGoed)/\(score.totaal)"
         
+        // Calculate the wrong answers, so we can tell the user where he made the most mistakes
+        let energie = (title: "Energie", diff: Int(score.energieTotaal-score.energieGoed))
+        let water = (title: "Water", diff: Int(score.waterTotaal-score.waterGoed))
+        let materiaal = (title: "Materiaal", diff: Int(score.materiaalTotaal-score.materiaalGoed))
+        let biomimicry = (title: "Bio Mimicry", diff: Int(score.biomimicryTotaal-score.biomimicryGoed))
+        let dierenwelzijn = (title: "Dierenwelzijn", diff: Int(score.dierenwelzijnTotaal-score.dierenwelzijnGoed))
+        
+        var scoresForAlert = [energie, water, materiaal, biomimicry, dierenwelzijn]
+        // Sort the scores
+        scoresForAlert.sort({ $0.diff < $1.diff })
+        
+        var badCategories = "\(scoresForAlert[scoresForAlert.count-1].title) en \(scoresForAlert[scoresForAlert.count-2].title)."
+        
         // Show an alert about the score
-        showAlert(goed: score.totaalGoed, totaal: score.totaal)
+        showAlert(goed: score.totaalGoed, totaal: score.totaal, badCategories: badCategories)
         
     }
     
     /**
         Show alert message about the score.
 
-        :param: goed        Amount of correctly answerd questions
-        :param: totaal      Total amountn of questions
+        :param: goed            Amount of correctly answerd questions
+        :param: totaal          Total amount of questions
+        :param: badCategories   A string with the bad categories
      */
-    func showAlert(#goed: Int, totaal: Int) {
+    func showAlert(#goed: Int, totaal: Int, badCategories: String) {
         
         // Calculate percentage
         var percent: Double = (Double(goed) / Double(totaal)) * Double(100.0)
@@ -118,6 +132,9 @@ class QuizDidEndViewController: UIViewController {
             alertColor = UIColorFromHex(0x39b54a, alpha: 1.0)
             
         }
+        
+        // Add the bad categories string to the message
+        alertText += badCategories
         
         // Show the message
         alert.show(self, title: alertTitle, text: alertText, buttonText: NSLocalizedString("oke", comment: ""), cancelButtonText: nil, color: alertColor, iconImage: alertIcon, delegate: nil)
