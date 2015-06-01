@@ -19,7 +19,7 @@ class QuizSendScoreViewController: UIViewController, MFMailComposeViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        verstuurButton = WildlandsButton.createButtonWithImage(named: "element-18", forButton: verstuurButton)
+        verstuurButton = WildlandsButton.createButtonWithImage(named: "default-button", forButton: verstuurButton)
         
         backgroundView.layer.insertSublayer(WildlandsGradient.greenGradient(forBounds: view.bounds), atIndex: 0)
 

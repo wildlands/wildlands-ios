@@ -39,7 +39,7 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
         quizCodeField.layer.shadowOpacity = 1
         quizCodeField.layer.shadowRadius = 15
         
-        startButton = WildlandsButton.createButtonWithImage(named: "element-18", forButton: startButton)
+        startButton = WildlandsButton.createButtonWithImage(named: "default-button", forButton: startButton)
         
         addKeyboardNotifications()
         

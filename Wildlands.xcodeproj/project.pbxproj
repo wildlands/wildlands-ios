@@ -52,6 +52,10 @@
 		E4627FF61ABAE1CD003B9229 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4627FF51ABAE1CD003B9229 /* Colors.swift */; };
 		E48FD5511AE91E59000C1CFA /* ContentPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48FD5501AE91E59000C1CFA /* ContentPage.swift */; };
 		E495EB3A1B00D37000C136C7 /* QuizBeforeStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E495EB391B00D37000C136C7 /* QuizBeforeStartViewController.swift */; };
+		E4A34A1E1B1C4DBA00A8EBC5 /* framebushbottom.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A34A1D1B1C4DBA00A8EBC5 /* framebushbottom.png */; };
+		E4A34A201B1C4EBE00A8EBC5 /* framebushleft.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A34A1F1B1C4EBE00A8EBC5 /* framebushleft.png */; };
+		E4A34A221B1C4F5600A8EBC5 /* framebushtop.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A34A211B1C4F5600A8EBC5 /* framebushtop.png */; };
+		E4A34A241B1C4F8E00A8EBC5 /* framebushright.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A34A231B1C4F8E00A8EBC5 /* framebushright.png */; };
 		E4A6406C1B028BD0003E2CEC /* QuizDidEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6406B1B028BD0003E2CEC /* QuizDidEndViewController.swift */; };
 		E4AA96011B09FB7A00B3AAC3 /* ChooseDoelgroepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AA96001B09FB7A00B3AAC3 /* ChooseDoelgroepViewController.swift */; };
 		E4AA96031B09FFEA00B3AAC3 /* dierenwelzijn-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E4AA96021B09FFEA00B3AAC3 /* dierenwelzijn-button.png */; };
@@ -179,7 +183,11 @@
 		E44FE9251ADE7AF4006DD395 /* stenden-2.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "stenden-2.gpx"; path = "GPSLocations/stenden-2.gpx"; sourceTree = "<group>"; };
 		E4627FF51ABAE1CD003B9229 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = Classes/UI/Colors.swift; sourceTree = "<group>"; };
 		E48FD5501AE91E59000C1CFA /* ContentPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentPage.swift; path = Classes/UI/ContentPage.swift; sourceTree = "<group>"; };
-		E495EB391B00D37000C136C7 /* QuizBeforeStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizBeforeStartViewController.swift; path = Teacher/QuizBeforeStartViewController.swift; sourceTree = "<group>"; };
+		E495EB391B00D37000C136C7 /* QuizBeforeStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = QuizBeforeStartViewController.swift; path = Teacher/QuizBeforeStartViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		E4A34A1D1B1C4DBA00A8EBC5 /* framebushbottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = framebushbottom.png; path = Images/Explorer/framebushbottom.png; sourceTree = "<group>"; };
+		E4A34A1F1B1C4EBE00A8EBC5 /* framebushleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = framebushleft.png; path = Images/Explorer/framebushleft.png; sourceTree = "<group>"; };
+		E4A34A211B1C4F5600A8EBC5 /* framebushtop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = framebushtop.png; path = Images/Explorer/framebushtop.png; sourceTree = "<group>"; };
+		E4A34A231B1C4F8E00A8EBC5 /* framebushright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = framebushright.png; path = Images/Explorer/framebushright.png; sourceTree = "<group>"; };
 		E4A6406B1B028BD0003E2CEC /* QuizDidEndViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizDidEndViewController.swift; path = Student/QuizDidEndViewController.swift; sourceTree = "<group>"; };
 		E4AA96001B09FB7A00B3AAC3 /* ChooseDoelgroepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChooseDoelgroepViewController.swift; path = ViewControllers/ChooseDoelgroepViewController.swift; sourceTree = "<group>"; };
 		E4AA96021B09FFEA00B3AAC3 /* dierenwelzijn-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dierenwelzijn-button.png"; path = "Images/Buttons/dierenwelzijn-button.png"; sourceTree = "<group>"; };
@@ -205,10 +213,10 @@
 		E4C84D511AEF8DB600A208EF /* speedletter-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "speedletter-regular.ttf"; path = "Fonts/speedletter-regular.ttf"; sourceTree = "<group>"; };
 		E4DEEB411AF0D0C5002B6434 /* NoAnimationSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoAnimationSegue.swift; path = Classes/Transitions/NoAnimationSegue.swift; sourceTree = "<group>"; };
 		E4DEEB471AF0DAE7002B6434 /* stroke_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stroke_green.png; path = Images/Views/stroke_green.png; sourceTree = "<group>"; };
-		E4DEEB491AF0E201002B6434 /* QuizChooseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizChooseViewController.swift; sourceTree = "<group>"; };
-		E4DEEB4B1AF0E8EE002B6434 /* JoinQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JoinQuizViewController.swift; path = Student/JoinQuizViewController.swift; sourceTree = "<group>"; };
+		E4DEEB491AF0E201002B6434 /* QuizChooseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = QuizChooseViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		E4DEEB4B1AF0E8EE002B6434 /* JoinQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = JoinQuizViewController.swift; path = Student/JoinQuizViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E4DEEB4D1AF0F4A4002B6434 /* WaitForQuizStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaitForQuizStartViewController.swift; path = Student/WaitForQuizStartViewController.swift; sourceTree = "<group>"; };
-		E4DEEB4F1AF0F902002B6434 /* GenerateQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenerateQuizViewController.swift; path = Teacher/GenerateQuizViewController.swift; sourceTree = "<group>"; };
+		E4DEEB4F1AF0F902002B6434 /* GenerateQuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = GenerateQuizViewController.swift; path = Teacher/GenerateQuizViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E4DEEB511AF106DA002B6434 /* FadeTransitionSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FadeTransitionSegue.swift; path = Classes/Transitions/FadeTransitionSegue.swift; sourceTree = "<group>"; };
 		E4DEEB541AF11118002B6434 /* Materiaal-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Materiaal-pin.png"; path = "Images/Pinpoints/Materiaal-pin.png"; sourceTree = "<group>"; };
 		E4DEEB551AF11118002B6434 /* Water-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Water-pin.png"; path = "Images/Pinpoints/Water-pin.png"; sourceTree = "<group>"; };
@@ -230,7 +238,7 @@
 		E4EEE5F31AEF9D9400920E85 /* element-11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-11.png"; path = "Images/Views/element-11.png"; sourceTree = "<group>"; };
 		E4EEE5F41AEF9D9400920E85 /* element-12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-12.png"; path = "Images/Views/element-12.png"; sourceTree = "<group>"; };
 		E4EEE6011AEF9E6100920E85 /* element-01-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "element-01-180.png"; path = "Images/Views/element-01-180.png"; sourceTree = "<group>"; };
-		E4EEE6031AEF9FC700920E85 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartViewController.swift; path = ViewControllers/StartViewController.swift; sourceTree = "<group>"; };
+		E4EEE6031AEF9FC700920E85 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = StartViewController.swift; path = ViewControllers/StartViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E4EEE6081AEFB1A700920E85 /* energie-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "energie-button.png"; path = "Images/Buttons/energie-button.png"; sourceTree = "<group>"; };
 		E4EEE6091AEFB1A700920E85 /* water-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "water-button.png"; path = "Images/Buttons/water-button.png"; sourceTree = "<group>"; };
 		E4EEE60A1AEFB1A700920E85 /* materialen-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "materialen-button.png"; path = "Images/Buttons/materialen-button.png"; sourceTree = "<group>"; };
@@ -238,7 +246,7 @@
 		E4EEE60C1AEFB1A700920E85 /* default-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "default-button.png"; path = "Images/Buttons/default-button.png"; sourceTree = "<group>"; };
 		E4EEE60D1AEFB1A700920E85 /* black-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "black-button.png"; path = "Images/Buttons/black-button.png"; sourceTree = "<group>"; };
 		E4FAE6CA1B01F9490061F9D1 /* QuizScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizScoreViewController.swift; path = Teacher/QuizScoreViewController.swift; sourceTree = "<group>"; };
-		E4FAE6CC1B0216CB0061F9D1 /* QuizSendScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizSendScoreViewController.swift; path = Teacher/QuizSendScoreViewController.swift; sourceTree = "<group>"; };
+		E4FAE6CC1B0216CB0061F9D1 /* QuizSendScoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = QuizSendScoreViewController.swift; path = Teacher/QuizSendScoreViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E4FAE6CE1B0218430061F9D1 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		E4FD960B1AFFB6B7007EFB0A /* AnalogClockHandView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnalogClockHandView.swift; path = Classes/Clock/AnalogClockHandView.swift; sourceTree = "<group>"; };
 		E4FD960C1AFFB6B7007EFB0A /* AnalogClockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnalogClockView.swift; path = Classes/Clock/AnalogClockView.swift; sourceTree = "<group>"; };
@@ -595,6 +603,10 @@
 			children = (
 				E44FE91B1ADD3BFD006DD395 /* spot.png */,
 				E4FE16921B0F4FAB008E0278 /* plattegrondbgverkenning.jpg */,
+				E4A34A1D1B1C4DBA00A8EBC5 /* framebushbottom.png */,
+				E4A34A1F1B1C4EBE00A8EBC5 /* framebushleft.png */,
+				E4A34A211B1C4F5600A8EBC5 /* framebushtop.png */,
+				E4A34A231B1C4F8E00A8EBC5 /* framebushright.png */,
 			);
 			name = Explorer;
 			sourceTree = "<group>";
@@ -751,7 +763,9 @@
 				E4C84D521AEF8DB600A208EF /* speedletter-regular.ttf in Resources */,
 				E4EEE6021AEF9E6100920E85 /* element-01-180.png in Resources */,
 				E4EEE5FA1AEF9D9400920E85 /* element-06.png in Resources */,
+				E4A34A1E1B1C4DBA00A8EBC5 /* framebushbottom.png in Resources */,
 				E43809791B0B573D0030B792 /* score-water.png in Resources */,
+				E4A34A241B1C4F8E00A8EBC5 /* framebushright.png in Resources */,
 				E44FE9261ADE7AF4006DD395 /* stenden-2.gpx in Resources */,
 				E44FE90B1ADD2117006DD395 /* bushbush.png in Resources */,
 				E4DEEB581AF11118002B6434 /* Materiaal-pin.png in Resources */,
@@ -777,6 +791,8 @@
 				E4DEEB591AF11118002B6434 /* Water-pin.png in Resources */,
 				E43809781B0B573D0030B792 /* score-energie.png in Resources */,
 				E438097F1B0C90130030B792 /* element-dierenwelzijn.png in Resources */,
+				E4A34A221B1C4F5600A8EBC5 /* framebushtop.png in Resources */,
+				E4A34A201B1C4EBE00A8EBC5 /* framebushleft.png in Resources */,
 				E43809831B0CB2C00030B792 /* Dierenwelzijn-pin.png in Resources */,
 				E4AA96051B0A067600B3AAC3 /* Dierenwelzijn-header.png in Resources */,
 				E44FE90F1ADD2117006DD395 /* logo_wildlands.png in Resources */,

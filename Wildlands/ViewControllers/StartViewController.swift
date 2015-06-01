@@ -21,9 +21,9 @@ class StartViewController: UIViewController {
 
         // Custom Wildlands elementen maken
         backgroundView.layer.insertSublayer(WildlandsGradient.greenGradient(forBounds: self.view.bounds), atIndex: 0)
-        verkenButton = WildlandsButton.createButtonWithImage(named: "element-18", forButton: verkenButton)
-        quizButton = WildlandsButton.createButtonWithImage(named: "element-18", forButton: quizButton)
-        infoButton = WildlandsButton.createButtonWithImage(named: "element-18", forButton: infoButton)
+        verkenButton = WildlandsButton.createButtonWithImage(named: "default-button", forButton: verkenButton)
+        quizButton = WildlandsButton.createButtonWithImage(named: "default-button", forButton: quizButton)
+        infoButton = WildlandsButton.createButtonWithImage(named: "default-button", forButton: infoButton)
         
     }
 
@@ -32,6 +32,8 @@ class StartViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        
+        UIApplication.sharedApplication().idleTimerDisabled = true
         
         UIView.animateWithDuration(1.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.8, options: nil, animations: {
             

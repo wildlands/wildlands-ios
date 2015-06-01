@@ -13,8 +13,6 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
     @IBOutlet weak var kaartScrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
-    @IBOutlet weak var bottomView: UIImageView!
-    
     var pinpoints: [Pinpoint] = []
     var blackScreen: UIView = UIView()
     var currentPosition: UIImageView = UIImageView()
@@ -77,28 +75,6 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
                 position.frame = CGRectMake(CGFloat(currentX) * zoomScale - 12.5, CGFloat(currentY) * zoomScale - 12.5, 25, 25)
                 
             }
-            
-        }
-        
-    }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        
-        if (scrollView.contentOffset.x > 500) {
-            
-            UIView.transitionWithView(bottomView, duration:0.5, options: UIViewAnimationOptions.TransitionCrossDissolve , animations: {
-                
-                self.bottomView.image = UIImage(named: "iceicebaby.png")
-                
-            }, completion: nil)
-            
-        } else {
-            
-            UIView.transitionWithView(bottomView, duration:0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-                
-                self.bottomView.image = UIImage(named: "bushbush.png")
-                
-            }, completion: nil)
             
         }
         

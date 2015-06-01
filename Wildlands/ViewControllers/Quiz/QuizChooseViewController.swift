@@ -20,10 +20,13 @@ class QuizChooseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Disable iPhone auto lock, otherwise we lose our Socket.IO connection
+        UIApplication.sharedApplication().idleTimerDisabled = true
+        
         backgroundView.layer.insertSublayer(WildlandsGradient.grayGradient(forBounds: view.bounds), atIndex: 0)
         
-        leerlingButton = WildlandsButton.createButtonWithImage(named: "element-18", forButton: leerlingButton)
-        docentButton = WildlandsButton.createButtonWithImage(named: "element-18", forButton: docentButton)
+        leerlingButton = WildlandsButton.createButtonWithImage(named: "default-button", forButton: leerlingButton)
+        docentButton = WildlandsButton.createButtonWithImage(named: "default-button", forButton: docentButton)
         
         disableButtons()
         
@@ -32,6 +35,9 @@ class QuizChooseViewController: UIViewController {
         socket?.on("connect", callback: socketConnected)
         
         delegate.connectIfNotConnected()
+        if delegate.isSocketConnected() {
+            socketConnected(nil, ack: nil)
+        }
         
     }
 

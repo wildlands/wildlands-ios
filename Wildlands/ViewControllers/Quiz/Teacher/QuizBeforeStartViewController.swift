@@ -31,7 +31,7 @@ class QuizBeforeStartViewController: UIViewController, UITableViewDelegate, UITa
         let background: UIImage = UIImage(named: "black-button")!.resizableImageWithCapInsets(UIEdgeInsetsMake(6, 6, 6, 6), resizingMode: UIImageResizingMode.Stretch)
         quizCodeLabelBackground.image = background
         
-        startQuizButton = WildlandsButton.createButtonWithImage(named: "element-18", forButton: startQuizButton)
+        startQuizButton = WildlandsButton.createButtonWithImage(named: "default-button", forButton: startQuizButton)
         
         let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         socket = delegate.socket

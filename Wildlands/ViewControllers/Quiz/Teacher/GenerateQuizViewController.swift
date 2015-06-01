@@ -23,7 +23,7 @@ class GenerateQuizViewController: UIViewController {
 
         backgroundView.layer.insertSublayer(WildlandsGradient.grayGradient(forBounds: view.bounds), atIndex: 0)
         
-        genereerButton = WildlandsButton.createButtonWithImage(named: "element-18", forButton: genereerButton)
+        genereerButton = WildlandsButton.createButtonWithImage(named: "default-button", forButton: genereerButton)
         
         let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         socket = delegate.socket
