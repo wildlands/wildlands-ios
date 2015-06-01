@@ -36,7 +36,7 @@
 "quizDoesNotExists" = "Quiz bestaat niet...";
 "quizNoQuestionsFound" = "Er zijn geen vragen gevonden...";
 "quizAbortedTitle" = "Quiz afgelopen";
-"quizAbortedTest" = "De quiz is vroegtijdig gestopt...";
+"quizAbortedText" = "De quiz is vroegtijdig gestopt...";
 
 // Score
 "scoreTitle1" = "Slecht";
