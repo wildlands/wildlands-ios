@@ -19,17 +19,17 @@ enum DownloadType: String {
 protocol JSONDownloaderDelegate {
     
     /**
-     * Returns the response of the server in a object
-     *
-     * @param response      The response, can be any object
+        Returns the response of the server in a object
+    
+        :param: response        The response, can be any object
      */
     func JSONDownloaderSuccess(response: AnyObject)
     
     /**
-     * Is called when the JSON download failed
-     *
-     * @param message       A message with a description of the error
-     * @param type          The DownloadType that failed
+        Is called when the JSON download failed
+    
+        :param: message         A message with a description of the error
+        :param: type            The DownloadType that failed
      */
     func JSONDownloaderFailed(message: String, type: DownloadType)
     
@@ -46,10 +46,10 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
     var imageURLs: [String] = []
 
     
-    /*
-     * Start downloading JSON from server
-     *
-     * @param DownloadType      The type of download
+    /**
+        Start downloading JSON from server
+    
+        :param: DownloadType        The type of download
      */
     func downloadJSON(type: DownloadType) {
         
@@ -57,18 +57,19 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
         jsonArray = nil
         data = NSMutableData()
         
-        // Spinner in statusbar inschakelen
+        // Add spinner in the statsubar
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
         let urlString = baseURL + type.rawValue
         var url = NSURL(string: urlString)
         var request = NSURLRequest(URL: url!)
+        // Start the connection
         var connection = NSURLConnection(request: request, delegate: self)
         
     }
     
-    /*
-     * Received data from the server
+    /**
+        Received data from the server
      */
     func connection(connection: NSURLConnection, didReceiveData data: NSData) {
         
@@ -76,14 +77,15 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
         
     }
     
-    /*
-     * Downloading from the server failed
+    /**
+        Downloading from the server failed
      */
     func connection(connection: NSURLConnection, didFailWithError error: NSError) {
         
-        // Spinner uitzetten
+        // Remove spinner from the statusbar
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         
+        // Send message to delegate that download failed
         delegate?.JSONDownloaderFailed(error.localizedDescription, type: currentType!)
         
     }
@@ -94,20 +96,23 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         
         var error: NSError?
-        // Data omzetten in JSON
+        // Convert NS data to NSDictionary or NSArray
         jsonArray = NSJSONSerialization.JSONObjectWithData(self.data, options: NSJSONReadingOptions.MutableContainers, error: &error)
         
+        // If response from server is a dictionary it probably is a error
         if let jsonError = jsonArray as? NSDictionary {
             
             if jsonError.objectForKey("error") != nil {
             
                 delegate?.JSONDownloaderFailed(jsonError.objectForKey("error") as! String, type: currentType!)
-                return;
+                // Prevent function from going on
+                return
                 
             }
             
         }
         
+        // Check the downloadType and call the right function
         if (currentType == DownloadType.DOWNLOAD_PINPOINTS) {
             
             processPinPoints()
@@ -128,10 +133,10 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
         
     }
     
-    /*
-     * Convert JSON to Pinpoint objects
-     *
-     * @delegate    Array with Pinpoint objects
+    /**
+        Convert JSON to Pinpoint objects.
+    
+        :delegate:      Array with Pinpoint objects
      */
     func processPinPoints() {
         
@@ -186,6 +191,7 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
                     
                 }
                 
+                // Add a trigger rectangle for GPS
                 var rect = CGRectMake(thePinpoint.xPos - 40, thePinpoint.yPos - 40, 80, 80)
                 thePinpoint.trigger = rect
                 
@@ -196,10 +202,16 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
             
         }
         
+        // Send our pinpoints to are delegate
         delegate?.JSONDownloaderSuccess(pinPoints)
         
     }
     
+    /**
+        Process questions.
+
+        :delegate:      Array with Question objects
+     */
     func processQuestions() {
         
         var questions: [Question] = []
@@ -211,6 +223,7 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
                 let dict = deVraag as! NSMutableDictionary
                 // Make a new Question object
                 var eenVraag: Question = Question()
+                eenVraag.id = dict.objectForKey("id") as! Int
                 eenVraag.text = dict.objectForKey("text") as! String
                 eenVraag.imageURL = dict.objectForKey("image") as! String
                 // Add images to the images array so they can be downloaded
@@ -251,10 +264,16 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
             
         }
         
+        // Send our questions to the delegate
         delegate?.JSONDownloaderSuccess(questions)
         
     }
     
+    /**
+        Process database checksum.
+
+        :delegate:      Int with database checksum
+     */
     func processDatabaseChecksum() {
         
         var checksum: Int = 0
@@ -265,10 +284,16 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
             
         }
         
+        // Send our checksum to the delegate
         delegate?.JSONDownloaderSuccess(checksum)
         
     }
     
+    /**
+        Process the levels.
+    
+        :delegate:      Array with Level objects
+     */
     func processLevels() {
         
         var levels: [Level] = []
@@ -289,6 +314,7 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
             
         }
         
+        // Send levels to the delegate
         delegate?.JSONDownloaderSuccess(levels)
         
     }

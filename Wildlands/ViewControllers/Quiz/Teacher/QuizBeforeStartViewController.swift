@@ -37,6 +37,7 @@ class QuizBeforeStartViewController: UIViewController, UITableViewDelegate, UITa
         socket = delegate.socket
         
         socket?.on("somebodyJoined", callback: somebodyJoined)
+        socket?.on("somebodyLeaved", callback: somebodyLeaved)
         
     }
 
@@ -49,6 +50,23 @@ class QuizBeforeStartViewController: UIViewController, UITableViewDelegate, UITa
         
         if let naam = data?[0].objectForKey("naam") as? String {
             deelnemers.append(naam)
+            tableView.reloadData()
+        }
+        
+    }
+    
+    func somebodyLeaved(data: NSArray?, ack: AckEmitter?) {
+        
+        if let naam = data?[0].objectForKey("naam") as? String {
+            
+            // Loop through all the participants so far
+            for (index, deelnemer) in enumerate(deelnemers) {
+                if deelnemer == naam {
+                    deelnemers.removeAtIndex(index)
+                    break;
+                }
+            }
+            
             tableView.reloadData()
         }
         

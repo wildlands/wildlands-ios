@@ -29,13 +29,6 @@ class WaitForQuizStartViewController: UIViewController {
         let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         socket = delegate.socket
         
-        if let theSocket = socket {
-            if theSocket.connected {
-                println("We zijn verbonden...")
-            }
-            theSocket.on("startTheQuiz", callback: startQuiz)
-        }
-        
         updateClock()
         
         
@@ -43,6 +36,23 @@ class WaitForQuizStartViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        if let theSocket = socket {
+            if theSocket.connected {
+                println("We zijn verbonden...")
+            }
+            theSocket.on("startTheQuiz", callback: startQuiz)
+        }
+    
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        
+        socket?.off("startTheQuiz")
+        
     }
     
     // MARK: - Socket IO
@@ -54,7 +64,6 @@ class WaitForQuizStartViewController: UIViewController {
             quizLevel = level
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             self.performSegueWithIdentifier("goToTheQuiz", sender: self)
-            socket?.off("startTheQuiz")
             
         }
         
@@ -80,6 +89,12 @@ class WaitForQuizStartViewController: UIViewController {
     
     // MARK: - Button actions
     @IBAction func cancelJoining(sender: AnyObject) {
+        
+        var json = [
+            "naam" : Utils.openObjectFromDisk(forKey: "quizName") as! String,
+            "quizID" : Utils.openObjectFromDisk(forKey: "quizCode") as! String
+        ]
+        socket?.emit("leaveQuiz", json)
         
         self.navigationController?.popViewControllerAnimated(false)
         

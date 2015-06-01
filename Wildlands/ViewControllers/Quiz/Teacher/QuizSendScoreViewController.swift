@@ -14,7 +14,7 @@ class QuizSendScoreViewController: UIViewController, MFMailComposeViewController
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var verstuurButton: UIButton!
     
-    var deelnemers = [String: Int]()
+    var deelnemers = [String: [Score]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,15 @@ class QuizSendScoreViewController: UIViewController, MFMailComposeViewController
             var body = "Uitslagen \n\n"
             for (naam, score) in deelnemers {
                 
-                body += "\(naam) : \(score) \n"
+                var theScore = ScoreCalculator.calculateScore(score)
+                
+                body += "\(naam) \n"
+                body += "Energie: \(theScore.energieGoed) van \(theScore.energieTotaal) \n"
+                body += "Water: \(theScore.waterGoed) van \(theScore.waterTotaal) \n"
+                body += "Materiaal: \(theScore.materiaalGoed) van \(theScore.materiaalTotaal) \n"
+                body += "Bio Mimicry: \(theScore.biomimicryGoed) van \(theScore.biomimicryTotaal) \n"
+                body += "Dierenwelzijn: \(theScore.dierenwelzijnGoed) van \(theScore.dierenwelzijnTotaal) \n"
+                body += "TOTAAL: \(theScore.totaalGoed) van \(theScore.totaal) \n\n"
                 
             }
         

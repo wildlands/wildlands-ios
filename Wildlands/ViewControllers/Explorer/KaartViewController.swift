@@ -45,8 +45,21 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
         currentPosition.frame = CGRectMake(0, 0, 25, 25)
         kaartScrollView.addSubview(currentPosition)
         
-        pinpoints = Utils.openObjectFromDisk(forKey: "pinpoints") as! [Pinpoint]
-        addPinPoints()
+        // Check if Pinpoints are available from disk
+        if let pins = Utils.openObjectFromDisk(forKey: "pinpoints") as? [Pinpoint] {
+            
+            // We found pinpoints, lets place them on the map
+            pinpoints = pins
+            addPinPoints()
+            
+        } else {
+            
+            // No Pinpoints found, show alert
+            var alert = JSSAlertView()
+            let icon = Utils.fontAwesomeToImageWith(string: "\u{f00d}", andColor: UIColor.whiteColor())
+            alert.show(self, title: NSLocalizedString("error", comment: "").uppercaseString, text: NSLocalizedString("explorerNoPinpoints", comment: ""), buttonText: NSLocalizedString("oke", comment: ""), cancelButtonText: nil, color: UIColorFromHex(0xc1272d, alpha: 1), iconImage: icon, delegate: nil)
+            
+        }
         
     }
     
@@ -81,6 +94,10 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
     }
     
     // MARK: - Pinpoints
+    
+    /**
+        Add the Pinpoints to the map
+     */
     func addPinPoints() {
         
         let zoomScale: CGFloat = kaartScrollView.zoomScale
@@ -120,12 +137,22 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
         
     }
     
+    /**
+        Action when a Pinpoint is pressed
+    
+        :param: sender          The button who sends the action
+     */
     func pinPointPressed(sender: UIButton!) {
         
         openPinpointWithID(sender.tag)
         
     }
     
+    /**
+        Open a popup with content from a Pinpoint with an ID.
+
+        :param: id              The ID from the Pinpoint
+     */
     func openPinpointWithID(id: Int) {
         
         popupOpen = true
@@ -140,12 +167,14 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
             
         })
         
+        // Create the popUp
         let popUp: PopupView = PopupView(aPinpoint: pinpoints[id])
         popUp.delegate = self
         popUp.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.001, 0.001)
         popUp.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.view.addSubview(popUp)
         
+        // Add the constraints to the popUp
         let bindings = ["popUp" : popUp]
         var format: String = "H:|-20-[popUp]-20-|"
         var constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: bindings)
@@ -157,6 +186,7 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
         
         self.view.addConstraints(constraints)
         
+        // Animate the popUp into the screen
         UIView.animateWithDuration(0.3/1.5, animations: {
             
             popUp.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1)
@@ -182,6 +212,7 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
     }
     
     // MARK: - Popup Delegate
+    
     func popUpDidDismiss() {
         
         blackScreen.removeFromSuperview()
@@ -190,26 +221,36 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
     }
     
     // MARK: - GPS
+    
+    /**
+        Is called from the WildlandsGPSDelegate.
+        See WildlandsGPS.swift
+    */
     func didReceiveNewCoordinates(x: Int, y: Int) {
         
         let zoomScale: CGFloat = kaartScrollView.zoomScale
         
+        // Animate the spot to the new location
         UIView.animateWithDuration(0.5, animations: {
         
             self.currentPosition.frame = CGRectMake((CGFloat(x) * zoomScale) - 12.5, (CGFloat(y) * zoomScale) - 12.5, 25, 25)
         
         });
         
+        // Save the coordinates
         currentX = x
         currentY = y
         
         let coordinate: CGPoint = CGPointMake(CGFloat(x), CGFloat(y))
         
         var i = 0
+        // Check if the current position on the map is in a trigger area from a Pinpoint
         for eenPinpoint: Pinpoint in pinpoints {
             
+            // Current position is in Pinpoint area, so open the popUp
             if CGRectContainsPoint(eenPinpoint.trigger, coordinate) {
                 
+                // Only open popUp if non is opened
                 if !popupOpen && i != lastPinpoint {
                 
                     openPinpointWithID(i)
@@ -226,6 +267,12 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
     }
     
     // MARK: - Button functions
+    
+    /**
+        Go back to previous ViewController (in this case: ChooseSubjectViewController).
+    
+        :param: sender          The object that send the request
+     */
     @IBAction func goBack(sender: AnyObject) {
         
         self.navigationController?.popViewControllerAnimated(true)

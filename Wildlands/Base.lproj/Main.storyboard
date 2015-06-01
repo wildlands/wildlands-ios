@@ -468,16 +468,25 @@
                                                     <action selector="goToGenerateQuiz:" destination="mfR-Gb-SjX" eventType="touchUpInside" id="KGJ-dW-r6v"/>
                                                 </connections>
                                             </button>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="GzD-8L-8C6">
+                                                <rect key="frame" x="290" y="241" width="20" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="J7V-Yi-Uhv"/>
+                                                    <constraint firstAttribute="width" constant="20" id="fS5-rb-K3F"/>
+                                                </constraints>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="centerX" secondItem="0yV-33-URR" secondAttribute="centerX" id="4qK-Ba-SyI"/>
                                             <constraint firstItem="Av5-Jw-fy5" firstAttribute="top" secondItem="2Rr-ey-2ei" secondAttribute="bottom" constant="25" id="74w-1g-P9U"/>
+                                            <constraint firstItem="GzD-8L-8C6" firstAttribute="top" secondItem="Av5-Jw-fy5" secondAttribute="bottom" constant="16" id="LG7-J1-7eS"/>
                                             <constraint firstAttribute="trailing" secondItem="2Rr-ey-2ei" secondAttribute="trailing" constant="16" id="O9S-R9-WuZ"/>
                                             <constraint firstItem="2Rr-ey-2ei" firstAttribute="leading" secondItem="WuW-WB-aQA" secondAttribute="leading" constant="16" id="Rhp-N7-m0J"/>
                                             <constraint firstItem="0yV-33-URR" firstAttribute="top" secondItem="WuW-WB-aQA" secondAttribute="top" constant="25" id="YL0-Hg-j0y"/>
                                             <constraint firstAttribute="bottom" secondItem="Av5-Jw-fy5" secondAttribute="bottom" constant="50" id="awi-bH-Vji"/>
                                             <constraint firstItem="0yV-33-URR" firstAttribute="leading" secondItem="WuW-WB-aQA" secondAttribute="leading" constant="16" id="bTH-vD-c97"/>
                                             <constraint firstItem="2Rr-ey-2ei" firstAttribute="top" secondItem="0yV-33-URR" secondAttribute="bottom" constant="25" id="e1F-Ta-Ni5"/>
+                                            <constraint firstAttribute="centerX" secondItem="GzD-8L-8C6" secondAttribute="centerX" id="gOY-Wt-woj"/>
                                             <constraint firstItem="Av5-Jw-fy5" firstAttribute="leading" secondItem="WuW-WB-aQA" secondAttribute="leading" constant="16" id="raQ-gI-Rg5"/>
                                             <constraint firstAttribute="trailing" secondItem="0yV-33-URR" secondAttribute="trailing" constant="16" id="xhU-sB-dUb"/>
                                             <constraint firstAttribute="trailing" secondItem="Av5-Jw-fy5" secondAttribute="trailing" constant="16" id="z3k-vZ-9b7"/>
@@ -542,6 +551,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Tid-xV-Oka"/>
                     <connections>
+                        <outlet property="activitySpinner" destination="GzD-8L-8C6" id="7QC-IF-Wd2"/>
                         <outlet property="backgroundView" destination="EIe-GQ-ApZ" id="zcc-nk-nLY"/>
                         <outlet property="docentButton" destination="Av5-Jw-fy5" id="EUo-nM-wKX"/>
                         <outlet property="leerlingButton" destination="2Rr-ey-2ei" id="xfZ-QD-hjS"/>
@@ -1952,7 +1962,7 @@ CONTENT...</string>
                                     <constraint firstAttribute="bottom" secondItem="eMU-sh-VCV" secondAttribute="bottom" id="yEg-7r-wEO"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="k5k-aa-4hT">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="k5k-aa-4hT">
                                 <rect key="frame" x="290" y="65" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="BOU-FT-zbq"/>
@@ -1994,6 +2004,7 @@ CONTENT...</string>
                     </view>
                     <navigationItem key="navigationItem" id="hvP-Gu-ffW"/>
                     <connections>
+                        <outlet property="activitySpinner" destination="k5k-aa-4hT" id="U1H-B2-dhA"/>
                         <outlet property="backgroundView" destination="tKV-G8-RAe" id="4Kd-N9-y7Z"/>
                         <outlet property="bushbushView" destination="ReR-Nh-aGc" id="o8a-WJ-cvX"/>
                         <outlet property="progressBar" destination="eMU-sh-VCV" id="1xW-Ie-Deg"/>

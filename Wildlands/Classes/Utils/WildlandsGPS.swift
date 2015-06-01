@@ -11,6 +11,14 @@ import CoreLocation
 
 protocol WildlandsGPSDelegate {
     
+    /**
+        Convert GPS coordinates to X and Y points for our Wildlands Map.
+        
+        :param: latitude        The latitude from the GPS
+        :param: longitude       The longitude from the GPS
+        
+        :returns:               The X and Y position for the Wildlands Map
+    */
     func didReceiveNewCoordinates(x: Int, y: Int)
     
 }
@@ -20,12 +28,14 @@ class WildlandsGPS: NSObject, CLLocationManagerDelegate {
     var locationManager: CLLocationManager = CLLocationManager()
     var delegate: WildlandsGPSDelegate?
 
+    // Coordinates from Wildlands Map
     let top = 52.778749
     let left = 6.910379
     
     let bottom = 52.777664
     let right = 6.913659
     
+    // Size from the map in the App
     let internalMapWidth = 2500.00
     let internalMapHeight = 2392.00
     

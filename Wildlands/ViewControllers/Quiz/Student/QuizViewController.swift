@@ -15,18 +15,19 @@ import SDWebImage
 class QuizViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, JSSAlertViewDelegate {
     
     @IBOutlet var backgroundView: UIView!
+    // The view above the gradient (with bush shape)
     @IBOutlet weak var bushbushView: UIImageView!
     @IBOutlet weak var questionImageView: UIImageView!
+    @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
 
-    var data: NSMutableData = NSMutableData()
     var questions: [Question] = []
     var currentQuestion: Int = 0
-    var goodAnswerd: Int = 0
     
     var socket: SocketIOClient?
     
-    var quizTimer: NSTimer?
+    var quizTimer: NSTimer = NSTimer()
     
+    // Placeholder for the score
     var endScore: [Score] = []
     
     var quizLevel: Int = 0
@@ -52,32 +53,32 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.backgroundColor = UIColor.clearColor()
         
         questionImageView.clipsToBounds = true
-        questionImageView.contentMode = .ScaleAspectFit;
+        questionImageView.contentMode = .ScaleAspectFill;
         
         progressBar.progress = 1.0
         
+        // Set the quiz timer
         quizTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateProgressbar", userInfo: nil, repeats: true)
         
         let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         socket = delegate.socket
         
-        // Controleren of er vragen zijn
-        if Utils.openObjectFromDisk(forKey: "questions") as? [Question] != nil {
+        socket?.on("quizAborted", callback: quizAborted)
+        
+        // Check if there are any Questions on the disk
+        if let sortQuestions = Utils.openObjectFromDisk(forKey: "questions") as? [Question] {
             
-            var sortQuestions = Utils.openObjectFromDisk(forKey: "questions") as! [Question]
+            // Select the questions with the same level is the quiz
+            questions = sortQuestions.filter() { $0.levelID == self.quizLevel }
+            // Sort the questions by ID
+            questions.sort({ $0.id < $1.id })
             
-            for theQuestion in sortQuestions {
-                
-                if theQuestion.levelID == quizLevel {
-                    questions.append(theQuestion)
-                }
-                
-            }
-            
+            // Lets go!
             showQuestion()
             
         } else {
             
+            // No questions have been found, show a alert
             var image: UIImage = Utils.fontAwesomeToImageWith(string: "\u{f00d}", andColor: UIColor.whiteColor())
             var alert = JSSAlertView().show(
                 self,
@@ -96,23 +97,53 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.didReceiveMemoryWarning()
     }
     
+    // MARK: - Socket.IO
+    
+    /**
+        Function is called by Socket.IO if quiz is aborted.
+
+        :param: data        Data send by the Socket
+        :param: ack         Acknowledend
+     */
+    func quizAborted(data: NSArray?, ack: AckEmitter?) {
+        
+        // Alert
+        var alert = JSSAlertView()
+        let icon = Utils.fontAwesomeToImageWith(string: "\u{f127}", andColor: UIColor.whiteColor())
+        alert.show(self, title: NSLocalizedString("quizAbortedTitle", comment: "").uppercaseString, text: NSLocalizedString("quizAbortedText", comment: ""), buttonText: NSLocalizedString("helaas", comment: ""), cancelButtonText: nil, color: UIColorFromHex(0xc1272d, alpha: 1), iconImage: icon, delegate: nil)
+        
+    }
+    
     // MARK: - Quiz functions
+    
+    /**
+        Shows the next question
+     */
     func showQuestion() {
         
+        // End the quiz if it is the last question
         if currentQuestion > questions.count - 1 {
             
+            quizTimer.invalidate()
+            
+            // Go to QuizDidEndViewController
             self.performSegueWithIdentifier("quizIsOver", sender: self)
+            
+            // Stop the function
             return
             
         }
         
+        // Put the current question in the label
         var komtIe: Question = questions[currentQuestion] as Question
         vraagLabel.text = komtIe.text
         vraagLabel.numberOfLines = 0
         vraagLabel.sizeToFit()
         
+        // Enable the tableView again so the user can give an answer
         tableView.userInteractionEnabled = true
-            
+        
+        // Remove the current background gradient
         var layer: CALayer = backgroundView.layer.valueForKey("gradient") as! CALayer
         layer.removeFromSuperlayer()
         backgroundView.layer.setValue(nil, forKey: "gradient")
@@ -120,6 +151,7 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
         var gradient: CAGradientLayer = CAGradientLayer()
         gradient.frame = view.bounds
         
+        // Color the background depending on the question theme
         if komtIe.typeName == "Bio Mimicry" {
             bushbushView.image = UIImage(named: "element-05.png")
             gradient.colors = WildlandsGradient.biomimicryColors()
@@ -142,11 +174,20 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
             gradient.colors = WildlandsGradient.dierenwelzijnColors()
         }
         
+        // Add the gradient to the background
         backgroundView.layer.insertSublayer(gradient, atIndex: 0)
         backgroundView.layer.setValue(gradient, forKey: "gradient")
+        
+        // Reload the answers in the tableView
         tableView.reloadData()
         
-        questionImageView.sd_setImageWithURL(NSURL(string: komtIe.imageURL))
+        // Get the question image
+        activitySpinner.startAnimating()
+        questionImageView.sd_setImageWithURL(NSURL(string: komtIe.imageURL), completed: { (image: UIImage!, error: NSError!, cacheType: SDImageCacheType, url: NSURL!) -> Void in
+            
+            self.activitySpinner.stopAnimating()
+            
+        })
         
     }
     
@@ -160,6 +201,7 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let hetAntwoord: Answer = deVraag.answers[indexPath.row]
         
+        // Get labels from the custom cell
         var label: UILabel? = cell.viewWithTag(1) as? UILabel
         var view: UIView? = cell.viewWithTag(2)
         
@@ -191,6 +233,9 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     }
     
+    /**
+        Answer is pressed
+     */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let antwoord: Answer = questions[currentQuestion].answers[indexPath.row]
@@ -198,6 +243,7 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         var view: UIView? = cell!.viewWithTag(2)
         
+        // Make the choosen cell yellow
         UIView.animateWithDuration(0.5, animations: {
             
             view?.backgroundColor = Colors.geel
@@ -207,17 +253,20 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
         var goodAnswer: Bool = false
         if antwoord.isRightAnswer {
             
-            goodAnswerd += 1
             goodAnswer = true
             
         } else {
             
+            // Wrong answer, viberate the iPhone
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             
         }
+        
+        // Disable tableView, so user can't give more than one answers
         tableView.userInteractionEnabled = false
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
+        // Make a JSON object for sending
         var json = [
         
             "naam" : Utils.openObjectFromDisk(forKey: "quizName") as! String,
@@ -226,9 +275,10 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
             "quizID" : Utils.openObjectFromDisk(forKey: "quizCode") as! String
         ]
         
+        // Send the JSON object to the teacher
         socket?.emit("sendAnswer", json)
         
-        // Maak nieuwe Score object aan voor uitslag
+        // Make an new Score object
         let score = Score()
         score.question = questions[currentQuestion]
         score.correctlyAnswerd = goodAnswer
@@ -236,6 +286,8 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         currentQuestion = currentQuestion + 1
         var nextQuestion = [currentQuestion]
+        
+        // Wait 1 second before going to the next question
         var timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: Selector("showQuestion"), userInfo: nil, repeats: false)
         
     }
@@ -246,36 +298,41 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        
-        if buttonIndex == 0 {
-            
-            navigationController?.popToRootViewControllerAnimated(true)
-            
-        }
-        
-    }
-    
     // MARK: - Button functions
+    
+    /**
+        Go back to the previous ViewController (in this case QuizChooseViewController).
+     */
     @IBAction func goBackButton(sender: AnyObject) {
         
+        quizTimer.invalidate()
         navigationController?.popToRootViewControllerAnimated(true)
         
     }
     
     // MARK: - Timer Bar
+    
+    /**
+        Update the progressBar, so the user can see how many time is left.
+     */
     func updateProgressbar() {
         
+        // Get duration from quiz
         var duration = Float(Utils.openObjectFromDisk(forKey: "quizDuration") as! Int) * 60.0
         
+        // Calculate bar length
         var step: Float = 1.0 / duration
         var newValue = self.progressBar.progress - step
         progressBar.setProgress(newValue, animated: true)
         
+        // There is no time left
         if newValue <= 0 {
             
+            // Disable timer
+            quizTimer.invalidate()
+            
+            // Go the QuizDidEndViewController
             self.performSegueWithIdentifier("quizIsOver", sender: self)
-            quizTimer?.invalidate()
             
         }
         

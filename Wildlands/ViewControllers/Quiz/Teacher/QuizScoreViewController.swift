@@ -19,7 +19,9 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
     
     var socket: SocketIOClient?
     
-    var deelnemers = [String: Int]()
+    var deelnemers = [String: [Score]]()
+    
+    var theQuestions: [Question] = []
     
     override func viewDidLoad() {
         
@@ -34,6 +36,17 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
         
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateProgress", userInfo: nil, repeats: true)
         
+        let currentLevel = Utils.openObjectFromDisk(forKey: "currentLevel") as! Level
+        
+        if let questions = Utils.openObjectFromDisk(forKey: "questions") as? [Question] {
+            
+            // Filter the questions
+            theQuestions = questions.filter() { $0.levelID == currentLevel.id }
+            // Sort the questions
+            theQuestions.sort({ $0.id < $1.id })
+        
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,15 +56,23 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK: - Socket IO
     func answerReceived(data: NSArray?, ack: AckEmitter?) {
         
-        if let naam = data?[0].objectForKey("naam") as? String, goed = data?[0].objectForKey("goed") as? Bool {
+        if let naam = data?[0].objectForKey("naam") as? String, goed = data?[0].objectForKey("goed") as? Bool, questionID = data?[0].objectForKey("vraag") as? Int {
             
+            // Make Score object
+            var score: Score = Score()
+            score.question = theQuestions[questionID-1]
+            score.correctlyAnswerd = goed
+            
+            // If participant doesn't exists in our array yet
             if (deelnemers[naam] == nil) {
-                deelnemers[naam] = 0
+                deelnemers[naam] = []
             }
             
-            if (goed) {
-                deelnemers[naam]! += 1
-            }
+            // Append current score to the score
+            var currentScore: [Score] = deelnemers[naam]!
+            currentScore.append(score)
+            deelnemers[naam] = currentScore
+
             tableView.reloadData()
         }
         
@@ -74,8 +95,11 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
         var nameLabel: UILabel? = cell.viewWithTag(1) as? UILabel
         var scoreLabel: UILabel? = cell.viewWithTag(2) as? UILabel
         
+        var score: [Score] = deelnemers[rowKey]!
+        var goodAnswerd = score.filter() { $0.correctlyAnswerd == true }
+        
         nameLabel?.text = rowKey
-        scoreLabel?.text = "\(deelnemers[rowKey]!)/10 "
+        scoreLabel?.text = "\(goodAnswerd.count)/\(theQuestions.count)"
         
         return cell
         
@@ -92,6 +116,10 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
         
         if newValue <= 0 {
             
+            // Stop the quiz timer
+            timer.invalidate()
+            
+            // Time is over, go to the score
             self.performSegueWithIdentifier("goToQuizDidEnd", sender: self)
             
         }
@@ -114,6 +142,12 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
     @IBAction func cancelTheQuiz(sender: AnyObject) {
     
         timer.invalidate()
+        
+        var json = [
+            "quizID" : Utils.openObjectFromDisk(forKey: "quizCode") as! String
+        ]
+        
+        socket?.emit("abortQuiz", json)
         self.navigationController?.popViewControllerAnimated(false)
         
     }

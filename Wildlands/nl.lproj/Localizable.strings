@@ -13,6 +13,10 @@
 "select" = "Selecteer";
 "goForward" = "Ga verder";
 "again" = "Opnieuw";
+"error" = "Error";
+
+// Explorer
+"explorerNoPinpoints" = "Er zijn geen pinpoints gevonden... Start de App opnieuw op om de content opnieuw te downloaden.";
 
 // Downloaden
 "downloadPinpoints" = "Downloaden\npinpoints...";
@@ -28,8 +32,11 @@
 
 // Quiz
 "quiz" = "Quiz";
+"quizCantConnect" = "Kon geen verbinding maken met de quiz server.";
 "quizDoesNotExists" = "Quiz bestaat niet...";
 "quizNoQuestionsFound" = "Er zijn geen vragen gevonden...";
+"quizAbortedTitle" = "Quiz afgelopen";
+"quizAbortedTest" = "De quiz is vroegtijdig gestopt...";
 
 // Score
 "scoreTitle1" = "Slecht";

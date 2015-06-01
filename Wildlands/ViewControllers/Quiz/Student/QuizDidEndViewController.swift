@@ -25,6 +25,7 @@ class QuizDidEndViewController: UIViewController {
 
         backgroundView.layer.insertSublayer(WildlandsGradient.greenGradient(forBounds: view.bounds), atIndex: 0)
         
+        // Only calculate score if there are any answered questions
         if endScore.count > 0 {
         
             calculateScore()
@@ -38,75 +39,49 @@ class QuizDidEndViewController: UIViewController {
     }
     
     // MARK: - Score functions
+    
+    /**
+        Calculate the score for the student and put them in the labels
+     */
     func calculateScore() {
         
-        var energieScore = (totaal: 0, goed: 0)
-        var waterScore = (totaal: 0, goed: 0)
-        var materialenScore = (totaal: 0, goed: 0)
-        var biomimicryScore = (totaal: 0, goed: 0)
-        var dierenwelzijnScore = (totaal: 0, goed: 0)
+        var score = ScoreCalculator.calculateScore(endScore)
         
-        for score in endScore {
-            
-            if score.question?.typeName == "Energie" {
-                energieScore.totaal += 1
-                if score.correctlyAnswerd {
-                    energieScore.goed += 1
-                }
-            }
-            if score.question?.typeName == "Water" {
-                waterScore.totaal += 1
-                if score.correctlyAnswerd {
-                    waterScore.goed += 1
-                }
-            }
-            if score.question?.typeName == "Materiaal" {
-                materialenScore.totaal += 1
-                if score.correctlyAnswerd {
-                    materialenScore.goed += 1
-                }
-            }
-            if score.question?.typeName == "Bio Mimicry" {
-                biomimicryScore.totaal += 1
-                if score.correctlyAnswerd {
-                    biomimicryScore.goed += 1
-                }
-            }
-            if score.question?.typeName == "Dierenwelzijn" {
-                dierenwelzijnScore.totaal += 1
-                if score.correctlyAnswerd {
-                    dierenwelzijnScore.goed += 1
-                }
-            }
-            
-        }
+        // Put the score into the labels (example: 5/6)
+        energieScoreLabel.text = "\(score.energieGoed)/\(score.energieTotaal)"
+        waterScoreLabel.text = "\(score.waterGoed)/\(score.waterTotaal)"
+        materialenScoreLabel.text = "\(score.materiaalGoed)/\(score.materiaalTotaal)"
+        biomimicryScoreLabel.text = "\(score.biomimicryGoed)/\(score.biomimicryTotaal)"
+        dierenwelzijnScoreLabel.text = "\(score.dierenwelzijnGoed)/\(score.dierenwelzijnTotaal)"
         
-        let totaalScore = energieScore.totaal + waterScore.totaal + materialenScore.totaal + biomimicryScore.totaal + dierenwelzijnScore.totaal
-        let goedScore = energieScore.goed + waterScore.goed + materialenScore.goed + biomimicryScore.goed + dierenwelzijnScore.goed
+        totaalScoreLabel.text = "\(score.totaalGoed)/\(score.totaal)"
         
-        energieScoreLabel.text = "\(energieScore.goed)/\(energieScore.totaal)"
-        waterScoreLabel.text = "\(waterScore.goed)/\(waterScore.totaal)"
-        materialenScoreLabel.text = "\(materialenScore.goed)/\(materialenScore.totaal)"
-        biomimicryScoreLabel.text = "\(biomimicryScore.goed)/\(biomimicryScore.totaal)"
-        dierenwelzijnScoreLabel.text = "\(dierenwelzijnScore.goed)/\(dierenwelzijnScore.totaal)"
-        
-        totaalScoreLabel.text = "\(goedScore)/\(totaalScore)"
-        
-        showAlert(goed: goedScore, totaal: totaalScore)
+        // Show an alert about the score
+        showAlert(goed: score.totaalGoed, totaal: score.totaal)
         
     }
     
+    /**
+        Show alert message about the score.
+
+        :param: goed        Amount of correctly answerd questions
+        :param: totaal      Total amountn of questions
+     */
     func showAlert(#goed: Int, totaal: Int) {
         
+        // Calculate percentage
         var percent: Double = (Double(goed) / Double(totaal)) * Double(100.0)
-        println(percent)
+      
+        // Placeholders
         var alertTitle: String = ""
         var alertText: String = ""
         var alertColor: UIColor = UIColor.clearColor()
         var alertIcon: UIImage = UIImage()
         
+        // Make alert object
         var alert = JSSAlertView()
         
+        // Generate message depending on the score
         if percent < 30 {
             
             alertTitle = NSLocalizedString("scoreTitle1", comment: "").uppercaseString
@@ -144,11 +119,16 @@ class QuizDidEndViewController: UIViewController {
             
         }
         
+        // Show the message
         alert.show(self, title: alertTitle, text: alertText, buttonText: NSLocalizedString("oke", comment: ""), cancelButtonText: nil, color: alertColor, iconImage: alertIcon, delegate: nil)
         
     }
 
     // MARK: - Button actions
+    
+    /**
+        Go back to the previous screen (in this case QuizChooseViewController)
+     */
     @IBAction func goBack(sender: AnyObject) {
         
         self.navigationController?.popToRootViewControllerAnimated(false)

@@ -14,6 +14,7 @@ class QuizChooseViewController: UIViewController {
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var leerlingButton: UIButton!
     @IBOutlet weak var docentButton: UIButton!
+    @IBOutlet weak var activitySpinner: UIActivityIndicatorView!
     
     var socket: SocketIOClient?
     
@@ -29,10 +30,12 @@ class QuizChooseViewController: UIViewController {
         docentButton = WildlandsButton.createButtonWithImage(named: "default-button", forButton: docentButton)
         
         disableButtons()
+        activitySpinner.startAnimating()
         
         let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         socket = delegate.socket
         socket?.on("connect", callback: socketConnected)
+        socket?.on("error", callback: socketError)
         
         delegate.connectIfNotConnected()
         if delegate.isSocketConnected() {
@@ -58,6 +61,17 @@ class QuizChooseViewController: UIViewController {
         println("Socket is connected!");
         leerlingButton.enabled = true
         docentButton.enabled = true
+        activitySpinner.stopAnimating()
+        
+    }
+    
+    func socketError(data: NSArray?, ack: AckEmitter?) {
+        
+        var alert = JSSAlertView()
+        let icon = Utils.fontAwesomeToImageWith(string: "\u{f127}", andColor: UIColor.whiteColor())
+        alert.show(self, title: NSLocalizedString("error", comment: "").uppercaseString, text: NSLocalizedString("quizCantConnect", comment: ""), buttonText: NSLocalizedString("helaas", comment: ""), cancelButtonText: nil, color: UIColorFromHex(0xc1272d, alpha: 1), iconImage: icon, delegate: nil)
+        
+        activitySpinner.stopAnimating()
         
     }
 

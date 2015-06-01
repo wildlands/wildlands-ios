@@ -56,6 +56,7 @@
 		E4A34A201B1C4EBE00A8EBC5 /* framebushleft.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A34A1F1B1C4EBE00A8EBC5 /* framebushleft.png */; };
 		E4A34A221B1C4F5600A8EBC5 /* framebushtop.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A34A211B1C4F5600A8EBC5 /* framebushtop.png */; };
 		E4A34A241B1C4F8E00A8EBC5 /* framebushright.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A34A231B1C4F8E00A8EBC5 /* framebushright.png */; };
+		E4A34A261B1CCEA400A8EBC5 /* ScoreCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A34A251B1CCEA400A8EBC5 /* ScoreCalculator.swift */; };
 		E4A6406C1B028BD0003E2CEC /* QuizDidEndViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A6406B1B028BD0003E2CEC /* QuizDidEndViewController.swift */; };
 		E4AA96011B09FB7A00B3AAC3 /* ChooseDoelgroepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AA96001B09FB7A00B3AAC3 /* ChooseDoelgroepViewController.swift */; };
 		E4AA96031B09FFEA00B3AAC3 /* dierenwelzijn-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E4AA96021B09FFEA00B3AAC3 /* dierenwelzijn-button.png */; };
@@ -188,6 +189,7 @@
 		E4A34A1F1B1C4EBE00A8EBC5 /* framebushleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = framebushleft.png; path = Images/Explorer/framebushleft.png; sourceTree = "<group>"; };
 		E4A34A211B1C4F5600A8EBC5 /* framebushtop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = framebushtop.png; path = Images/Explorer/framebushtop.png; sourceTree = "<group>"; };
 		E4A34A231B1C4F8E00A8EBC5 /* framebushright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = framebushright.png; path = Images/Explorer/framebushright.png; sourceTree = "<group>"; };
+		E4A34A251B1CCEA400A8EBC5 /* ScoreCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScoreCalculator.swift; path = Classes/Utils/ScoreCalculator.swift; sourceTree = "<group>"; };
 		E4A6406B1B028BD0003E2CEC /* QuizDidEndViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuizDidEndViewController.swift; path = Student/QuizDidEndViewController.swift; sourceTree = "<group>"; };
 		E4AA96001B09FB7A00B3AAC3 /* ChooseDoelgroepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChooseDoelgroepViewController.swift; path = ViewControllers/ChooseDoelgroepViewController.swift; sourceTree = "<group>"; };
 		E4AA96021B09FFEA00B3AAC3 /* dierenwelzijn-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dierenwelzijn-button.png"; path = "Images/Buttons/dierenwelzijn-button.png"; sourceTree = "<group>"; };
@@ -556,6 +558,7 @@
 				E430E7741AC1A3540036506D /* JSONDownloader.swift */,
 				E430E7D91AC41DA00036506D /* Utils.swift */,
 				E44FE8F01ADD1F73006DD395 /* WildlandsGPS.swift */,
+				E4A34A251B1CCEA400A8EBC5 /* ScoreCalculator.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -900,6 +903,7 @@
 				E4EEE6041AEF9FC700920E85 /* StartViewController.swift in Sources */,
 				E4C1903D1AE7A7ED00FC2800 /* ContentPageView.swift in Sources */,
 				E4FD960E1AFFB6B7007EFB0A /* AnalogClockView.swift in Sources */,
+				E4A34A261B1CCEA400A8EBC5 /* ScoreCalculator.swift in Sources */,
 				E4DEEB4C1AF0E8EE002B6434 /* JoinQuizViewController.swift in Sources */,
 				E4DEEB421AF0D0C5002B6434 /* NoAnimationSegue.swift in Sources */,
 				E4AA96011B09FB7A00B3AAC3 /* ChooseDoelgroepViewController.swift in Sources */,

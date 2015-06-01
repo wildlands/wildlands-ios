@@ -56,6 +56,9 @@ class ChooseSubjectViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    /**
+        Create buttons for every subject and add them to the view
+     */
     func createButtons() {
         
         energieButton = WildlandsButton.createButtonWithImage(named: "energie-button", forButton: energieButton)
@@ -85,6 +88,12 @@ class ChooseSubjectViewController: UIViewController {
     }
 
     // MARK: - Button functions
+    
+    /**
+        Opens the map with Energie pinpoints.
+        
+        :param: sender      The object who calls this action
+     */
     @IBAction func openKaartWithEnergie(sender: AnyObject) {
         
         openType = .ENERGIE
@@ -92,6 +101,11 @@ class ChooseSubjectViewController: UIViewController {
         
     }
     
+    /**
+        Opens the map with Water pinpoints.
+    
+        :param: sender      The object who calls this action
+     */
     @IBAction func openKaartWithWater(sender: AnyObject) {
         
         openType = .WATER
@@ -99,6 +113,11 @@ class ChooseSubjectViewController: UIViewController {
         
     }
     
+    /**
+        Opens the map with Materialen pinpoints.
+    
+        :param: sender      The object who calls this action
+     */
     @IBAction func openKaartWithMaterialen(sender: AnyObject) {
         
         openType = .MATERIAAL
@@ -106,6 +125,11 @@ class ChooseSubjectViewController: UIViewController {
         
     }
     
+    /**
+        Opens the map with Bio Mimicry pinpoints.
+    
+        :param: sender      The object who calls this action
+    */
     @IBAction func openKaartWithBioMimicry(sender: AnyObject) {
         
         openType = .BIO_MIMICRY
@@ -113,6 +137,11 @@ class ChooseSubjectViewController: UIViewController {
         
     }
 
+    /**
+        Opens the map with Dierenwelzijn pinpoints.
+    
+        :param: sender      The object who calls this action
+    */
     @IBAction func openKaartWithDierenwelzijn(sender: AnyObject) {
         
         openType = .DIERENWELZIJN
@@ -120,6 +149,11 @@ class ChooseSubjectViewController: UIViewController {
         
     }
     
+    /**
+        Goes back to the previous screen (in this case: StartViewController).
+    
+        :param: sender      The object who calls this action
+    */
     @IBAction func goBack(sender: AnyObject) {
         
         self.navigationController?.popViewControllerAnimated(false)
@@ -127,11 +161,17 @@ class ChooseSubjectViewController: UIViewController {
     }
     
     // MARK: - Button animations
+    
+    /**
+        Fades out the buttons from screen and then navigates to the next screen
+        (in this case: KaartViewController)
+    */
     func fadeOutButtons() {
         
         var delay = 0.0
         var counter = 1
         
+        // Loop through the buttons
         for button in buttonsForAnimation {
             
             if counter != buttonsForAnimation.count {
@@ -152,6 +192,7 @@ class ChooseSubjectViewController: UIViewController {
                         
                     if finished {
                     
+                        // Goes to KaartViewController
                         self.performSegueWithIdentifier("openKaart", sender: self)
                         
                     }

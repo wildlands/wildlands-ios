@@ -10,6 +10,7 @@ import Foundation
 
 class Question : NSObject, NSCoding {
     
+    var id: Int = 0
     var text: String = ""
     var answers: [Answer] = []
     var typeName: String = ""
@@ -32,6 +33,7 @@ class Question : NSObject, NSCoding {
         
         super.init()
         
+        id = aDecoder.decodeObjectForKey("id") as! Int
         text = aDecoder.decodeObjectForKey("text") as! String
         answers = aDecoder.decodeObjectForKey("answers") as! [Answer]
         typeName = aDecoder.decodeObjectForKey("typeName") as! String
@@ -42,6 +44,7 @@ class Question : NSObject, NSCoding {
     
     func encodeWithCoder(aCoder: NSCoder) {
         
+        aCoder.encodeObject(id, forKey: "id")
         aCoder.encodeObject(text, forKey: "text")
         aCoder.encodeObject(answers, forKey: "answers")
         aCoder.encodeObject(typeName, forKey: "typeName")
