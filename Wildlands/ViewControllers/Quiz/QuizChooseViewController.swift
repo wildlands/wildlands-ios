@@ -11,6 +11,7 @@ import Socket_IO_Client_Swift
 
 class QuizChooseViewController: UIViewController {
 
+    // MARK: Interface Builder
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var leerlingButton: UIButton!
     @IBOutlet weak var docentButton: UIButton!
@@ -38,6 +39,8 @@ class QuizChooseViewController: UIViewController {
         socket?.on("error", callback: socketError)
         
         delegate.connectIfNotConnected()
+        
+        // If Socket is connected enable the buttons
         if delegate.isSocketConnected() {
             socketConnected(nil, ack: nil)
         }
@@ -49,6 +52,11 @@ class QuizChooseViewController: UIViewController {
     }
     
     // MARK: - Socket IO
+    
+    /**
+        Disable the buttons, so if the user is not connected with the Socket, he 
+        can't start or join a quiz.
+     */
     func disableButtons() {
         
         leerlingButton.enabled = false

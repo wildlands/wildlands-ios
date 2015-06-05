@@ -52,6 +52,13 @@
 		E4627FF61ABAE1CD003B9229 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4627FF51ABAE1CD003B9229 /* Colors.swift */; };
 		E48FD5511AE91E59000C1CFA /* ContentPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48FD5501AE91E59000C1CFA /* ContentPage.swift */; };
 		E495EB3A1B00D37000C136C7 /* QuizBeforeStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E495EB391B00D37000C136C7 /* QuizBeforeStartViewController.swift */; };
+		E49B28971B1DABEF00B03A43 /* biomimicry-layer.png in Resources */ = {isa = PBXBuildFile; fileRef = E49B28921B1DABEF00B03A43 /* biomimicry-layer.png */; };
+		E49B28981B1DABEF00B03A43 /* dierenwelzijn-layer.png in Resources */ = {isa = PBXBuildFile; fileRef = E49B28931B1DABEF00B03A43 /* dierenwelzijn-layer.png */; };
+		E49B28991B1DABEF00B03A43 /* energie-layer.png in Resources */ = {isa = PBXBuildFile; fileRef = E49B28941B1DABEF00B03A43 /* energie-layer.png */; };
+		E49B289A1B1DABEF00B03A43 /* materialen-layer.png in Resources */ = {isa = PBXBuildFile; fileRef = E49B28951B1DABEF00B03A43 /* materialen-layer.png */; };
+		E49B289B1B1DABEF00B03A43 /* water-layer.png in Resources */ = {isa = PBXBuildFile; fileRef = E49B28961B1DABEF00B03A43 /* water-layer.png */; };
+		E49B289D1B1F0D2900B03A43 /* LayerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49B289C1B1F0D2900B03A43 /* LayerResponse.swift */; };
+		E49B289F1B1F324100B03A43 /* skip-button.png in Resources */ = {isa = PBXBuildFile; fileRef = E49B289E1B1F324100B03A43 /* skip-button.png */; };
 		E4A34A1E1B1C4DBA00A8EBC5 /* framebushbottom.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A34A1D1B1C4DBA00A8EBC5 /* framebushbottom.png */; };
 		E4A34A201B1C4EBE00A8EBC5 /* framebushleft.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A34A1F1B1C4EBE00A8EBC5 /* framebushleft.png */; };
 		E4A34A221B1C4F5600A8EBC5 /* framebushtop.png in Resources */ = {isa = PBXBuildFile; fileRef = E4A34A211B1C4F5600A8EBC5 /* framebushtop.png */; };
@@ -185,6 +192,13 @@
 		E4627FF51ABAE1CD003B9229 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = Classes/UI/Colors.swift; sourceTree = "<group>"; };
 		E48FD5501AE91E59000C1CFA /* ContentPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentPage.swift; path = Classes/UI/ContentPage.swift; sourceTree = "<group>"; };
 		E495EB391B00D37000C136C7 /* QuizBeforeStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = QuizBeforeStartViewController.swift; path = Teacher/QuizBeforeStartViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		E49B28921B1DABEF00B03A43 /* biomimicry-layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "biomimicry-layer.png"; path = "Images/Layers/biomimicry-layer.png"; sourceTree = "<group>"; };
+		E49B28931B1DABEF00B03A43 /* dierenwelzijn-layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dierenwelzijn-layer.png"; path = "Images/Layers/dierenwelzijn-layer.png"; sourceTree = "<group>"; };
+		E49B28941B1DABEF00B03A43 /* energie-layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "energie-layer.png"; path = "Images/Layers/energie-layer.png"; sourceTree = "<group>"; };
+		E49B28951B1DABEF00B03A43 /* materialen-layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "materialen-layer.png"; path = "Images/Layers/materialen-layer.png"; sourceTree = "<group>"; };
+		E49B28961B1DABEF00B03A43 /* water-layer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "water-layer.png"; path = "Images/Layers/water-layer.png"; sourceTree = "<group>"; };
+		E49B289C1B1F0D2900B03A43 /* LayerResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LayerResponse.swift; path = Classes/Objects/LayerResponse.swift; sourceTree = "<group>"; };
+		E49B289E1B1F324100B03A43 /* skip-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "skip-button.png"; path = "Images/Navigation/skip-button.png"; sourceTree = "<group>"; };
 		E4A34A1D1B1C4DBA00A8EBC5 /* framebushbottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = framebushbottom.png; path = Images/Explorer/framebushbottom.png; sourceTree = "<group>"; };
 		E4A34A1F1B1C4EBE00A8EBC5 /* framebushleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = framebushleft.png; path = Images/Explorer/framebushleft.png; sourceTree = "<group>"; };
 		E4A34A211B1C4F5600A8EBC5 /* framebushtop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = framebushtop.png; path = Images/Explorer/framebushtop.png; sourceTree = "<group>"; };
@@ -400,6 +414,7 @@
 		E4627FF81ABAE423003B9229 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E49B28911B1DABAD00B03A43 /* Layers */,
 				E4EE3DD01B166664007D5995 /* Explorer */,
 				E4EE3DCF1B16662F007D5995 /* Credits */,
 				E4EE3DCE1B166592007D5995 /* Navigation */,
@@ -443,6 +458,18 @@
 				E4A6406B1B028BD0003E2CEC /* QuizDidEndViewController.swift */,
 			);
 			name = Student;
+			sourceTree = "<group>";
+		};
+		E49B28911B1DABAD00B03A43 /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				E49B28921B1DABEF00B03A43 /* biomimicry-layer.png */,
+				E49B28931B1DABEF00B03A43 /* dierenwelzijn-layer.png */,
+				E49B28941B1DABEF00B03A43 /* energie-layer.png */,
+				E49B28951B1DABEF00B03A43 /* materialen-layer.png */,
+				E49B28961B1DABEF00B03A43 /* water-layer.png */,
+			);
+			name = Layers;
 			sourceTree = "<group>";
 		};
 		E4C20DDB1AB9A2EB00A911B5 = {
@@ -544,6 +571,7 @@
 			isa = PBXGroup;
 			children = (
 				E44FE8F31ADD20B1006DD395 /* Question.swift */,
+				E49B289C1B1F0D2900B03A43 /* LayerResponse.swift */,
 				E438097C1B0B699B0030B792 /* Score.swift */,
 				E4AA960C1B0A180C00B3AAC3 /* Level.swift */,
 				E4C20E0D1AB9AAF600A911B5 /* Answer.swift */,
@@ -589,6 +617,7 @@
 			children = (
 				E4FE169E1B1478C1008E0278 /* back-button.png */,
 				E4FE169F1B1478C1008E0278 /* quit-button.png */,
+				E49B289E1B1F324100B03A43 /* skip-button.png */,
 			);
 			name = Navigation;
 			sourceTree = "<group>";
@@ -767,6 +796,8 @@
 				E4EEE6021AEF9E6100920E85 /* element-01-180.png in Resources */,
 				E4EEE5FA1AEF9D9400920E85 /* element-06.png in Resources */,
 				E4A34A1E1B1C4DBA00A8EBC5 /* framebushbottom.png in Resources */,
+				E49B28991B1DABEF00B03A43 /* energie-layer.png in Resources */,
+				E49B28971B1DABEF00B03A43 /* biomimicry-layer.png in Resources */,
 				E43809791B0B573D0030B792 /* score-water.png in Resources */,
 				E4A34A241B1C4F8E00A8EBC5 /* framebushright.png in Resources */,
 				E44FE9261ADE7AF4006DD395 /* stenden-2.gpx in Resources */,
@@ -803,7 +834,9 @@
 				E4AA96071B0A068600B3AAC3 /* Dierenwelzijn-close.png in Resources */,
 				E4EEE6121AEFB1A700920E85 /* default-button.png in Resources */,
 				E438097A1B0B573D0030B792 /* score-materialen.png in Resources */,
+				E49B289B1B1DABEF00B03A43 /* water-layer.png in Resources */,
 				E44D75741AF3870000EC9D5E /* Bio Mimicry-header.png in Resources */,
+				E49B28981B1DABEF00B03A43 /* dierenwelzijn-layer.png in Resources */,
 				E43809771B0B573D0030B792 /* score-biomimicry.png in Resources */,
 				E4EEE5FF1AEF9D9400920E85 /* element-11.png in Resources */,
 				E430E77A1AC1A4FE0036506D /* Localizable.strings in Resources */,
@@ -813,6 +846,7 @@
 				E4EEE6001AEF9D9400920E85 /* element-12.png in Resources */,
 				E4EEE5F71AEF9D9400920E85 /* element-03.png in Resources */,
 				E44D75821AF3879A00EC9D5E /* Bio Mimicry-pin.png in Resources */,
+				E49B289A1B1DABEF00B03A43 /* materialen-layer.png in Resources */,
 				E44FE9241ADE7880006DD395 /* stenden.gpx in Resources */,
 				E43809911B0CC2B40030B792 /* ButtonParticles.sks in Resources */,
 				E4AA96031B09FFEA00B3AAC3 /* dierenwelzijn-button.png in Resources */,
@@ -833,6 +867,7 @@
 				E44D757F1AF3876200EC9D5E /* Water-close.png in Resources */,
 				E4EEE5F81AEF9D9400920E85 /* element-04.png in Resources */,
 				E44D75771AF3870000EC9D5E /* Energie-header.png in Resources */,
+				E49B289F1B1F324100B03A43 /* skip-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -900,6 +935,7 @@
 			files = (
 				E4EE3D931B15C001007D5995 /* JSSAlertView.swift in Sources */,
 				E48FD5511AE91E59000C1CFA /* ContentPage.swift in Sources */,
+				E49B289D1B1F0D2900B03A43 /* LayerResponse.swift in Sources */,
 				E4EEE6041AEF9FC700920E85 /* StartViewController.swift in Sources */,
 				E4C1903D1AE7A7ED00FC2800 /* ContentPageView.swift in Sources */,
 				E4FD960E1AFFB6B7007EFB0A /* AnalogClockView.swift in Sources */,

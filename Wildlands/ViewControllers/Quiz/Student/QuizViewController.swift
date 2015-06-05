@@ -64,6 +64,7 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
         socket = delegate.socket
         
         socket?.on("quizAborted", callback: quizAborted)
+        socket?.on("quizSkiped", callback: quizSkiped)
         
         // Check if there are any Questions on the disk
         if let sortQuestions = Utils.openObjectFromDisk(forKey: "questions") as? [Question] {
@@ -103,7 +104,7 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
         Function is called by Socket.IO if quiz is aborted.
 
         :param: data        Data send by the Socket
-        :param: ack         Acknowledend
+        :param: ack         Acknowledgend
      */
     func quizAborted(data: NSArray?, ack: AckEmitter?) {
         
@@ -111,6 +112,20 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
         var alert = JSSAlertView()
         let icon = Utils.fontAwesomeToImageWith(string: "\u{f127}", andColor: UIColor.whiteColor())
         alert.show(self, title: NSLocalizedString("quizAbortedTitle", comment: "").uppercaseString, text: NSLocalizedString("quizAbortedText", comment: ""), buttonText: NSLocalizedString("helaas", comment: ""), cancelButtonText: nil, color: UIColorFromHex(0xc1272d, alpha: 1), iconImage: icon, delegate: nil)
+        alert.delegate = self
+        alert.tag = 1
+        
+    }
+    
+    /**
+        Function is called by Socket.IO if teacher finishes the quiz.
+    
+        :param: data        Data send by the Socket
+        :param: ack         Acknowledgend
+     */
+    func quizSkiped(data: NSArray?, ack: AckEmitter?) {
+        
+        self.performSegueWithIdentifier("quizIsOver", sender: self)
         
     }
     
@@ -270,7 +285,7 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
         var json = [
         
             "naam" : Utils.openObjectFromDisk(forKey: "quizName") as! String,
-            "vraag" : (currentQuestion + 1),
+            "vraag" : currentQuestion,
             "goed" : goodAnswer,
             "quizID" : Utils.openObjectFromDisk(forKey: "quizCode") as! String
         ]
@@ -339,18 +354,32 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     // MARK: - AlertView actions
-    func JSSAlertViewButtonPressed() {
-        self.performSegueWithIdentifier("quizIsOver", sender: self)
+    func JSSAlertViewButtonPressed(forAlert: JSSAlertView) {
+        
+        // Alert for a aborted quiz
+        if forAlert.tag == 1 {
+        
+            self.navigationController?.popViewControllerAnimated(true)
+            
+        }
+        
     }
     
-    func JSSAlertViewCancelButtonPressed() {
+    func JSSAlertViewCancelButtonPressed(forAlert: JSSAlertView) {
     }
     
     // MARK: - Segues
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        var destinationViewController = segue.destinationViewController as! QuizDidEndViewController
-        destinationViewController.endScore = self.endScore
+        if segue.identifier == "quizIsOver" {
+        
+            socket?.off("quizAborted")
+            socket?.off("quizSkiped")
+        
+            var destinationViewController = segue.destinationViewController as! QuizDidEndViewController
+            destinationViewController.endScore = self.endScore
+            
+        }
         
     }
     

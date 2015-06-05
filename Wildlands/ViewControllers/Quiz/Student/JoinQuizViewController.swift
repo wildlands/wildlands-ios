@@ -26,6 +26,7 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
 
         backgroundView.layer.insertSublayer(WildlandsGradient.grayGradient(forBounds: view.bounds), atIndex: 0)
         
+        // Make up the textfields
         let background: UIImage = UIImage(named: "black-button")!.resizableImageWithCapInsets(UIEdgeInsetsMake(6, 6, 6, 6), resizingMode: UIImageResizingMode.Stretch)
         naamInputField.background = background
         naamInputField.layer.shadowColor = UIColor.blackColor().CGColor
@@ -40,6 +41,7 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
         quizCodeField.layer.shadowRadius = 15
         
         startButton = WildlandsButton.createButtonWithImage(named: "default-button", forButton: startButton)
+        startButton.enabled = false
         
         addKeyboardNotifications()
         
@@ -51,10 +53,6 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
         
         socket?.on("joinSuccess", callback: successReceived)
         socket?.on("joinFailed", callback: failReceived)
-        
-        
-        socket?.onAny {println("Got event: \($0.event), with items: \($0.items)")}
-        
         
     }
     
@@ -73,8 +71,12 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
     
     func failReceived(data: NSArray?, ack: AckEmitter?) {
         
-        var image = Utils.fontAwesomeToImageWith(string: "\u{f119}", andColor: UIColor.whiteColor())
-        var alert = JSSAlertView().show(self, title : NSLocalizedString("quiz", comment: "").uppercaseString, text : NSLocalizedString("quizDoesNotExists", comment: ""), color : UIColorFromHex(0xc1272d, alpha: 1.0), buttonText: NSLocalizedString("helaas", comment: "Helaas"), iconImage: image)
+        if let error = data?[0].objectForKey("error") as? String {
+        
+            var image = Utils.fontAwesomeToImageWith(string: "\u{f119}", andColor: UIColor.whiteColor())
+            var alert = JSSAlertView().show(self, title : NSLocalizedString("quiz", comment: "").uppercaseString, text : error, color : UIColorFromHex(0xc1272d, alpha: 1.0), buttonText: NSLocalizedString("helaas", comment: "Helaas"), iconImage: image)
+            
+        }
         
     }
     
@@ -146,6 +148,32 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
         activeTextField = nil
         
     }
+    
+    /**
+       Limit the amount of characters to four on the Quiz Code field.
+     */
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
+        // Make sure the App doesn't crash on a Paste action
+        if range.length + range.location > textField.text.length {
+            return false
+        }
+        
+        let newLength: Int = textField.text.length + string.length - range.length
+        
+        // Enable Start button if Quiz code has four characters
+        if textField == quizCodeField {
+            startButton.enabled = (newLength == 4)
+        }
+        
+        // The name field needs less then 40 characters
+        if textField == naamInputField {
+            return newLength <= 25
+        }
+        
+        return newLength <= 4
+        
+    }
 
     // MARK: - Button actions
     @IBAction func goBack(sender: AnyObject) {
@@ -156,11 +184,21 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func startTheQuiz(sender: AnyObject) {
         
-        var socketJson = [
-            "quizID" : quizCodeField.text!,
-            "naam" : naamInputField.text!
-        ]
-        socket?.emit("joinQuiz", socketJson)
+        // Check if Quiz code and Name aren't empty
+        if quizCodeField.text.length != 0 && naamInputField.text.length != 0 {
+            
+            var socketJson = [
+                "quizID" : quizCodeField.text!,
+                "naam" : naamInputField.text!
+            ]
+            socket?.emit("joinQuiz", socketJson)
+            
+        } else {
+            
+            var image = Utils.fontAwesomeToImageWith(string: "\u{f119}", andColor: UIColor.whiteColor())
+            var alert = JSSAlertView().show(self, title : NSLocalizedString("quiz", comment: "").uppercaseString, text : NSLocalizedString("quizNoName", comment: ""), color : UIColorFromHex(0xc1272d, alpha: 1.0), buttonText: NSLocalizedString("helaas", comment: "Helaas"), iconImage: image)
+            
+        }
         
     }
 }

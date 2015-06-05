@@ -117,7 +117,7 @@ class QuizDidEndViewController: UIViewController {
             alertIcon = Utils.fontAwesomeToImageWith(string: "\u{f00c}", andColor: UIColor.whiteColor())
             alertColor = UIColorFromHex(0xfcee21, alpha: 1.0)
             
-        } else if percent > 80 && percent <= 100 {
+        } else if percent > 80 && percent < 100 {
             
             alertTitle = NSLocalizedString("scoreTitle4", comment: "").uppercaseString
             alertText = NSLocalizedString("scoreText4", comment: "")
@@ -134,7 +134,9 @@ class QuizDidEndViewController: UIViewController {
         }
         
         // Add the bad categories string to the message
-        alertText += badCategories
+        if percent < 100 {
+            alertText += badCategories
+        }
         
         // Show the message
         alert.show(self, title: alertTitle, text: alertText, buttonText: NSLocalizedString("oke", comment: ""), cancelButtonText: nil, color: alertColor, iconImage: alertIcon, delegate: nil)

@@ -17,18 +17,19 @@ protocol JSSAlertViewDelegate {
     /**
      * Will be called when the default button is pressed.
      */
-    func JSSAlertViewButtonPressed()
+    func JSSAlertViewButtonPressed(forAlert: JSSAlertView)
     
     /**
      * Will be called when the cancel button is pressed.
      */
-    func JSSAlertViewCancelButtonPressed()
+    func JSSAlertViewCancelButtonPressed(forAlert: JSSAlertView)
     
 }
 
 class JSSAlertView: UIViewController {
     
     var delegate: JSSAlertViewDelegate?
+    var tag: Int?
     var containerView:UIView!
     var alertBackgroundView:UIView!
     var dismissButton:UIButton!
@@ -99,6 +100,7 @@ class JSSAlertView: UIViewController {
         }
         
         var delegate: JSSAlertViewDelegate?
+        var tag: Int?
         
     }
     
@@ -386,9 +388,9 @@ class JSSAlertView: UIViewController {
     
     func closeView(withCallback:Bool) {
 
-        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.8, options: nil, animations: {
+        UIView.animateWithDuration(0.1, delay: 0, options: nil, animations: {
             
-            self.containerView.alpha = 0.5
+            self.containerView.alpha = 0.8
             self.containerView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.001, 0.001)
             
             }, completion: { finished in
@@ -397,9 +399,9 @@ class JSSAlertView: UIViewController {
                     self.view.alpha = 0
                     }, completion: { finished in
                         if withCallback == true {
-                            self.delegate?.JSSAlertViewButtonPressed()
+                            self.delegate?.JSSAlertViewButtonPressed(self)
                         } else {
-                            self.delegate?.JSSAlertViewCancelButtonPressed()
+                            self.delegate?.JSSAlertViewCancelButtonPressed(self)
                         }
                         self.removeView()
                 })

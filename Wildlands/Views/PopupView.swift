@@ -43,6 +43,9 @@ class PopupView: UIView, UIScrollViewDelegate {
         
     }
     
+    /**
+        Add the content to the page
+     */
     func addContent() {
         
         whiteBackground.backgroundColor = Colors.zand
@@ -57,17 +60,20 @@ class PopupView: UIView, UIScrollViewDelegate {
         whiteBackground.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.addSubview(whiteBackground)
         
+        // Create the theme header on the popUp
         let header: UIImageView = UIImageView(image: UIImage(named: thePinpoint!.typeName.rawValue + "-header.png"))
         header.setTranslatesAutoresizingMaskIntoConstraints(false)
         header.contentMode = UIViewContentMode.ScaleAspectFit
         self.addSubview(header)
         
+        // Create backbutton
         let backButton: UIButton = UIButton()
         backButton.setTranslatesAutoresizingMaskIntoConstraints(false)
         backButton.setImage(UIImage(named: thePinpoint!.typeName.rawValue + "-close.png"), forState: UIControlState.Normal)
         backButton.addTarget(self, action: Selector("goBackButton:"), forControlEvents: UIControlEvents.TouchUpInside)
         whiteBackground.addSubview(backButton)
         
+        // Make scrollView for the pages
         pageScrollView.setTranslatesAutoresizingMaskIntoConstraints(false)
         pageScrollView.bounces = true
         pageScrollView.showsVerticalScrollIndicator = true
@@ -76,12 +82,14 @@ class PopupView: UIView, UIScrollViewDelegate {
         pageScrollView.pagingEnabled = true
         whiteBackground.addSubview(pageScrollView)
         
+        // Make dots for page indication
         pageControl.pageIndicatorTintColor = Colors.houtBruin
         pageControl.currentPageIndicatorTintColor = Colors.groen
         pageControl.setTranslatesAutoresizingMaskIntoConstraints(false)
         pageControl.addTarget(self, action: Selector("changePage"), forControlEvents: UIControlEvents.ValueChanged)
         whiteBackground.addSubview(pageControl)
         
+        // Add constraints
         let bindings = ["header" : header, "whiteBackground" : whiteBackground, "backButton" : backButton, "pageScrollView" : pageScrollView, "pageControl" : pageControl]
         
         var format: String = "H:|-20-[header]-20-|"
@@ -133,9 +141,16 @@ class PopupView: UIView, UIScrollViewDelegate {
         
     }
     
+    /**
+        Add the pagines to the scrollView
+     */
     func addPagesToScrollView() {
         
-        if thePinpoint!.pages.count > 0 {
+        let currentLevel = Utils.openObjectFromDisk(forKey: "currentLevel") as! Level
+        
+        var paginas = thePinpoint!.pages.filter() { $0.level == currentLevel.id }
+        
+        if paginas.count > 0 {
         
             var pageBindings = [String : AnyObject]()
             pageBindings["pageScrollView"] = pageScrollView
@@ -143,7 +158,7 @@ class PopupView: UIView, UIScrollViewDelegate {
             var horizontalFormat = "H:|"
             
             var index = 1
-            for contentPage in thePinpoint!.pages {
+            for contentPage in paginas {
                 
                 let page = ContentPageView(content: contentPage)
                 page.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -160,7 +175,7 @@ class PopupView: UIView, UIScrollViewDelegate {
                 
             }
             
-            pageControl.numberOfPages = thePinpoint!.pages.count
+            pageControl.numberOfPages = paginas.count
             
             horizontalFormat = horizontalFormat + "|"
             

@@ -93,3 +93,14 @@ class Utils: NSObject {
     }
    
 }
+
+/**
+    Add a length property to the String object
+ */
+extension String {
+    
+    var length : Int {
+        return count(self)
+    }
+    
+}

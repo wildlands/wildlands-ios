@@ -33,7 +33,7 @@ class StartViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         
-        UIApplication.sharedApplication().idleTimerDisabled = true
+        UIApplication.sharedApplication().idleTimerDisabled = false
         
         UIView.animateWithDuration(1.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.8, options: nil, animations: {
             

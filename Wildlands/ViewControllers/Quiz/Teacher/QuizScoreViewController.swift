@@ -9,7 +9,7 @@
 import UIKit
 import Socket_IO_Client_Swift
 
-class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, JSSAlertViewDelegate {
 
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -60,7 +60,7 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
             
             // Make Score object
             var score: Score = Score()
-            score.question = theQuestions[questionID-1]
+            score.question = theQuestions[questionID]
             score.correctlyAnswerd = goed
             
             // If participant doesn't exists in our array yet
@@ -101,6 +101,10 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
         nameLabel?.text = rowKey
         scoreLabel?.text = "\(goodAnswerd.count)/\(theQuestions.count)"
         
+        if score.count == theQuestions.count {
+            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        }
+        
         return cell
         
     }
@@ -112,7 +116,12 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
         var step: Float = 1.0 / duration
         
         var newValue = self.progressView.progress - step
-        progressView.setProgress(newValue, animated: true)
+        
+        dispatch_async(dispatch_get_main_queue(), {
+        
+            self.progressView.setProgress(newValue, animated: true)
+            
+        })
         
         if newValue <= 0 {
             
@@ -131,6 +140,9 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
         
         if segue.identifier == "goToQuizDidEnd" {
             
+            // Remove the receiveAnswer event
+            socket?.off("receiveAnswer")
+            
             let destController: QuizSendScoreViewController = segue.destinationViewController as! QuizSendScoreViewController
             destController.deelnemers = self.deelnemers
             
@@ -141,15 +153,55 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK: - Button actions
     @IBAction func cancelTheQuiz(sender: AnyObject) {
     
+        var alertIcon: UIImage = Utils.fontAwesomeToImageWith(string: "\u{f128}", andColor: UIColor.whiteColor())
+        var alert = JSSAlertView()
+        alert.show(self, title: NSLocalizedString("quizAbortSureTitle", comment: "").uppercaseString, text: NSLocalizedString("quizAbortSureText", comment: ""), buttonText: NSLocalizedString("yes", comment: ""), cancelButtonText: NSLocalizedString("no", comment: ""), color: UIColorFromHex(0xc1272d, alpha: 1.0), iconImage: alertIcon, delegate: nil)
+        alert.delegate = self
+        alert.tag = 1
+        
+    }
+    
+    @IBAction func skipTheQuiz(sender: AnyObject) {
+        
+        var alertIcon: UIImage = Utils.fontAwesomeToImageWith(string: "\u{f050}", andColor: UIColor.whiteColor())
+        var alert = JSSAlertView()
+        alert.show(self, title: NSLocalizedString("quizSkipSureTitle", comment: "").uppercaseString, text: NSLocalizedString("quizSkipSureText", comment: ""), buttonText: NSLocalizedString("yes", comment: ""), cancelButtonText: NSLocalizedString("no", comment: ""), color: UIColorFromHex(0xc1272d, alpha: 1.0), iconImage: alertIcon, delegate: nil)
+        alert.delegate = self
+        alert.tag = 2
+        
+    }
+    
+    // MARK: - AlertVieW Delegate
+    func JSSAlertViewButtonPressed(forAlert: JSSAlertView) {
+        
         timer.invalidate()
         
         var json = [
             "quizID" : Utils.openObjectFromDisk(forKey: "quizCode") as! String
         ]
         
-        socket?.emit("abortQuiz", json)
-        self.navigationController?.popViewControllerAnimated(false)
+        // Abort alert
+        if forAlert.tag == 1 {
+            
+            // Send
+            socket?.emit("abortQuiz", json)
+            // Go to QuizChooseViewController
+            self.navigationController?.popViewControllerAnimated(false)
+            
+        // Skip alert
+        } else if forAlert.tag == 2 {
+            
+            socket?.emit("skipQuiz", json)
+            // Go to QuizSendScoreViewController
+            self.performSegueWithIdentifier("goToQuizDidEnd", sender: self)
+            
+        }
         
+    }
+    
+    func JSSAlertViewCancelButtonPressed(forAlert: JSSAlertView) {
+        // Do nothing, just ignore the alert
+        // This function has to be implemented, because Swift doesn't accept optional delegate functions yet
     }
     
 }

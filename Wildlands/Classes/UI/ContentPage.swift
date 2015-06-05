@@ -14,6 +14,7 @@ class ContentPage: NSObject, NSCoding {
     var image: String = ""
     var title: String = ""
     var content: String = ""
+    var level: Int = 0
     
     override init() {
         
@@ -28,6 +29,7 @@ class ContentPage: NSObject, NSCoding {
         image = aDecoder.decodeObjectForKey("image") as! String
         title = aDecoder.decodeObjectForKey("title") as! String
         content = aDecoder.decodeObjectForKey("content") as! String
+        level = aDecoder.decodeObjectForKey("level") as! Int
         
     }
     
@@ -36,6 +38,7 @@ class ContentPage: NSObject, NSCoding {
         aCoder.encodeObject(image, forKey: "image")
         aCoder.encodeObject(title, forKey: "title")
         aCoder.encodeObject(content, forKey: "content")
+        aCoder.encodeObject(level, forKey: "level")
         
     }
     

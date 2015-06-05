@@ -82,6 +82,14 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate, JSSAlert
         
     }
     
+    func downloadLayers() {
+        
+        println("Downloaden layers")
+        contentDownloader.downloadJSON(DownloadType.DOWNLOAD_LAYERS)
+        downloadStatusLabel.text = NSLocalizedString("downloadLayers", comment: "").uppercaseString
+        
+    }
+    
     func downloadPicture(atIndex index: Int) {
         
         println("Downloaden afbeelding \(index+1) van \(images.count)")
@@ -159,6 +167,10 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate, JSSAlert
             
             let questionResponse = response as? [Question]
             Utils.saveObjectToDisk(questionResponse!, forKey: "questions")
+            downloadLayers()
+            
+        } else if response is LayerResponse {
+            
             images = contentDownloader.imageURLs
             if images.count > 0 {
                 downloadPicture(atIndex: 0)
@@ -175,11 +187,11 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate, JSSAlert
     }
     
     // MARK: - AlertView actions
-    func JSSAlertViewButtonPressed() {
+    func JSSAlertViewButtonPressed(forAlert: JSSAlertView) {
         downloadContent()
     }
     
-    func JSSAlertViewCancelButtonPressed() {
+    func JSSAlertViewCancelButtonPressed(forAlert: JSSAlertView) {
         self.performSegueWithIdentifier("goToChooseDoelgroep", sender: self)
     }
 

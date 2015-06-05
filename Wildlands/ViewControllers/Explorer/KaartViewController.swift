@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import SDWebImage
 
 class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDelegate, WildlandsGPSDelegate {
 
+    // MARK: Interface Builder
     @IBOutlet weak var kaartScrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
+    // MARK: Properties
     var pinpoints: [Pinpoint] = []
     var blackScreen: UIView = UIView()
     var currentPosition: UIImageView = UIImageView()
@@ -25,6 +28,8 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
     
     var popupOpen: Bool = false
     var lastPinpoint: Int = 0
+    
+    var layerView: UIImageView = UIImageView()
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
@@ -45,6 +50,8 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
         currentPosition.frame = CGRectMake(0, 0, 25, 25)
         kaartScrollView.addSubview(currentPosition)
         
+        addThemeLayer()
+        
         // Check if Pinpoints are available from disk
         if let pins = Utils.openObjectFromDisk(forKey: "pinpoints") as? [Pinpoint] {
             
@@ -58,6 +65,41 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
             var alert = JSSAlertView()
             let icon = Utils.fontAwesomeToImageWith(string: "\u{f00d}", andColor: UIColor.whiteColor())
             alert.show(self, title: NSLocalizedString("error", comment: "").uppercaseString, text: NSLocalizedString("explorerNoPinpoints", comment: ""), buttonText: NSLocalizedString("oke", comment: ""), cancelButtonText: nil, color: UIColorFromHex(0xc1272d, alpha: 1), iconImage: icon, delegate: nil)
+            
+        }
+        
+    }
+    
+    // MARK: - Theme
+    
+    /**
+        Add the theme layer to the map.
+     */
+    func addThemeLayer() {
+        
+        let zoomScale: CGFloat = kaartScrollView.zoomScale
+        
+        if let layerString = Utils.openObjectFromDisk(forKey: currentType!.rawValue) as? String {
+            
+            var image: UIImage = UIImage()
+            layerView = UIImageView(frame: CGRectMake(0, 0, kaartScrollView.contentSize.width / zoomScale, kaartScrollView.contentSize.height / zoomScale))
+            layerView.alpha = 0
+            
+            // Select layer depending on theme
+            layerView.sd_setImageWithURL(NSURL(string: layerString), completed: { (image: UIImage!, error: NSError!, cacheType: SDImageCacheType, imageURL: NSURL!) -> Void in
+            
+                // Fade in the layer
+                UIView.animateWithDuration(0.5, animations: {
+                
+                    self.layerView.alpha = 1
+                
+                })
+                
+            })
+            
+            layerView.clipsToBounds = true
+            // Add layer to the map
+            contentView.addSubview(layerView)
             
         }
         
@@ -85,7 +127,11 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
             
             if let position = views as? UIImageView {
                 
-                position.frame = CGRectMake(CGFloat(currentX) * zoomScale - 12.5, CGFloat(currentY) * zoomScale - 12.5, 25, 25)
+                if position == currentPosition {
+                
+                    position.frame = CGRectMake(CGFloat(currentX) * zoomScale - 12.5, CGFloat(currentY) * zoomScale - 12.5, 25, 25)
+                    
+                }
                 
             }
             

@@ -14,6 +14,8 @@
 "goForward" = "Ga verder";
 "again" = "Opnieuw";
 "error" = "Error";
+"yes" = "Ja";
+"no" = "Nee";
 
 // Explorer
 "explorerNoPinpoints" = "Er zijn geen pinpoints gevonden... Start de App opnieuw op om de content opnieuw te downloaden.";
@@ -24,6 +26,7 @@
 "downloadChecksum" = "Downloaden\ncheck...";
 "downloadPictures" = "Downloaden\nafbeeldingen...";
 "downloadQuestions" = "Downloaden\nvragen...";
+"downloadLayers" = "Downloaden\nlayers...";
 "downloadError" = "Er is iets misgegaan tijdens het downloaden.";
 
 // Level
@@ -35,8 +38,13 @@
 "quizCantConnect" = "Kon geen verbinding maken met de quiz server.";
 "quizDoesNotExists" = "Quiz bestaat niet...";
 "quizNoQuestionsFound" = "Er zijn geen vragen gevonden...";
+"quizNoName" = "Je hebt geen naam ingevoerd.";
 "quizAbortedTitle" = "Quiz afgelopen";
 "quizAbortedText" = "De quiz is vroegtijdig gestopt...";
+"quizAbortSureTitle" = "Quiz annuleren";
+"quizAbortSureText" = "Weet u zeker dat u de quiz wilt annuleren?";
+"quizSkipSureTitle" = "Quiz afronden";
+"quizSkipSureText" = "Hiermee wordt de quiz afgerond en de scores berekend.";
 
 // Score
 "scoreTitle1" = "Slecht";
@@ -47,6 +55,6 @@
 "scoreText3" = "Yes, voldoende! Als je wilt kun je het beste nog een keer naar op verkenning gaan bij de volgende thema's: ";
 "scoreTitle4" = "Goed";
 "scoreText4" = "Geweldig, jij hebt een goed! Bij de volgende thema's heb je misschien iets laten liggen: ";
-"scoretitle5" = "Geweldig!";
+"scoreTitle5" = "Geweldig!";
 "scoreText5" = "SUPER!!!! Alles goed! Jij bent waarschijnlijk een Ecologisch wezen!";
 

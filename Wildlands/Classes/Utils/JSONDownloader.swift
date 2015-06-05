@@ -14,6 +14,7 @@ enum DownloadType: String {
     case DOWNLOAD_QUESTIONS = "?c=GetAllQuestions"
     case DOWNLOAD_CHECKUM = "?c=GetDatabaseChecksum"
     case DOWNLOAD_LEVELS = "?c=GetAllLevels"
+    case DOWNLOAD_LAYERS = "?c=GetAllLayers"
 }
 
 protocol JSONDownloaderDelegate {
@@ -129,6 +130,10 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
             
             processLevels()
             
+        } else if (currentType == DownloadType.DOWNLOAD_LAYERS) {
+            
+            processLayers()
+            
         }
         
     }
@@ -185,6 +190,11 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
                         imageURLs.append(page.image)
                         page.title = aPage.objectForKey("title") as! String
                         page.content = aPage.objectForKey("text") as! String
+                        
+                        if let level = aPage.objectForKey("level") as? NSDictionary {
+                            page.level = level.objectForKey("id") as! Int
+                        }
+                        
                         thePinpoint.pages.append(page)
                         
                     }
@@ -316,6 +326,51 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
         
         // Send levels to the delegate
         delegate?.JSONDownloaderSuccess(levels)
+        
+    }
+    
+    /**
+        Process the layers.
+     */
+    func processLayers() {
+        
+        if let jsonLayers = jsonArray as? NSArray {
+            
+            for layer in jsonLayers {
+             
+                let theLayer = layer as! NSDictionary
+                
+                if let type = theLayer.objectForKey("type") as? NSDictionary {
+                    
+                    if type.objectForKey("name") as! String == "Bio Mimicry" {
+                        Utils.saveObjectToDisk(theLayer.objectForKey("image") as! String, forKey: WildlandsTheme.BIO_MIMICRY.rawValue)
+                    }
+                    if type.objectForKey("name") as! String == "Materiaal" {
+                        Utils.saveObjectToDisk(theLayer.objectForKey("image") as! String, forKey: WildlandsTheme.MATERIAAL.rawValue)
+                    }
+                    if type.objectForKey("name") as! String == "Water" {
+                        Utils.saveObjectToDisk(theLayer.objectForKey("image") as! String, forKey: WildlandsTheme.WATER.rawValue)
+                    }
+                    if type.objectForKey("name") as! String == "Energie" {
+                        Utils.saveObjectToDisk(theLayer.objectForKey("image") as! String, forKey: WildlandsTheme.ENERGIE.rawValue)
+                    }
+                    if type.objectForKey("name") as! String == "Dierenwelzijn" {
+                        Utils.saveObjectToDisk(theLayer.objectForKey("image") as! String, forKey: WildlandsTheme.DIERENWELZIJN.rawValue)
+                    }
+                    
+                }
+                
+                imageURLs.append(theLayer.objectForKey("image") as! String)
+                
+            }
+            
+            delegate?.JSONDownloaderSuccess(LayerResponse())
+            
+        } else {
+            
+            delegate?.JSONDownloaderFailed("Kon Layers niet verwerken", type: .DOWNLOAD_LAYERS)
+            
+        }
         
     }
     

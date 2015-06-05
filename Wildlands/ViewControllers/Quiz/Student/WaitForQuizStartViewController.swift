@@ -42,7 +42,7 @@ class WaitForQuizStartViewController: UIViewController {
         
         if let theSocket = socket {
             if theSocket.connected {
-                println("We zijn verbonden...")
+                println("We are connected to socket and waiting for the Quiz...")
             }
             theSocket.on("startTheQuiz", callback: startQuiz)
         }
@@ -70,6 +70,10 @@ class WaitForQuizStartViewController: UIViewController {
     }
     
     // MARK: - Clock
+    
+    /**
+        Update the clock with new values.
+     */
     func updateClock() {
         
         self.animatedClock.hours = Int(arc4random() % 12);
