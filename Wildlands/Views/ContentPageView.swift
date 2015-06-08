@@ -33,8 +33,12 @@ class ContentPageView: UIView {
         
     }
     
+    /**
+        Place the content in the page.
+     */
     func placeContent() {
         
+        // Header image
         let imageView: UIImageView = UIImageView()
         imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
         imageView.sd_setImageWithURL(NSURL(string: theContent!.image))
@@ -42,12 +46,7 @@ class ContentPageView: UIView {
         imageView.clipsToBounds = true
         self.addSubview(imageView)
         
-        let scrollView: UIScrollView = UIScrollView()
-        scrollView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        scrollView.bounces = true
-        scrollView.showsVerticalScrollIndicator = true
-        self.addSubview(scrollView)
-        
+        // Make a webView, so we can show bold text, lists, enz.
         var htmlString = "<style>body { font-family: 'Roboto'; text-align: justify; color: #461e00; }</style> \(theContent!.content)"
         let webView: UIWebView = UIWebView()
         webView.loadHTMLString(htmlString, baseURL: nil)
@@ -56,7 +55,8 @@ class ContentPageView: UIView {
         webView.opaque = false
         self.addSubview(webView)
         
-        let bindings = ["webView" : webView, "scrollView" : scrollView, "imageView" : imageView]
+        // Add the layout constraints
+        let bindings = ["webView" : webView, "imageView" : imageView]
         
         var format = "H:|[imageView]|"
         var constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: bindings)

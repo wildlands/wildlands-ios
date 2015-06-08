@@ -33,9 +33,11 @@ class QuizBeforeStartViewController: UIViewController, UITableViewDelegate, UITa
         
         startQuizButton = WildlandsButton.createButtonWithImage(named: "default-button", forButton: startQuizButton)
         
+        // Get socket from the App delegate
         let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         socket = delegate.socket
         
+        // Add socket handlers
         socket?.on("somebodyJoined", callback: somebodyJoined)
         socket?.on("somebodyLeaved", callback: somebodyLeaved)
         
@@ -46,8 +48,16 @@ class QuizBeforeStartViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     // MARK: - Socket IO
+    
+    /**
+        A student joined the quiz.
+
+        :param: data           Response from Socket.IO server.
+        :param: ack            ... 
+     */
     func somebodyJoined(data: NSArray?, ack: AckEmitter?) {
         
+        // Unwrap the response
         if let naam = data?[0].objectForKey("naam") as? String {
             deelnemers.append(naam)
             tableView.reloadData()
@@ -55,8 +65,15 @@ class QuizBeforeStartViewController: UIViewController, UITableViewDelegate, UITa
         
     }
     
+    /**
+        A student leaved the quiz.
+    
+        :param: data            Response from Socket.IO sever.
+        :param: ack             ...
+     */
     func somebodyLeaved(data: NSArray?, ack: AckEmitter?) {
         
+        // Unwrap the response
         if let naam = data?[0].objectForKey("naam") as? String {
             
             // Loop through all the participants so far
@@ -67,27 +84,44 @@ class QuizBeforeStartViewController: UIViewController, UITableViewDelegate, UITa
                 }
             }
             
+            // Reload the tableView with the new data
             tableView.reloadData()
         }
         
     }
     
     // MARK: - Button actions
+    
+    /**
+        Start the quiz on every device who joined the quiz.
+    
+        :param: sender          The button who calls this function.
+     */
     @IBAction func startTheQuiz(sender: AnyObject) {
         
+        // Get the current level from the teacher and set this as level 
+        // for the quiz
         let currentLevel = Utils.openObjectFromDisk(forKey: "currentLevel") as! Level
         
+        // Make a JSON object
         var json = [
             "quizID" : Utils.openObjectFromDisk(forKey: "quizCode")!,
             "duration" : Utils.openObjectFromDisk(forKey: "quizDuration")!,
             "level" : currentLevel.id
         ]
         
+        // Send socket message
         socket?.emit("startQuiz", json)
+        // Go the next screen (in this case: QuizScoreViewController)
         self.performSegueWithIdentifier("goToQuizScore", sender: self)
         
     }
     
+    /**
+        Cancel the quiz.
+
+        :param: sender          The button who calls this function.
+     */
     @IBAction func cancelQuiz(sender: AnyObject) {
         
         self.navigationController?.popViewControllerAnimated(false)

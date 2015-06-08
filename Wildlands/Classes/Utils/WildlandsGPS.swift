@@ -29,11 +29,11 @@ class WildlandsGPS: NSObject, CLLocationManagerDelegate {
     var delegate: WildlandsGPSDelegate?
 
     // Coordinates from Wildlands Map
-    let top = 52.778749
-    let left = 6.910379
+    let top = 52.783688
+    let left = 6.881025
     
-    let bottom = 52.777664
-    let right = 6.913659
+    let bottom = 52.776225
+    let right = 6.893921
     
     // Size from the map in the App
     let internalMapWidth = 2500.00

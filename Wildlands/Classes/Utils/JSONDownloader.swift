@@ -286,11 +286,11 @@ class JSONDownloader: NSObject, NSURLConnectionDelegate, NSURLConnectionDataDele
      */
     func processDatabaseChecksum() {
         
-        var checksum: Int = 0
+        var checksum: ChecksumResponse = ChecksumResponse()
         
         if let JSONCheckum = jsonArray as? NSMutableDictionary {
             
-            checksum = JSONCheckum.objectForKey("checksum") as! Int
+            checksum.checksum = JSONCheckum.objectForKey("checksum") as! Int
             
         }
         

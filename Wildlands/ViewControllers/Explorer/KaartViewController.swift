@@ -79,6 +79,7 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
         
         let zoomScale: CGFloat = kaartScrollView.zoomScale
         
+        // Unwrap the layer image URL
         if let layerString = Utils.openObjectFromDisk(forKey: currentType!.rawValue) as? String {
             
             var image: UIImage = UIImage()
@@ -117,6 +118,7 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
         
         for views in kaartScrollView.subviews as! [UIView] {
             
+            // Keep the pinpoints on the right position
             if let button = views as? UIButton {
                 
                 let dePinPoint = pinpoints[button.tag]
@@ -125,6 +127,7 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
                 
             }
             
+            // Keep the GPS position on the right place
             if let position = views as? UIImageView {
                 
                 if position == currentPosition {
@@ -149,33 +152,30 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
         let zoomScale: CGFloat = kaartScrollView.zoomScale
         
         pinpoints.sort({ $0.id < $1.id })
+        pinpoints = pinpoints.filter() { $0.typeName.rawValue == self.currentType?.rawValue }
         
         var delay = 0.3
         
         var i = 0
         for eenPinPoint: Pinpoint in pinpoints {
             
-            if eenPinPoint.typeName.rawValue == currentType?.description {
+            let pinPointButton: UIButton = UIButton(frame: CGRectMake(eenPinPoint.xPos * zoomScale - 40, eenPinPoint.yPos * zoomScale - 108, 80, 108))
+            var pinImage = "\(eenPinPoint.typeName.rawValue)-pin"
+            pinPointButton.setImage(UIImage(named: pinImage), forState: UIControlState.Normal)
+            pinPointButton.tag = eenPinPoint.id
+            pinPointButton.addTarget(self, action: Selector("pinPointPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
+            pinPointButton.alpha = 0
+            kaartScrollView.addSubview(pinPointButton)
+            
+            pinpoints[i].trigger = CGRectMake(eenPinPoint.xPos * zoomScale - 80, eenPinPoint.yPos * zoomScale - 80, 160, 160)
+            
+            UIView.animateWithDuration(0.5, delay: delay, options: nil, animations: {
                 
-                let pinPointButton: UIButton = UIButton(frame: CGRectMake(eenPinPoint.xPos * zoomScale - 40, eenPinPoint.yPos * zoomScale - 108, 80, 108))
-                var pinImage = "\(eenPinPoint.typeName.rawValue)-pin"
-                pinPointButton.setImage(UIImage(named: pinImage), forState: UIControlState.Normal)
-                pinPointButton.tag = eenPinPoint.id
-                pinPointButton.addTarget(self, action: Selector("pinPointPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
-                pinPointButton.alpha = 0
-                kaartScrollView.addSubview(pinPointButton)
+                pinPointButton.alpha = 1
                 
-                pinpoints[i].trigger = CGRectMake(eenPinPoint.xPos * zoomScale - 80, eenPinPoint.yPos * zoomScale - 80, 160, 160)
-                
-                UIView.animateWithDuration(0.5, delay: delay, options: nil, animations: {
-                    
-                    pinPointButton.alpha = 1
-                    
-                    }, completion: nil)
-                
-                delay += 0.3
-                
-            }
+                }, completion: nil)
+            
+            delay += 0.3
             
             i++
             
@@ -214,7 +214,7 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
         })
         
         // Create the popUp
-        let popUp: PopupView = PopupView(aPinpoint: pinpoints[id])
+        let popUp: PopupView = PopupView(aPinpoint: pinpoints.filter { $0.id == id }.first! )
         popUp.delegate = self
         popUp.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.001, 0.001)
         popUp.setTranslatesAutoresizingMaskIntoConstraints(false)

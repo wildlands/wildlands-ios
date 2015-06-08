@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChooseDoelgroepViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIAlertViewDelegate {
+class ChooseDoelgroepViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIAlertViewDelegate, JSSAlertViewDelegate {
 
     @IBOutlet weak var chooseButton: UIButton!
     @IBOutlet weak var goVerder: UIButton!
@@ -22,26 +22,28 @@ class ChooseDoelgroepViewController: UIViewController, UIPickerViewDelegate, UIP
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor(red: 45.0/255.0, green: 100.0/255.0, blue: 0.0/255.0, alpha: 1).CGColor, UIColor(red: 22.0/255.0, green: 45.0/255.0, blue: 26.0/255.0, alpha: 1).CGColor]
-        backgroundView.layer.insertSublayer(gradient, atIndex: 0)
+        backgroundView.layer.insertSublayer(WildlandsGradient.greenGradient(forBounds: view.bounds), atIndex: 0)
         
         chooseButton = WildlandsButton.createButtonWithImage(named: "black-button", forButton: chooseButton)
         goVerder = WildlandsButton.createButtonWithImage(named: "default-button", forButton: goVerder)
         
+        // Place the pickerView out of the screen
         pickerViewHolder.transform = CGAffineTransformMakeTranslation(0, view.bounds.height + 216)
         
+        // Give a shadow to the pickerViewHolder
         pickerViewHolder.layer.shadowColor = UIColor.blackColor().CGColor
         pickerViewHolder.layer.shadowOffset = CGSizeMake(0, 0)
         pickerViewHolder.layer.shadowRadius = 12
         pickerViewHolder.layer.shadowOpacity = 1.0
         
+        // Add a drag gesture to the pickerViewHolder
         let gesture: UIPanGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handleGesture:")
         pickerViewHolder.addGestureRecognizer(gesture)
         
+        // Get all the available levels
         levels = Utils.openObjectFromDisk(forKey: "levels") as! [Level]
         
+        // Make a placeholder level for the 'Selecteer...' option
         let selectLevel = Level()
         selectLevel.id = 0
         selectLevel.name = NSLocalizedString("select", comment: "")
@@ -54,10 +56,15 @@ class ChooseDoelgroepViewController: UIViewController, UIPickerViewDelegate, UIP
     }
     
     // MARK: - Gesture recognizers
+    
+    /**
+        Make the pickerViewHolder dragable for some funny animations
+     */
     func handleGesture(panGesture: UIPanGestureRecognizer) {
         
         let point: CGPoint = panGesture.translationInView(pickerViewHolder)
         
+        // Stop the drag animation at an y of -80
         if point.y < -80 {
             
             pickerViewHolder.transform = CGAffineTransformMakeTranslation(0, -80)
@@ -68,8 +75,10 @@ class ChooseDoelgroepViewController: UIViewController, UIPickerViewDelegate, UIP
             
         }
         
+        // User stoped dragging
         if panGesture.state == UIGestureRecognizerState.Ended {
             
+            // User moved more than 100 points, so move pickerViewHolder out of screen
             if point.y > 100 {
                 
                 UIView.animateWithDuration(1.0, delay: 0, usingSpringWithDamping: 1.2, initialSpringVelocity: 1.2, options: nil, animations: {
@@ -80,6 +89,7 @@ class ChooseDoelgroepViewController: UIViewController, UIPickerViewDelegate, UIP
                 
             } else {
             
+                // Bounce back into the screen, to origional position
                 UIView.animateWithDuration(1.0, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: nil, animations: {
                     
                     self.pickerViewHolder.transform = CGAffineTransformIdentity
@@ -126,6 +136,9 @@ class ChooseDoelgroepViewController: UIViewController, UIPickerViewDelegate, UIP
         
     }
     
+    /**
+        Fallback function if viewForRow failes...
+     */
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         
         return levels[row].name
@@ -139,6 +152,12 @@ class ChooseDoelgroepViewController: UIViewController, UIPickerViewDelegate, UIP
     }
 
     // MARK: - Button functions
+    
+    /**
+        Animate the pickerViewHolder into the screen.
+    
+        :param: sender          The button that calls this action.
+    */
     @IBAction func chooseDoelgroep(sender: AnyObject) {
         
         UIView.animateWithDuration(1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.8, options: nil, animations: {
@@ -149,6 +168,11 @@ class ChooseDoelgroepViewController: UIViewController, UIPickerViewDelegate, UIP
         
     }
 
+    /**
+        Animate the pickerViewHolder out the screen.
+
+        :param: sender          The button that calls this action.
+     */
     @IBAction func dissmissPickerview(sender: AnyObject) {
         
         UIView.animateWithDuration(1.0, delay: 0, usingSpringWithDamping: 1.2, initialSpringVelocity: 1.2, options: nil, animations: {
@@ -159,10 +183,17 @@ class ChooseDoelgroepViewController: UIViewController, UIPickerViewDelegate, UIP
         
     }
     
+    /**
+        Go to the next screen if the user has selected a valid level.
+
+        :param: sender          The button that calls this action.
+     */
     @IBAction func goVerder(sender: AnyObject) {
         
+        // If the user didn't select a valid level
         if pickerView.selectedRowInComponent(0) == 0 {
             
+            // Show an alert
             var image = Utils.fontAwesomeToImageWith(string: "\u{f007}", andColor: UIColor.whiteColor())
             var alert = JSSAlertView().show(
                 self,
@@ -172,12 +203,15 @@ class ChooseDoelgroepViewController: UIViewController, UIPickerViewDelegate, UIP
                 buttonText: "Oké",
                 iconImage: image
             )
-            alert.addAction(chooseDoelgroepAfterAlert)
+            alert.delegate = self
             
             
+        // User selected a valid level
         } else {
             
+            // Save the level
             Utils.saveObjectToDisk(levels[pickerView.selectedRowInComponent(0)], forKey: "currentLevel")
+            // Go to the next screen (in this case StartViewController)
             self.performSegueWithIdentifier("goToHome", sender: self)
             
         }
@@ -185,9 +219,15 @@ class ChooseDoelgroepViewController: UIViewController, UIPickerViewDelegate, UIP
     }
     
     // MARK: - AlertView
-    func chooseDoelgroepAfterAlert() {
-        
+    
+    func JSSAlertViewButtonPressed(forAlert: JSSAlertView) {
+    
+        // Open the pickerView
         chooseDoelgroep(self)
         
+    }
+    
+    func JSSAlertViewCancelButtonPressed(forAlert: JSSAlertView) {
+        // Doesn't do anthing, but has to be implemented.
     }
 }

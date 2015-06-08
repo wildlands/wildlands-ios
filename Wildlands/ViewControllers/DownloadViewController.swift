@@ -35,13 +35,20 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate, JSSAlert
     }
     
     // MARK: - Download functions
+    
+    /**
+        Start downloading from the content.
+     */
     func startDownloading() {
         
         let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        
+        // No pinpoints found so start downloading content
         if defaults.objectForKey("pinpoints") == nil {
             
             downloadContent()
             
+        // Pinpoints found, so check for a new online database
         } else {
             
             checkDatabaseChecksum()
@@ -50,6 +57,9 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate, JSSAlert
         
     }
     
+    /**
+        Start downloading the online database checksum.
+     */
     func checkDatabaseChecksum() {
         
         println("Downloaden checksum")
@@ -58,6 +68,9 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate, JSSAlert
         
     }
     
+    /**
+        Start downloading the pinpoints from the online database.
+     */
     func downloadContent() {
         
         println("Downloaden pinpoints")
@@ -66,6 +79,9 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate, JSSAlert
         
     }
     
+    /**
+        Start downloading the levels from the online database.
+     */
     func downloadLevels() {
         
         println("Downloaden levels")
@@ -74,6 +90,9 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate, JSSAlert
         
     }
     
+    /**
+        Start downloading the quiz questions from the online database.
+     */
     func downloadQuizQuestions() {
         
         println("Downloaden questions")
@@ -82,6 +101,9 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate, JSSAlert
         
     }
     
+    /**
+        Start downloading the map layers from the online database.
+     */
     func downloadLayers() {
         
         println("Downloaden layers")
@@ -90,28 +112,35 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate, JSSAlert
         
     }
     
+    /**
+        Start downloading all the picture from the database.
+     */
     func downloadPicture(atIndex index: Int) {
         
         println("Downloaden afbeelding \(index+1) van \(images.count)")
-        downloadStatusLabel.text = NSLocalizedString("downloadPictures", comment: "").uppercaseString
+        downloadStatusLabel.text = NSLocalizedString("downloadPictures", comment: "").uppercaseString + "\(index+1)/\(images.count)"
         
         var currentIndex = index
         
+        // Check if there are images available for download
         if images.count > 0 {
         
             let url = NSURL(string: images[index])
+            
+            // Download the image
             SDWebImageDownloader.sharedDownloader().downloadImageWithURL(url, options: nil, progress: nil, completed: { (image: UIImage!, data: NSData!, error: NSError!, finished: Bool) in
         
                 if finished {
                     
-                    // Bij de laatste afbeelding, gebruiker door sturen naar startscherm
+                    // If last image is downloaded, send user to next screen
+                    // (In this case ChooseDielgroepViewController)
                     if currentIndex == (self.images.count - 1) {
                     
                         self.performSegueWithIdentifier("goToChooseDoelgroep", sender: self)
                         
                     } else {
                         
-                        // Volgende afbeelding sturen
+                        // Download the next i,age
                         currentIndex += 1
                         self.downloadPicture(atIndex: currentIndex)
                         
@@ -135,46 +164,64 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate, JSSAlert
     
     func JSONDownloaderSuccess(response: AnyObject) {
         
+        // If response are Pinpoints
         if response is [Pinpoint] {
             
             let pinpointResponse = response as? [Pinpoint]
             Utils.saveObjectToDisk(pinpointResponse!, forKey: "pinpoints")
+            // Start downloading levels
             downloadLevels()
             
-        } else if response is Int {
+        // If response is the online database checksum
+        } else if response is ChecksumResponse {
             
-            if response as! Int != NSUserDefaults.standardUserDefaults().objectForKey("checksum") as! Int {
+            if let theResponse = response as? ChecksumResponse {
                 
-                println("Nieuwe database!")
-                NSUserDefaults.standardUserDefaults().setObject(response, forKey: "checksum")
-                NSUserDefaults.standardUserDefaults().synchronize()
-                downloadContent()
-                
-            } else {
-                
-                self.performSegueWithIdentifier("goToChooseDoelgroep", sender: self)
+                if theResponse.checksum != NSUserDefaults.standardUserDefaults().objectForKey("checksum") as! Int {
+                    
+                    println("Nieuwe database!")
+                    NSUserDefaults.standardUserDefaults().setObject(theResponse.checksum, forKey: "checksum")
+                    NSUserDefaults.standardUserDefaults().synchronize()
+                    downloadContent()
+                    
+                // There is no new database, so go to next screen
+                // (In this case ChooseDoelgroepViewController)
+                } else {
+                    
+                    self.performSegueWithIdentifier("goToChooseDoelgroep", sender: self)
+                    
+                }
                 
             }
-            
+        
+        // If the response are the levels
         } else if response is [Level] {
             
             let levelResponse = response as? [Level]
             Utils.saveObjectToDisk(levelResponse!, forKey: "levels")
+            // Start downloading the quiz questions
             downloadQuizQuestions()
             
-            
+        // If the response are the quiz questions
         } else if response is [Question] {
             
             let questionResponse = response as? [Question]
             Utils.saveObjectToDisk(questionResponse!, forKey: "questions")
+            // Start downloading the layers
             downloadLayers()
             
+        // If the response are the map layers
         } else if response is LayerResponse {
             
+            // Get the image from the JSONDownloader
             images = contentDownloader.imageURLs
+            
+            // If there are any images available for download
             if images.count > 0 {
+                // Start downloading the images
                 downloadPicture(atIndex: 0)
             } else {
+                // Go the next screen (in this case ChooseDoelgroepViewController)
                 self.performSegueWithIdentifier("goToChooseDoelgroep", sender: self)
             }
             
@@ -192,6 +239,8 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate, JSSAlert
     }
     
     func JSSAlertViewCancelButtonPressed(forAlert: JSSAlertView) {
+        
+        // Go to the next screen (in this case ChooseDoelgroepViewController)
         self.performSegueWithIdentifier("goToChooseDoelgroep", sender: self)
     }
 

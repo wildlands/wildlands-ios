@@ -29,13 +29,17 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
         
         backgroundView.layer.insertSublayer(WildlandsGradient.greenGradient(forBounds: view.bounds), atIndex: 0)
 
+        // Get socket from the App delegate
         let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         socket = delegate.socket
         
+        // Add socket handler
         socket?.on("receiveAnswer", callback: answerReceived)
         
+        // Set a timer for the quiz
         timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateProgress", userInfo: nil, repeats: true)
         
+        // Get the current level
         let currentLevel = Utils.openObjectFromDisk(forKey: "currentLevel") as! Level
         
         if let questions = Utils.openObjectFromDisk(forKey: "questions") as? [Question] {
@@ -54,8 +58,16 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     // MARK: - Socket IO
+    
+    /**
+        An answer is send by a student and received by this device.
+
+        :param: data        The data from Socket.IO server
+        :param: ack         ...
+     */
     func answerReceived(data: NSArray?, ack: AckEmitter?) {
         
+        // Unwrap the response
         if let naam = data?[0].objectForKey("naam") as? String, goed = data?[0].objectForKey("goed") as? Bool, questionID = data?[0].objectForKey("vraag") as? Int {
             
             // Make Score object
@@ -110,6 +122,10 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     // MARK: - Timer
+    
+    /**
+        Update the progressView, so teacher can see how many time is left for the quiz.
+     */
     func updateProgress() {
         
         var duration = Float(Utils.openObjectFromDisk(forKey: "quizDuration") as! Int) * 60
@@ -117,12 +133,14 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
         
         var newValue = self.progressView.progress - step
         
+        // Make the setValue async
         dispatch_async(dispatch_get_main_queue(), {
         
             self.progressView.setProgress(newValue, animated: true)
             
         })
         
+        // If there is no time left
         if newValue <= 0 {
             
             // Stop the quiz timer
@@ -151,8 +169,15 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
     }
 
     // MARK: - Button actions
+    
+    /**
+        Cancel the quiz.
+
+        :param: sender      The button who calls this action.
+     */
     @IBAction func cancelTheQuiz(sender: AnyObject) {
     
+        // Show an confirm message to make sure the teacher wants to cancel the quiz
         var alertIcon: UIImage = Utils.fontAwesomeToImageWith(string: "\u{f128}", andColor: UIColor.whiteColor())
         var alert = JSSAlertView()
         alert.show(self, title: NSLocalizedString("quizAbortSureTitle", comment: "").uppercaseString, text: NSLocalizedString("quizAbortSureText", comment: ""), buttonText: NSLocalizedString("yes", comment: ""), cancelButtonText: NSLocalizedString("no", comment: ""), color: UIColorFromHex(0xc1272d, alpha: 1.0), iconImage: alertIcon, delegate: nil)
@@ -161,8 +186,14 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
         
     }
     
+    /**
+        Skip the quiz and go to the score.
+        
+        :param: sender      The button who calls this action.
+     */
     @IBAction func skipTheQuiz(sender: AnyObject) {
         
+        // Show an confirm message to make sure the teacher wants to skip the quiz
         var alertIcon: UIImage = Utils.fontAwesomeToImageWith(string: "\u{f050}", andColor: UIColor.whiteColor())
         var alert = JSSAlertView()
         alert.show(self, title: NSLocalizedString("quizSkipSureTitle", comment: "").uppercaseString, text: NSLocalizedString("quizSkipSureText", comment: ""), buttonText: NSLocalizedString("yes", comment: ""), cancelButtonText: NSLocalizedString("no", comment: ""), color: UIColorFromHex(0xc1272d, alpha: 1.0), iconImage: alertIcon, delegate: nil)
@@ -174,8 +205,10 @@ class QuizScoreViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK: - AlertVieW Delegate
     func JSSAlertViewButtonPressed(forAlert: JSSAlertView) {
         
+        // Stop the timer
         timer.invalidate()
         
+        // Make a JSON object
         var json = [
             "quizID" : Utils.openObjectFromDisk(forKey: "quizCode") as! String
         ]

@@ -33,11 +33,15 @@ class QuizChooseViewController: UIViewController {
         disableButtons()
         activitySpinner.startAnimating()
         
+        // Get socket from the App delegate
         let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         socket = delegate.socket
+        
+        // Add socket handlers
         socket?.on("connect", callback: socketConnected)
         socket?.on("error", callback: socketError)
         
+        // Connect socket if it isn't yet
         delegate.connectIfNotConnected()
         
         // If Socket is connected enable the buttons
@@ -64,17 +68,31 @@ class QuizChooseViewController: UIViewController {
 
     }
     
+    /**
+        Socket is connected.
+
+        :param: data        Reponse from the Socket.IO server.
+        :param: ack         ...
+     */
     func socketConnected(data: NSArray?, ack: AckEmitter?) {
         
         println("Socket is connected!");
+        // Enable the buttons
         leerlingButton.enabled = true
         docentButton.enabled = true
         activitySpinner.stopAnimating()
         
     }
     
+    /**
+        Socket gave an error message.
+
+        :param: data        Response from the Socket.IO server.
+        :param: ack         ...
+     */
     func socketError(data: NSArray?, ack: AckEmitter?) {
         
+        // Make an alert
         var alert = JSSAlertView()
         let icon = Utils.fontAwesomeToImageWith(string: "\u{f127}", andColor: UIColor.whiteColor())
         alert.show(self, title: NSLocalizedString("error", comment: "").uppercaseString, text: NSLocalizedString("quizCantConnect", comment: ""), buttonText: NSLocalizedString("helaas", comment: ""), cancelButtonText: nil, color: UIColorFromHex(0xc1272d, alpha: 1), iconImage: icon, delegate: nil)
@@ -84,18 +102,34 @@ class QuizChooseViewController: UIViewController {
     }
 
     // MARK: - Button actions
+    
+    /**
+        Go back to the previous screen (in this case StartViewController)
+
+        :param: sender      The button who calls this function.
+     */
     @IBAction func goBack(sender: AnyObject) {
         
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
 
+    /**
+        Student: Go to the join quiz screen.
+
+        :param: sender      The button who calls this function.
+     */
     @IBAction func goToJoinQuiz(sender: AnyObject) {
         
         self.performSegueWithIdentifier("goToJoinQuiz", sender: self)
         
     }
 
+    /**
+        Teacher: Go to the generate quiz screen.
+        
+        :param: sender      The button who calls this functions.
+     */
     @IBAction func goToGenerateQuiz(sender: AnyObject) {
         
         self.performSegueWithIdentifier("goToGenerateQuiz", sender: self)

@@ -60,6 +60,7 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Set the quiz timer
         quizTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "updateProgressbar", userInfo: nil, repeats: true)
         
+        // Get Socket from the delegate
         let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         socket = delegate.socket
         
@@ -249,7 +250,7 @@ class QuizViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     /**
-        Answer is pressed
+        Answer is pressed.
      */
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         

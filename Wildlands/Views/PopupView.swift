@@ -10,6 +10,9 @@ import UIKit
 
 protocol PopUpViewDelegate {
  
+    /**
+        When the user dissmisses the popUp, this message is send.
+     */
     func popUpDidDismiss()
     
 }
@@ -142,24 +145,29 @@ class PopupView: UIView, UIScrollViewDelegate {
     }
     
     /**
-        Add the pagines to the scrollView
+        Add the pages with the content to the scrollView.
      */
     func addPagesToScrollView() {
         
         let currentLevel = Utils.openObjectFromDisk(forKey: "currentLevel") as! Level
         
+        // Only show pages with the same level that is selected in the beginning from the App
         var paginas = thePinpoint!.pages.filter() { $0.level == currentLevel.id }
         
+        // If there are pages
         if paginas.count > 0 {
         
             var pageBindings = [String : AnyObject]()
             pageBindings["pageScrollView"] = pageScrollView
             
+            // Constraint string
             var horizontalFormat = "H:|"
             
             var index = 1
+            // Loop through the pages
             for contentPage in paginas {
                 
+                // Make the page
                 let page = ContentPageView(content: contentPage)
                 page.setTranslatesAutoresizingMaskIntoConstraints(false)
                 pageBindings["page\(index)"] = page
@@ -169,12 +177,14 @@ class PopupView: UIView, UIScrollViewDelegate {
                 var constraint = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(0), metrics: nil, views: pageBindings)
                 pageScrollView.addConstraints(constraint)
                 
+                // Add this page to the horizontal constraint
                 horizontalFormat = horizontalFormat + "[page\(index)(==pageScrollView)]"
                 
                 index++
                 
             }
             
+            // Set the pages dots
             pageControl.numberOfPages = paginas.count
             
             horizontalFormat = horizontalFormat + "|"
@@ -186,8 +196,14 @@ class PopupView: UIView, UIScrollViewDelegate {
     
     }
     
+    /**
+        Dismiss the popUp.
+
+        :param: sender      The button who send the action.
+     */
     func goBackButton(sender: UIButton!) {
         
+        // Animate the popUp out of the view
         UIView.animateWithDuration(0.3/1.5, animations: {
             
             self.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.1, 1.1)
@@ -200,7 +216,9 @@ class PopupView: UIView, UIScrollViewDelegate {
                             
                     }, completion: { (finished: Bool) in
                         
+                        // Send delegate message
                         self.delegate?.popUpDidDismiss()
+                        // Completely remove the popUp from the view
                         self.removeFromSuperview()
                             
                     })
@@ -211,15 +229,21 @@ class PopupView: UIView, UIScrollViewDelegate {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
+        // Change the dot who indicates the current page when the user scrolled the scrollView
         pageControl.currentPage = (Int(floor(scrollView.contentOffset.x)) / (Int(floor(scrollView.contentSize.width)) / thePinpoint!.pages.count))
         
     }
     
+    /**
+        Is called by the pageControl when the user clicks on the left or right side of the pageControl.
+     */
     func changePage() {
     
+        // Calculate the x position from the current page
         let page: CGFloat = CGFloat(pageControl.currentPage)
         let pageWidth: CGFloat = CGFloat(floor(pageScrollView.contentSize.width)) / CGFloat(thePinpoint!.pages.count)
         
+        // Scroll to the page
         pageScrollView.scrollRectToVisible(CGRectMake(pageWidth * page, 0, pageWidth, pageScrollView.contentSize.height), animated: true)
     
     }

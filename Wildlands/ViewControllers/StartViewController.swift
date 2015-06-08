@@ -19,7 +19,7 @@ class StartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Custom Wildlands elementen maken
+        // Make the custom Wildlands elements
         backgroundView.layer.insertSublayer(WildlandsGradient.greenGradient(forBounds: self.view.bounds), atIndex: 0)
         verkenButton = WildlandsButton.createButtonWithImage(named: "default-button", forButton: verkenButton)
         quizButton = WildlandsButton.createButtonWithImage(named: "default-button", forButton: quizButton)
@@ -33,8 +33,10 @@ class StartViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         
+        // Enable the sleepfunction of the iPhone
         UIApplication.sharedApplication().idleTimerDisabled = false
         
+        // Animate the buttons into the screen
         UIView.animateWithDuration(1.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.8, options: nil, animations: {
             
             self.verkenButton.transform = CGAffineTransformIdentity
@@ -50,8 +52,15 @@ class StartViewController: UIViewController {
     }
     
     // MARK: - Button actions
+    
+    /**
+        Start to explorer.
+
+        :param: sender          The button who calls this action.
+     */
     @IBAction func verkenPress(sender: AnyObject) {
         
+        // First animate the buttons out of the screen
         UIView.animateWithDuration(1.0, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.8, options: nil, animations: {
             
             self.verkenButton.transform = CGAffineTransformMakeTranslation(-400, 0)
@@ -64,7 +73,9 @@ class StartViewController: UIViewController {
             
             
         }, completion: { completed in
-                
+            
+            // Animation is complete, so go to the next screen
+            // (In this case: ChooseSubjectViewController)
             self.performSegueWithIdentifier("goToVerken", sender: self);
                 
         })

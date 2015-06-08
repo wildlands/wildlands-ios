@@ -30,6 +30,12 @@ class QuizSendScoreViewController: UIViewController, MFMailComposeViewController
     }
     
     // MARK: - Button actions
+    
+    /**
+        Go back to the previous screen (in this case: QuizChooseViewController).
+
+        :param: sender      The button who calls this action.
+     */
     @IBAction func goBack(sender: AnyObject) {
         
         self.navigationController?.popToRootViewControllerAnimated(false)
@@ -37,10 +43,17 @@ class QuizSendScoreViewController: UIViewController, MFMailComposeViewController
         
     }
 
+    /**
+        Send the quiz scores by email.
+        
+        :param: sender      The button who calls this action.
+     */
     @IBAction func sendQuizScore(sender: AnyObject) {
         
+        // Check if device can send an email
         if MFMailComposeViewController.canSendMail() {
             
+            // Compose the email
             var body = "Uitslagen \n\n"
             for (naam, score) in deelnemers {
                 
@@ -62,6 +75,7 @@ class QuizSendScoreViewController: UIViewController, MFMailComposeViewController
             mailComposer.setSubject(subject)
             mailComposer.setMessageBody(body, isHTML: false)
             
+            // Show the mail ViewController
             self.presentViewController(mailComposer, animated: true, completion: nil)
             
         }

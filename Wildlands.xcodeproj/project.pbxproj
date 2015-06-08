@@ -83,6 +83,7 @@
 		E4C20E0E1AB9AAF600A911B5 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C20E0D1AB9AAF600A911B5 /* Answer.swift */; };
 		E4C84D501AEF87E500A208EF /* wildlands-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4C84D4F1AEF87E500A208EF /* wildlands-regular.ttf */; };
 		E4C84D521AEF8DB600A208EF /* speedletter-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E4C84D511AEF8DB600A208EF /* speedletter-regular.ttf */; };
+		E4DB53F21B25961100D7EBA1 /* ChecksumResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DB53F11B25961100D7EBA1 /* ChecksumResponse.swift */; };
 		E4DEEB421AF0D0C5002B6434 /* NoAnimationSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DEEB411AF0D0C5002B6434 /* NoAnimationSegue.swift */; };
 		E4DEEB481AF0DAE7002B6434 /* stroke_green.png in Resources */ = {isa = PBXBuildFile; fileRef = E4DEEB471AF0DAE7002B6434 /* stroke_green.png */; };
 		E4DEEB4A1AF0E201002B6434 /* QuizChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DEEB491AF0E201002B6434 /* QuizChooseViewController.swift */; };
@@ -227,6 +228,7 @@
 		E4C20E0D1AB9AAF600A911B5 /* Answer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Answer.swift; path = Classes/Objects/Answer.swift; sourceTree = "<group>"; };
 		E4C84D4F1AEF87E500A208EF /* wildlands-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "wildlands-regular.ttf"; path = "Fonts/wildlands-regular.ttf"; sourceTree = "<group>"; };
 		E4C84D511AEF8DB600A208EF /* speedletter-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "speedletter-regular.ttf"; path = "Fonts/speedletter-regular.ttf"; sourceTree = "<group>"; };
+		E4DB53F11B25961100D7EBA1 /* ChecksumResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChecksumResponse.swift; path = Classes/Objects/ChecksumResponse.swift; sourceTree = "<group>"; };
 		E4DEEB411AF0D0C5002B6434 /* NoAnimationSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoAnimationSegue.swift; path = Classes/Transitions/NoAnimationSegue.swift; sourceTree = "<group>"; };
 		E4DEEB471AF0DAE7002B6434 /* stroke_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stroke_green.png; path = Images/Views/stroke_green.png; sourceTree = "<group>"; };
 		E4DEEB491AF0E201002B6434 /* QuizChooseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = QuizChooseViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -572,6 +574,7 @@
 			children = (
 				E44FE8F31ADD20B1006DD395 /* Question.swift */,
 				E49B289C1B1F0D2900B03A43 /* LayerResponse.swift */,
+				E4DB53F11B25961100D7EBA1 /* ChecksumResponse.swift */,
 				E438097C1B0B699B0030B792 /* Score.swift */,
 				E4AA960C1B0A180C00B3AAC3 /* Level.swift */,
 				E4C20E0D1AB9AAF600A911B5 /* Answer.swift */,
@@ -950,6 +953,7 @@
 				E4627FF61ABAE1CD003B9229 /* Colors.swift in Sources */,
 				E4DEEB501AF0F902002B6434 /* GenerateQuizViewController.swift in Sources */,
 				E4DEEB4A1AF0E201002B6434 /* QuizChooseViewController.swift in Sources */,
+				E4DB53F21B25961100D7EBA1 /* ChecksumResponse.swift in Sources */,
 				E44FE8F11ADD1F73006DD395 /* WildlandsGPS.swift in Sources */,
 				E4DEEB521AF106DA002B6434 /* FadeTransitionSegue.swift in Sources */,
 				E43809811B0CA84A0030B792 /* WildlandsGradient.swift in Sources */,

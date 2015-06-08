@@ -14,7 +14,11 @@ class CreditsViewController: UIViewController {
         super.viewDidLoad()
 
         let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "goBack:")
+        
+        // Loop through all the views in this controller
         for view in self.view.subviews {
+            
+            // If the view is an UIImageView
             if view.isKindOfClass(UIImageView) {
                 view.addGestureRecognizer(tapRecognizer)
             }
@@ -28,6 +32,12 @@ class CreditsViewController: UIViewController {
     }
     
     // MARK: - Button functions
+    
+    /**
+        Go back to the previous page (in this case StartViewController)
+    
+        :param: sender      The gesture that calls this action.
+     */
     func goBack(sender: UITapGestureRecognizer) {
         
         self.dismissViewControllerAnimated(true, completion: nil)

@@ -45,12 +45,15 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
         
         addKeyboardNotifications()
         
+        // Add gesture to dissmiss the keyboard when the users taps somewhere in the view
         var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
+        // Get the socket from the App delegate
         let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         socket = delegate.socket
         
+        // Add socket handlers
         socket?.on("joinSuccess", callback: successReceived)
         socket?.on("joinFailed", callback: failReceived)
         
@@ -61,6 +64,13 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Socket IO
+    
+    /**
+        Received a success message from the Socket.IO server.
+
+        :param: data        Data from the server.
+        :param: ack         ...
+     */
     func successReceived(data: NSArray?, ack: AckEmitter?) {
         
         Utils.saveObjectToDisk(naamInputField.text, forKey: "quizName")
@@ -69,10 +79,18 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    /**
+        Received a failure message from the Socket.IO server.
+        
+        :param: data        Data from the server.
+        :param: ack         ...
+     */
     func failReceived(data: NSArray?, ack: AckEmitter?) {
         
+        // Error is found in the response
         if let error = data?[0].objectForKey("error") as? String {
         
+            // Show an alert message
             var image = Utils.fontAwesomeToImageWith(string: "\u{f119}", andColor: UIColor.whiteColor())
             var alert = JSSAlertView().show(self, title : NSLocalizedString("quiz", comment: "").uppercaseString, text : error, color : UIColorFromHex(0xc1272d, alpha: 1.0), buttonText: NSLocalizedString("helaas", comment: "Helaas"), iconImage: image)
             
@@ -81,12 +99,19 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Keyboard functions
+    
+    /**
+        Dissmiss the keyboard.
+     */
     func dismissKeyboard() {
         
         activeTextField?.resignFirstResponder()
         
     }
     
+    /**
+        Add the keyboard notifications when keyboard shows or hides.
+     */
     func addKeyboardNotifications() {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillBeShown:", name: UIKeyboardDidShowNotification, object: nil)
@@ -96,8 +121,11 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
+        // If the 'Gereed' button is clicked on the name field, go to quiz code field
         if textField == naamInputField {
             quizCodeField.becomeFirstResponder()
+            
+        // Dissmiss the keyboard on any other field
         } else {
             textField.resignFirstResponder()
         }
@@ -106,12 +134,19 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    /**
+        The keyboard is about the be displayed on the screen. 
+        Move the scrollView so the content will not be displayed behind the keyboard.
+    
+        :param: sender          The notification who calls this action.
+     */
     func keyboardWillBeShown(sender: NSNotification) {
         
         let info: NSDictionary = sender.userInfo!
         let value: NSValue = info.valueForKey(UIKeyboardFrameBeginUserInfoKey) as! NSValue
         let keyboardSize: CGSize = value.CGRectValue().size
         let contentInsets: UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height + 50, 0.0)
+        // Set scrollView insets to the size of the keyboard
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
 
@@ -123,6 +158,7 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
         if let fieldOrigin = activeTextFieldOrigin {
         
             if (!CGRectContainsPoint(aRect, fieldOrigin)) {
+                // Scroll the scrollView
                 scrollView.scrollRectToVisible(activeTextFieldRect!, animated:true)
             }
             
@@ -130,6 +166,11 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
     
     }
 
+    /**
+        The keyboard is about to be hidden.
+    
+        :param: sender          The notification who calls this action.
+     */
     func keyboardWillBeHidden(sender: NSNotification) {
         let contentInsets: UIEdgeInsets = UIEdgeInsetsZero
         scrollView.contentInset = contentInsets
@@ -176,17 +217,29 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
     }
 
     // MARK: - Button actions
+    
+    /**
+        Go back to the previous screen (in this case: QuizChooseViewController).
+    
+        :param: sender          The button who calls this action.
+     */
     @IBAction func goBack(sender: AnyObject) {
         
         self.navigationController?.popViewControllerAnimated(false)
         
     }
     
+    /**
+        Join the quiz.
+
+        :param: sender          The button who calls this action.
+     */
     @IBAction func startTheQuiz(sender: AnyObject) {
         
         // Check if Quiz code and Name aren't empty
         if quizCodeField.text.length != 0 && naamInputField.text.length != 0 {
             
+            // Make JSON object
             var socketJson = [
                 "quizID" : quizCodeField.text!,
                 "naam" : naamInputField.text!
@@ -195,6 +248,7 @@ class JoinQuizViewController: UIViewController, UITextFieldDelegate {
             
         } else {
             
+            // Show an alert
             var image = Utils.fontAwesomeToImageWith(string: "\u{f119}", andColor: UIColor.whiteColor())
             var alert = JSSAlertView().show(self, title : NSLocalizedString("quiz", comment: "").uppercaseString, text : NSLocalizedString("quizNoName", comment: ""), color : UIColorFromHex(0xc1272d, alpha: 1.0), buttonText: NSLocalizedString("helaas", comment: "Helaas"), iconImage: image)
             

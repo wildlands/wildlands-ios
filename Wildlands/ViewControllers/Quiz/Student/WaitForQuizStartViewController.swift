@@ -24,8 +24,10 @@ class WaitForQuizStartViewController: UIViewController {
 
         backgroundView.layer.insertSublayer(WildlandsGradient.grayGradient(forBounds: view.bounds), atIndex: 0)
         
+        // Set a timer for the clock animation
         NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "updateClock", userInfo: nil, repeats: true)
         
+        // Get Socket from App delegate
         let delegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         socket = delegate.socket
         
@@ -44,6 +46,7 @@ class WaitForQuizStartViewController: UIViewController {
             if theSocket.connected {
                 println("We are connected to socket and waiting for the Quiz...")
             }
+            // Add socket handler
             theSocket.on("startTheQuiz", callback: startQuiz)
         }
     
@@ -92,14 +95,24 @@ class WaitForQuizStartViewController: UIViewController {
     }
     
     // MARK: - Button actions
+    
+    /**
+        Cancel joining of the quiz.
+
+        :param: sender          The button who calls this action.
+     */
     @IBAction func cancelJoining(sender: AnyObject) {
         
+        // Make a JSON object
         var json = [
             "naam" : Utils.openObjectFromDisk(forKey: "quizName") as! String,
             "quizID" : Utils.openObjectFromDisk(forKey: "quizCode") as! String
         ]
+        
+        // Send an Socket message
         socket?.emit("leaveQuiz", json)
         
+        // Go to previous viewcontroller (in this case: JoinQuizViewController)
         self.navigationController?.popViewControllerAnimated(false)
         
     }
