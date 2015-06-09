@@ -118,7 +118,7 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate, JSSAlert
     func downloadPicture(atIndex index: Int) {
         
         println("Downloaden afbeelding \(index+1) van \(images.count)")
-        downloadStatusLabel.text = NSLocalizedString("downloadPictures", comment: "").uppercaseString + "\(index+1)/\(images.count)"
+        downloadStatusLabel.text = NSLocalizedString("downloadPictures", comment: "").uppercaseString + "\n(\(index+1)/\(images.count))"
         
         var currentIndex = index
         
@@ -214,7 +214,7 @@ class DownloadViewController: UIViewController, JSONDownloaderDelegate, JSSAlert
         } else if response is LayerResponse {
             
             // Get the image from the JSONDownloader
-            images = contentDownloader.imageURLs
+            images = Array(Set(contentDownloader.imageURLs))
             
             // If there are any images available for download
             if images.count > 0 {

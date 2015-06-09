@@ -1796,10 +1796,10 @@
                                                     <constraint firstAttribute="height" constant="150" id="g3o-yM-WtL"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tib-B1-N5X">
-                                                <rect key="frame" x="16" y="260" width="568" height="70"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tib-B1-N5X">
+                                                <rect key="frame" x="16" y="260" width="568" height="90"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="70" id="N03-pA-EyQ"/>
+                                                    <constraint firstAttribute="height" constant="90" id="N03-pA-EyQ"/>
                                                 </constraints>
                                                 <string key="text">DOWNLOADEN
 CONTENT...</string>
@@ -1808,7 +1808,7 @@ CONTENT...</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="AxJ-UO-Qxh">
-                                                <rect key="frame" x="282" y="338" width="37" height="37"/>
+                                                <rect key="frame" x="282" y="358" width="37" height="37"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="37" id="Oth-Ul-fpn"/>
                                                     <constraint firstAttribute="width" constant="37" id="YXj-Sl-NbD"/>
