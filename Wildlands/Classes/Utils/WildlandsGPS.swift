@@ -72,6 +72,14 @@ class WildlandsGPS: NSObject, CLLocationManagerDelegate {
         
     }
     
+    /**
+        Converts the GPS coordinates to a position on the Wildlansd map.
+
+        :param: latitude            The GPS latitude
+        :param: longitude           The GPS longitude
+        
+        :returns: An X and Y position on the Wildlands map.
+     */
     func convertPositionData (latitude : Double, longitude : Double) -> (x: Int, y: Int) {
         
         var x = ((longitude - left) / (right - left)) * internalMapWidth

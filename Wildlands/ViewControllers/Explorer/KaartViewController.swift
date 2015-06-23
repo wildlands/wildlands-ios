@@ -162,7 +162,7 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
             let pinPointButton: UIButton = UIButton(frame: CGRectMake(eenPinPoint.xPos * zoomScale - 40, eenPinPoint.yPos * zoomScale - 108, 80, 108))
             var pinImage = "\(eenPinPoint.typeName.rawValue)-pin"
             pinPointButton.setImage(UIImage(named: pinImage), forState: UIControlState.Normal)
-            pinPointButton.tag = eenPinPoint.id
+            pinPointButton.tag = i
             pinPointButton.addTarget(self, action: Selector("pinPointPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
             pinPointButton.alpha = 0
             kaartScrollView.addSubview(pinPointButton)
