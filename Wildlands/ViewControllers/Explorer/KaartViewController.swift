@@ -121,9 +121,10 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
             // Keep the pinpoints on the right position
             if let button = views as? UIButton {
                 
-                let dePinPoint = pinpoints[button.tag]
+                // - 1 because the view tag started with 1 and an array starts with 0
+                let dePinPoint = pinpoints[button.tag - 1]
                 button.frame = CGRectMake(dePinPoint.xPos * zoomScale - 40, dePinPoint.yPos * zoomScale - 108, 80, 108)
-                pinpoints[button.tag].trigger = CGRectMake(dePinPoint.xPos * zoomScale - 80, dePinPoint.yPos * zoomScale - 80, 160, 160)
+                pinpoints[button.tag - 1].trigger = CGRectMake(dePinPoint.xPos * zoomScale - 80, dePinPoint.yPos * zoomScale - 80, 160, 160)
                 
             }
             
@@ -162,7 +163,8 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
             let pinPointButton: UIButton = UIButton(frame: CGRectMake(eenPinPoint.xPos * zoomScale - 40, eenPinPoint.yPos * zoomScale - 108, 80, 108))
             var pinImage = "\(eenPinPoint.typeName.rawValue)-pin"
             pinPointButton.setImage(UIImage(named: pinImage), forState: UIControlState.Normal)
-            pinPointButton.tag = i
+            // We have to start with a tag greater then 0 (all other views are 0 by default)
+            pinPointButton.tag = i + 1
             pinPointButton.addTarget(self, action: Selector("pinPointPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
             pinPointButton.alpha = 0
             kaartScrollView.addSubview(pinPointButton)
@@ -214,7 +216,8 @@ class KaartViewController: UIViewController, UIScrollViewDelegate, PopUpViewDele
         })
         
         // Create the popUp
-        let popUp: PopupView = PopupView(aPinpoint: pinpoints.filter { $0.id == id }.first! )
+        // - 1 because the view tag started with 1 and an array starts with 0
+        let popUp: PopupView = PopupView(aPinpoint: pinpoints[id - 1])
         popUp.delegate = self
         popUp.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.001, 0.001)
         popUp.setTranslatesAutoresizingMaskIntoConstraints(false)
